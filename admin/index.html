@@ -7,6 +7,17 @@
         <title>Editor del sitio</title>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
         <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url"/>
+        <style>
+            /* Ajustes al editor de Decap 3.16.3 (las clases e1nx103k…, efqlgsg…
+               son las fijas de esa versión; al cambiar de versión, revisar con
+               las pruebas):
+               - Sin los botones de mostrar/ocultar la vista previa y de
+                 sincronizar el desplazamiento: la vista previa siempre está.
+               - El menú de "Añadir bloque" abre hacia la izquierda, para que el
+                 borde del formulario no lo corte. */
+            .e1nx103k0 { display: none !important; }
+            .e1nx103k2 .efqlgsg1 { left: auto !important; right: 0 !important; max-width: calc(100vw - 32px); }
+        </style>
     </head>
     <body>
         <!-- Panel de edición (Decap CMS), instalado por la consola de Icónica24.
@@ -14,7 +25,12 @@
              está publicado (repo, dirección) se pone aquí al iniciar, así el
              mismo kit sirve en cualquier dominio. admin/sitio.js lo escribe
              el build con el repo de este sitio. -->
-        <script>window.CMS_MANUAL_INIT = true;</script>
+        <script>
+            window.CMS_MANUAL_INIT = true;
+            // La vista previa siempre abierta (sin el botón del ojo no habría
+            // forma de volver a mostrarla si alguna vez se ocultó).
+            try { localStorage.setItem('cms.right-pane', 'preview'); } catch (e) {}
+        </script>
         <script src="/admin/sitio.js"></script>
         <script src="https://unpkg.com/decap-cms@3.16.3/dist/decap-cms.js"></script>
         <script>

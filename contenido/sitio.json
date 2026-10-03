@@ -1,19 +1,48 @@
 {
   "nombre": "Nombre",
-  "marca": { "acento": "#3263c3" },
+  "marca": {
+    "acento": "#3263c3"
+  },
   "menu": [
-    { "texto": "Funciones", "enlace": "#funciones" },
-    { "texto": "Producto", "enlace": "#producto" },
-    { "texto": "Precios", "enlace": "#precios" },
-    { "texto": "Contacto", "enlace": "#contacto" }
+    {
+      "texto": "Funciones",
+      "enlace": "#funciones"
+    },
+    {
+      "texto": "Producto",
+      "enlace": "#producto"
+    },
+    {
+      "texto": "Precios",
+      "enlace": "#precios"
+    },
+    {
+      "texto": "Contacto",
+      "enlace": "#contacto"
+    }
   ],
-  "boton": { "texto": "Entrar", "enlace": "#precios" },
+  "boton": {
+    "texto": "Entrar",
+    "enlace": "#precios"
+  },
   "pie": {
     "enlaces": [
-      { "texto": "Funciones", "enlace": "#funciones" },
-      { "texto": "Precios", "enlace": "#precios" },
-      { "texto": "Privacidad", "enlace": "#" },
-      { "texto": "Términos", "enlace": "#" }
+      {
+        "texto": "Funciones",
+        "enlace": "#funciones"
+      },
+      {
+        "texto": "Precios",
+        "enlace": "#precios"
+      },
+      {
+        "texto": "Privacidad",
+        "enlace": "#"
+      },
+      {
+        "texto": "Términos",
+        "enlace": "#"
+      }
     ],
     "legal": "© 2026 Nombre"
   }
