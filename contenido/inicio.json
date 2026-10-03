@@ -7,11 +7,17 @@
     {
       "tipo": "portada",
       "etiqueta": "Nueva versión disponible",
-      "titulo": "Una frase clara que explica lo que hace tu producto.",
+      "titulo": "Aquí va el PUNCH! de tu servicio. La promesa irresistible.",
       "texto": "Un párrafo breve que amplía la propuesta de valor: para quién es, qué problema resuelve y por qué ahora.",
       "imagen": "",
-      "boton": { "texto": "Empezar gratis", "enlace": "#precios" },
-      "boton2": { "texto": "Ver cómo funciona", "enlace": "#producto" },
+      "boton": {
+        "texto": "Empezar gratis",
+        "enlace": "#precios"
+      },
+      "boton2": {
+        "texto": "Ver cómo funciona",
+        "enlace": "#producto"
+      },
       "ancla": ""
     },
     {
@@ -20,9 +26,18 @@
       "titulo": "Todo lo que necesitas, nada que sobre.",
       "texto": "Resume en una o dos líneas el conjunto de funciones principales y el beneficio común que comparten.",
       "tarjetas": [
-        { "titulo": "Función principal", "texto": "Describe el beneficio concreto que obtiene el usuario, no la tecnología detrás." },
-        { "titulo": "Segunda función", "texto": "Una o dos líneas bastan. Prioriza lo que diferencia al producto." },
-        { "titulo": "Tercera función", "texto": "Cierra con la función que reduce la fricción o el riesgo de empezar." }
+        {
+          "titulo": "Función principal",
+          "texto": "Describe el beneficio concreto que obtiene el usuario, no la tecnología detrás."
+        },
+        {
+          "titulo": "Segunda función",
+          "texto": "Una o dos líneas bastan. Prioriza lo que diferencia al producto."
+        },
+        {
+          "titulo": "Tercera función",
+          "texto": "Cierra con la función que reduce la fricción o el riesgo de empezar."
+        }
       ],
       "ancla": "funciones"
     },
@@ -31,33 +46,51 @@
       "rotulo": "Incluido",
       "titulo": "Todo viene listo desde el primer día.",
       "texto": "Una línea que resuma lo que obtiene el usuario sin configuración adicional ni costos ocultos.",
-      "puntos": ["Primera característica incluida", "Segunda característica incluida", "Tercera característica incluida", "Cuarta característica incluida", "Quinta característica incluida", "Sexta característica incluida"],
-      "boton": { "texto": "Ver planes", "enlace": "#precios" },
+      "puntos": [
+        "Primera característica incluida",
+        "Segunda característica incluida",
+        "Tercera característica incluida",
+        "Cuarta característica incluida",
+        "Quinta característica incluida",
+        "Sexta característica incluida"
+      ],
+      "boton": {
+        "texto": "Ver planes",
+        "enlace": "#precios"
+      },
       "ancla": ""
     },
     {
-      "tipo": "imagen_texto",
-      "imagen": "",
+      "rotulo": "Cómo funciona",
+      "texto": "Describe con más detalle cómo el usuario pasa del problema al resultado. Un párrafo concreto funciona mejor que una lista larga de beneficios.",
+      "pasos": [
+        "Primer paso del proceso",
+        "Segundo paso del proceso",
+        "Resultado final"
+      ],
+      "ancla": "producto",
       "descripcion": "",
+      "imagen": "",
+      "tipo": "imagen_texto",
+      "titulo": "Explica el flujo principal en una frase.",
       "imagen_derecha": false,
-      "fondo_suave": true,
-      "rotulo": "Cómo funciona",
-      "titulo": "Explica el flujo principal en una frase.",
-      "texto": "Describe con más detalle cómo el usuario pasa del problema al resultado. Un párrafo concreto funciona mejor que una lista larga de beneficios.",
-      "pasos": ["Primer paso del proceso", "Segundo paso del proceso", "Resultado final"],
-      "ancla": "producto"
+      "fondo_suave": true
     },
     {
-      "tipo": "imagen_texto",
-      "imagen": "",
-      "descripcion": "",
-      "imagen_derecha": true,
-      "fondo_suave": false,
       "rotulo": "Cómo funciona",
-      "titulo": "Explica el flujo principal en una frase.",
       "texto": "Describe con más detalle cómo el usuario pasa del problema al resultado. Un párrafo concreto funciona mejor que una lista larga de beneficios.",
-      "pasos": ["Primer paso del proceso", "Segundo paso del proceso", "Resultado final"],
-      "ancla": ""
+      "pasos": [
+        "Primer paso del proceso",
+        "Segundo paso del proceso",
+        "Resultado final"
+      ],
+      "ancla": "",
+      "descripcion": "",
+      "imagen": "",
+      "tipo": "imagen_texto",
+      "titulo": "Explica el flujo principal en una frase.",
+      "imagen_derecha": true,
+      "fondo_suave": false
     },
     {
       "tipo": "testimonios",
@@ -65,9 +98,24 @@
       "titulo": "Lo que dicen quienes ya lo usan.",
       "texto": "Una línea que presente a los clientes y el tipo de resultados que han conseguido.",
       "citas": [
-        { "cita": "Una cita breve y específica sobre el resultado que obtuvo este cliente.", "nombre": "Nombre Apellido", "cargo": "Cargo, Empresa", "foto": "" },
-        { "cita": "Otra opinión que refuerce un beneficio distinto al del primer testimonio.", "nombre": "Nombre Apellido", "cargo": "Cargo, Empresa", "foto": "" },
-        { "cita": "Un tercer comentario que hable de la experiencia de uso o del soporte.", "nombre": "Nombre Apellido", "cargo": "Cargo, Empresa", "foto": "" }
+        {
+          "cita": "Una cita breve y específica sobre el resultado que obtuvo este cliente.",
+          "nombre": "Nombre Apellido",
+          "cargo": "Cargo, Empresa",
+          "foto": ""
+        },
+        {
+          "cita": "Otra opinión que refuerce un beneficio distinto al del primer testimonio.",
+          "nombre": "Nombre Apellido",
+          "cargo": "Cargo, Empresa",
+          "foto": ""
+        },
+        {
+          "cita": "Un tercer comentario que hable de la experiencia de uso o del soporte.",
+          "nombre": "Nombre Apellido",
+          "cargo": "Cargo, Empresa",
+          "foto": ""
+        }
       ],
       "ancla": ""
     },
@@ -78,31 +126,92 @@
       "etiqueta_mensual": "Mensual",
       "etiqueta_anual": "Anual −20%",
       "planes": [
-        { "nombre": "Básico", "destacado": false, "insignia": "", "precio": "0 €", "precio_anual": "", "periodo": "", "descripcion": "Para probar el producto sin compromiso.", "incluye": ["1 proyecto", "Funciones esenciales", "Soporte por correo"], "boton": { "texto": "Empezar gratis", "enlace": "#contacto" } },
-        { "nombre": "Pro", "destacado": true, "insignia": "Popular", "precio": "24 €", "precio_anual": "19 €", "periodo": "/ usuario · mes", "descripcion": "Para equipos pequeños que ya están creciendo.", "incluye": ["Proyectos ilimitados", "Todas las funciones", "Integraciones", "Soporte prioritario"], "boton": { "texto": "Elegir Pro", "enlace": "#contacto" } },
-        { "nombre": "Empresa", "destacado": false, "insignia": "", "precio": "A medida", "precio_anual": "", "periodo": "", "descripcion": "Para organizaciones con necesidades a medida.", "incluye": ["Todo lo de Pro", "SSO y permisos", "Acuerdo de nivel de servicio"], "boton": { "texto": "Contactar ventas", "enlace": "#contacto" } }
+        {
+          "boton": {
+            "texto": "Empezar gratis",
+            "enlace": "#contacto"
+          },
+          "precio": "0 €",
+          "destacado": false,
+          "nombre": "Básico",
+          "descripcion": "Para probar el producto sin compromiso.",
+          "periodo": "",
+          "incluye": [
+            "1 proyecto",
+            "Funciones esenciales",
+            "Soporte por correo"
+          ],
+          "insignia": "",
+          "precio_anual": ""
+        },
+        {
+          "boton": {
+            "texto": "Elegir Pro",
+            "enlace": "#contacto"
+          },
+          "precio": "24 €",
+          "destacado": true,
+          "nombre": "Pro",
+          "descripcion": "Para equipos pequeños que ya están creciendo.",
+          "periodo": "/ usuario · mes",
+          "incluye": [
+            "Proyectos ilimitados",
+            "Todas las funciones",
+            "Integraciones",
+            "Soporte prioritario"
+          ],
+          "insignia": "Popular",
+          "precio_anual": "19 €"
+        },
+        {
+          "boton": {
+            "texto": "Contactar ventas",
+            "enlace": "#contacto"
+          },
+          "precio": "A medida",
+          "destacado": false,
+          "nombre": "Empresa",
+          "descripcion": "Para organizaciones con necesidades a medida.",
+          "periodo": "",
+          "incluye": [
+            "Todo lo de Pro",
+            "SSO y permisos",
+            "Acuerdo de nivel de servicio"
+          ],
+          "insignia": "",
+          "precio_anual": ""
+        }
       ],
       "ancla": "precios"
     },
     {
       "tipo": "llamada",
       "titulo": "Una invitación final, directa y breve.",
-      "boton": { "texto": "Empezar gratis", "enlace": "#precios" },
+      "boton": {
+        "texto": "Empezar gratis",
+        "enlace": "#precios"
+      },
       "ancla": ""
     },
     {
-      "tipo": "contacto",
-      "titulo": "Hablemos.",
       "texto": "Cuéntanos qué necesitas y te respondemos en menos de 24 horas.",
-      "datos": [
-        { "etiqueta": "Correo", "valor": "hola@nombre.com" },
-        { "etiqueta": "Oficina", "valor": "Calle Ejemplo 123, Ciudad" }
-      ],
-      "correo_destino": "hola@nombre.com",
       "boton": "Enviar mensaje",
       "enviado_titulo": "Mensaje listo.",
+      "ancla": "contacto",
       "enviado_texto": "Se abrió tu aplicación de correo con el mensaje: sólo falta darle Enviar.",
-      "ancla": "contacto"
+      "tipo": "contacto",
+      "titulo": "Hablemos.",
+      "datos": [
+        {
+          "etiqueta": "Correo",
+          "valor": "hola@nombre.com"
+        },
+        {
+          "etiqueta": "Oficina",
+          "valor": "Calle Ejemplo 123, Ciudad"
+        }
+      ],
+      "correo_destino": "hola@nombre.com"
     }
   ]
 }
