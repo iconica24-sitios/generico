@@ -1,0 +1,89 @@
+{
+  "label": "Testimonios",
+  "name": "testimonios",
+  "widget": "object",
+  "summary": "Testimonios — {{fields.titulo}}",
+  "fields": [
+    {
+      "label": "Rótulo",
+      "name": "rotulo",
+      "widget": "string",
+      "required": false,
+      "default": "Testimonios"
+    },
+    {
+      "label": "Título",
+      "name": "titulo",
+      "widget": "string",
+      "default": "Lo que dicen quienes ya lo usan."
+    },
+    {
+      "label": "Texto",
+      "name": "texto",
+      "widget": "text",
+      "required": false,
+      "default": "Una línea que presente a los clientes y el tipo de resultados que han conseguido."
+    },
+    {
+      "label": "Testimonios",
+      "name": "citas",
+      "widget": "list",
+      "summary": "{{fields.nombre}}",
+      "hint": "Se ven mejor de 3 en 3.",
+      "default": [
+        {
+          "cita": "Una cita breve y específica sobre el resultado que obtuvo este cliente.",
+          "nombre": "Nombre Apellido",
+          "cargo": "Cargo, Empresa"
+        },
+        {
+          "cita": "Otra opinión que refuerce un beneficio distinto.",
+          "nombre": "Nombre Apellido",
+          "cargo": "Cargo, Empresa"
+        },
+        {
+          "cita": "Un tercer comentario sobre la experiencia o el soporte.",
+          "nombre": "Nombre Apellido",
+          "cargo": "Cargo, Empresa"
+        }
+      ],
+      "fields": [
+        {
+          "label": "Testimonio (sin comillas)",
+          "name": "cita",
+          "widget": "text"
+        },
+        {
+          "label": "Nombre",
+          "name": "nombre",
+          "widget": "string"
+        },
+        {
+          "label": "Cargo o detalle",
+          "name": "cargo",
+          "widget": "string",
+          "required": false
+        },
+        {
+          "label": "Foto",
+          "name": "foto",
+          "widget": "image",
+          "required": false,
+          "hint": "Cuadrada; se ve en un círculo pequeño."
+        }
+      ]
+    },
+    {
+      "label": "Ancla para el menú",
+      "name": "ancla",
+      "widget": "string",
+      "required": false,
+      "default": "",
+      "hint": "Sin espacios (p. ej. precios): el menú la enlaza como #precios. Vacío = sin ancla.",
+      "pattern": [
+        "^[a-z0-9-]*$",
+        "Sólo minúsculas, números y guiones"
+      ]
+    }
+  ]
+}

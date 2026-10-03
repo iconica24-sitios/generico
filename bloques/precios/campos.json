@@ -1,0 +1,169 @@
+{
+  "label": "Precios",
+  "name": "precios",
+  "widget": "object",
+  "summary": "Precios — {{fields.titulo}}",
+  "fields": [
+    {
+      "label": "Título",
+      "name": "titulo",
+      "widget": "string",
+      "default": "Precios simples."
+    },
+    {
+      "label": "Texto",
+      "name": "texto",
+      "widget": "text",
+      "required": false,
+      "default": "Empieza cuando quieras y cambia de plan cuando lo necesites."
+    },
+    {
+      "label": "Selector: texto de mensual",
+      "name": "etiqueta_mensual",
+      "widget": "string",
+      "required": false,
+      "default": "Mensual"
+    },
+    {
+      "label": "Selector: texto de anual",
+      "name": "etiqueta_anual",
+      "widget": "string",
+      "required": false,
+      "default": "Anual −20%",
+      "hint": "Vacío = sin selector (sólo un precio por plan)."
+    },
+    {
+      "label": "Planes",
+      "name": "planes",
+      "widget": "list",
+      "summary": "{{fields.nombre}} — {{fields.precio}}",
+      "hint": "Se ven mejor de 3 en 3.",
+      "default": [
+        {
+          "nombre": "Básico",
+          "destacado": false,
+          "insignia": "",
+          "precio": "$0",
+          "precio_anual": "",
+          "periodo": "",
+          "descripcion": "Para empezar sin compromiso.",
+          "incluye": [
+            "Primer beneficio",
+            "Segundo beneficio",
+            "Tercer beneficio"
+          ],
+          "boton": {
+            "texto": "Empezar",
+            "enlace": "#contacto"
+          }
+        },
+        {
+          "nombre": "Pro",
+          "destacado": true,
+          "insignia": "Popular",
+          "precio": "$24",
+          "precio_anual": "$19",
+          "periodo": "/ mes",
+          "descripcion": "Para negocios que ya están creciendo.",
+          "incluye": [
+            "Todo lo del Básico",
+            "Otro beneficio",
+            "Uno más"
+          ],
+          "boton": {
+            "texto": "Elegir Pro",
+            "enlace": "#contacto"
+          }
+        }
+      ],
+      "fields": [
+        {
+          "label": "Nombre",
+          "name": "nombre",
+          "widget": "string"
+        },
+        {
+          "label": "Destacado (tarjeta oscura)",
+          "name": "destacado",
+          "widget": "boolean",
+          "default": false
+        },
+        {
+          "label": "Insignia del destacado",
+          "name": "insignia",
+          "widget": "string",
+          "required": false,
+          "default": "Popular"
+        },
+        {
+          "label": "Precio",
+          "name": "precio",
+          "widget": "string",
+          "hint": "Como se lee: $24, 0 €, A medida…"
+        },
+        {
+          "label": "Precio anual",
+          "name": "precio_anual",
+          "widget": "string",
+          "required": false,
+          "hint": "Se muestra al elegir Anual. Vacío = el mismo precio."
+        },
+        {
+          "label": "Periodo",
+          "name": "periodo",
+          "widget": "string",
+          "required": false,
+          "hint": "Ej. / mes. Puede ir vacío."
+        },
+        {
+          "label": "Descripción",
+          "name": "descripcion",
+          "widget": "text"
+        },
+        {
+          "label": "Qué incluye",
+          "name": "incluye",
+          "widget": "list",
+          "field": {
+            "label": "Punto",
+            "name": "punto",
+            "widget": "string"
+          }
+        },
+        {
+          "label": "Botón",
+          "name": "boton",
+          "widget": "object",
+          "collapsed": true,
+          "fields": [
+            {
+              "label": "Texto",
+              "name": "texto",
+              "widget": "string",
+              "default": "Elegir"
+            },
+            {
+              "label": "Enlace",
+              "name": "enlace",
+              "widget": "string",
+              "default": "#contacto",
+              "hint": "#ancla, /pagina o https://… (p. ej. el enlace de pago)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Ancla para el menú",
+      "name": "ancla",
+      "widget": "string",
+      "required": false,
+      "default": "precios",
+      "hint": "Sin espacios (p. ej. precios): el menú la enlaza como #precios. Vacío = sin ancla.",
+      "pattern": [
+        "^[a-z0-9-]*$",
+        "Sólo minúsculas, números y guiones"
+      ]
+    }
+  ]
+}

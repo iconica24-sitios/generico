@@ -1,0 +1,85 @@
+{
+  "label": "Imagen y texto",
+  "name": "imagen_texto",
+  "widget": "object",
+  "summary": "Imagen y texto — {{fields.titulo}}",
+  "fields": [
+    {
+      "label": "Imagen",
+      "name": "imagen",
+      "widget": "image",
+      "required": false,
+      "hint": "Ocupa media pantalla a sangre. En celular no se muestra."
+    },
+    {
+      "label": "Qué se ve en la imagen",
+      "name": "descripcion",
+      "widget": "string",
+      "required": false,
+      "default": "",
+      "hint": "Para personas que no ven la imagen y para Google."
+    },
+    {
+      "label": "Imagen a la derecha",
+      "name": "imagen_derecha",
+      "widget": "boolean",
+      "default": false
+    },
+    {
+      "label": "Fondo gris suave",
+      "name": "fondo_suave",
+      "widget": "boolean",
+      "default": true,
+      "hint": "Alterna el fondo para separar bloques seguidos."
+    },
+    {
+      "label": "Rótulo",
+      "name": "rotulo",
+      "widget": "string",
+      "required": false,
+      "default": "Cómo funciona"
+    },
+    {
+      "label": "Título",
+      "name": "titulo",
+      "widget": "string",
+      "default": "Explica el flujo principal en una frase."
+    },
+    {
+      "label": "Texto",
+      "name": "texto",
+      "widget": "text",
+      "required": false,
+      "default": "Describe con más detalle cómo el usuario pasa del problema al resultado. Un párrafo concreto funciona mejor que una lista larga de beneficios."
+    },
+    {
+      "label": "Pasos",
+      "name": "pasos",
+      "widget": "list",
+      "required": false,
+      "field": {
+        "label": "Paso",
+        "name": "paso",
+        "widget": "string"
+      },
+      "hint": "Se numeran solos. Sin pasos, la lista no aparece.",
+      "default": [
+        "Primer paso del proceso",
+        "Segundo paso del proceso",
+        "Resultado final"
+      ]
+    },
+    {
+      "label": "Ancla para el menú",
+      "name": "ancla",
+      "widget": "string",
+      "required": false,
+      "default": "",
+      "hint": "Sin espacios (p. ej. precios): el menú la enlaza como #precios. Vacío = sin ancla.",
+      "pattern": [
+        "^[a-z0-9-]*$",
+        "Sólo minúsculas, números y guiones"
+      ]
+    }
+  ]
+}

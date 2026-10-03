@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="robots" content="noindex, nofollow"/>
+        <title>Editor del sitio</title>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+        <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url"/>
+    </head>
+    <body>
+        <!-- Panel de edición (Decap CMS), instalado por la consola de Icónica24.
+             config.yml tiene los campos de este sitio; lo que depende de dónde
+             está publicado (repo, dirección) se pone aquí al iniciar, así el
+             mismo kit sirve en cualquier dominio. admin/sitio.js lo escribe
+             el build con el repo de este sitio. -->
+        <script>window.CMS_MANUAL_INIT = true;</script>
+        <script src="/admin/sitio.js"></script>
+        <script src="https://unpkg.com/decap-cms@3.16.3/dist/decap-cms.js"></script>
+        <script>
+            // El español de Decap deja algunos textos en inglés ("Add …",
+            // "Insert from URL"): se completan sin tocar los que ya trae.
+            (function () {
+                function completar(a, b) {
+                    Object.keys(b).forEach(function (k) {
+                        if (b[k] && typeof b[k] === 'object') a[k] = completar(a[k] || {}, b[k]);
+                        else if (!(k in a)) a[k] = b[k];
+                    });
+                    return a;
+                }
+                CMS.registerLocale('es', completar(CMS.getLocale('es') || {}, { editor: { editorWidgets: {
+                    list: { add: 'Añadir %{item}', addType: 'Añadir %{item}' },
+                    image: { chooseUrl: 'Insertar desde URL', replaceUrl: 'Reemplazar con URL' },
+                    file: { chooseUrl: 'Insertar desde URL', replaceUrl: 'Reemplazar con URL' },
+                } } }));
+            })();
+            CMS.init({
+                config: {
+                    backend: {
+                        name: 'github',
+                        repo: window.SITIO.repo,
+                        branch: 'main',
+                        // Usuario y contraseña (api/auth.js) y todas las llamadas
+                        // a GitHub por el intermediario (api/github.js).
+                        base_url: location.origin,
+                        auth_endpoint: 'api/auth',
+                        api_root: '/api/github',
+                    },
+                    // El panel siempre habla con GitHub por el intermediario, aunque
+                    // config.yml traiga local_backend de cuando se diseñó en local.
+                    local_backend: false,
+                    site_url: location.origin,
+                    display_url: location.origin,
+                },
+            });
+            // El editor no entra con GitHub: se quita "con GitHub" y el logo del botón.
+            new MutationObserver(function () {
+                document.querySelectorAll('button').forEach(function (b) {
+                    if (!/con GitHub|with GitHub/i.test(b.textContent)) return;
+                    b.querySelectorAll('svg').forEach(function (i) { (i.parentElement === b ? i : i.parentElement).style.display = 'none'; });
+                    b.childNodes.forEach(function (n) {
+                        if (n.nodeType === 3) n.textContent = n.textContent.replace(/\s*(con|with) GitHub/i, '');
+                    });
+                });
+            }).observe(document.documentElement, { childList: true, subtree: true });
+        </script>
+        <script type="module" src="/admin/vista-previa.js"></script>
+    </body>
+</html>

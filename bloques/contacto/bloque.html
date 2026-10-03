@@ -1,0 +1,28 @@
+<section class="contacto" id="" data-cms-id=".ancla" data-cms-item>
+  <div class="contacto__rejilla">
+    <div class="contacto__info">
+      <div>
+        <h2 class="titulo-seccion contacto__titulo" data-cms=".titulo">Hablemos.</h2>
+        <p class="contacto__texto" data-cms=".texto" data-cms-optional>Cuéntanos qué necesitas y te respondemos en menos de 24 horas.</p>
+      </div>
+      <div class="contacto__datos" data-cms-list=".datos">
+        <div class="contacto__dato" data-cms-item><span class="contacto__etiqueta" data-cms=".etiqueta">Correo</span><span class="contacto__valor" data-cms=".valor">hola@nombre.com</span></div>
+      </div>
+    </div>
+    <div class="contacto__enviado" hidden>
+      <h3 data-cms=".enviado_titulo">Mensaje listo.</h3>
+      <p data-cms=".enviado_texto">Se abrió tu aplicación de correo con el mensaje: sólo falta darle Enviar.</p>
+    </div>
+    <form class="contacto__form">
+      <a class="contacto__destino" hidden href="mailto:" data-cms-href="mailto:{.correo_destino}"></a>
+      <div class="contacto__campos">
+        <div class="contacto__fila">
+          <input name="nombre" required placeholder="Nombre" aria-label="Nombre" autocomplete="name">
+          <input name="correo" type="email" required placeholder="Correo" aria-label="Correo" autocomplete="email">
+        </div>
+        <textarea name="mensaje" rows="5" placeholder="Mensaje" aria-label="Mensaje"></textarea>
+      </div>
+      <button type="submit" class="contacto__boton" data-cms=".boton">Enviar mensaje</button>
+    </form>
+  </div>
+</section>

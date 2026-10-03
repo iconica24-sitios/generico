@@ -1,0 +1,99 @@
+{
+  "label": "Portada",
+  "name": "portada",
+  "widget": "object",
+  "summary": "Portada — {{fields.titulo}}",
+  "fields": [
+    {
+      "label": "Etiqueta",
+      "name": "etiqueta",
+      "widget": "string",
+      "required": false,
+      "default": "Nueva versión disponible",
+      "hint": "Texto pequeño sobre el título. Vacío = no aparece."
+    },
+    {
+      "label": "Título",
+      "name": "titulo",
+      "widget": "string",
+      "default": "Una frase clara que explica lo que hace tu negocio.",
+      "pattern": [
+        "^.{1,90}$",
+        "Máximo 90 caracteres"
+      ]
+    },
+    {
+      "label": "Texto",
+      "name": "texto",
+      "widget": "text",
+      "required": false,
+      "default": "Un párrafo breve que amplía la propuesta: para quién es y qué problema resuelve."
+    },
+    {
+      "label": "Imagen de fondo",
+      "name": "imagen",
+      "widget": "image",
+      "required": false,
+      "hint": "Horizontal, 1920 px de ancho o más. Sin imagen se ve el rayado."
+    },
+    {
+      "label": "Botón principal",
+      "name": "boton",
+      "widget": "object",
+      "collapsed": true,
+      "fields": [
+        {
+          "label": "Texto",
+          "name": "texto",
+          "widget": "string",
+          "required": false,
+          "default": "Empezar",
+          "hint": "Vacío = sin botón."
+        },
+        {
+          "label": "Enlace",
+          "name": "enlace",
+          "widget": "string",
+          "required": false,
+          "default": "#contacto",
+          "hint": "#ancla de una sección, /pagina o https://…"
+        }
+      ]
+    },
+    {
+      "label": "Botón secundario",
+      "name": "boton2",
+      "widget": "object",
+      "collapsed": true,
+      "fields": [
+        {
+          "label": "Texto",
+          "name": "texto",
+          "widget": "string",
+          "required": false,
+          "default": "",
+          "hint": "Vacío = sin botón."
+        },
+        {
+          "label": "Enlace",
+          "name": "enlace",
+          "widget": "string",
+          "required": false,
+          "default": ""
+        }
+      ]
+    },
+    {
+      "label": "Ancla para el menú",
+      "name": "ancla",
+      "widget": "string",
+      "required": false,
+      "default": "",
+      "hint": "Opcional. Sin espacios (p. ej. inicio): el menú la enlaza como #inicio.",
+      "pattern": [
+        "^[a-z0-9-]*$",
+        "Sólo minúsculas, números y guiones"
+      ]
+    }
+  ]
+}

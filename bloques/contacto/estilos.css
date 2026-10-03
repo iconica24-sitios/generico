@@ -1,0 +1,39 @@
+/* Contacto: datos a la izquierda y formulario a la derecha (en celular, uno sobre otro) */
+.contacto { background: var(--suave); }
+.contacto__rejilla { max-width: 1200px; margin: 0 auto; padding: 112px 32px; display: flex; flex-direction: column; gap: 56px; }
+.contacto__info { display: flex; flex-direction: column; }
+.contacto__titulo { margin-top: -0.1em; text-wrap: initial; }
+.contacto__texto { margin: 24px 0 0; font-size: 18px; line-height: 1.6; color: var(--gris); max-width: 420px; }
+.contacto__datos { margin-top: 48px; display: flex; flex-direction: column; gap: 24px; font-size: 16px; }
+.contacto__dato { display: flex; flex-direction: column; gap: 4px; }
+.contacto__etiqueta { font-size: 13px; color: var(--gris); }
+.contacto__valor { font-weight: 600; }
+.contacto__form { display: flex; flex-direction: column; gap: 20px; }
+.contacto__campos { display: flex; flex-direction: column; gap: 20px; }
+.contacto__fila { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 20px; }
+.contacto input, .contacto textarea {
+  font-size: 16px; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--linea-fuerte);
+  background: var(--papel); outline: none; color: var(--tinta);
+}
+.contacto input:focus, .contacto textarea:focus { border-color: var(--acento); }
+.contacto textarea { resize: vertical; }
+.contacto__boton {
+  align-self: flex-start; justify-self: start; font-size: 16px; font-weight: 600; padding: 16px 28px;
+  border-radius: 999px; border: none; cursor: pointer; background: var(--tinta); color: var(--blanco);
+}
+.contacto__boton:hover { background: var(--acento); }
+.contacto__enviado {
+  padding: 48px; border-radius: 16px; background: var(--papel); border: 1px solid oklch(0.9 0.005 260);
+  display: flex; flex-direction: column; gap: 12px; justify-content: center;
+}
+.contacto__enviado[hidden] { display: none; }
+.contacto__enviado h3 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+.contacto__enviado p { margin: 0; font-size: 16px; color: var(--gris); }
+@media (min-width: 900px) {
+  .contacto__rejilla { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 72px; row-gap: 20px; }
+  .contacto__info { grid-column: 1; grid-row: 1; justify-content: space-between; }
+  .contacto__form { display: contents; }
+  .contacto__campos { grid-column: 2; grid-row: 1; }
+  .contacto__boton { grid-column: 2; grid-row: 2; }
+  .contacto__enviado { grid-column: 2; grid-row: 1 / 3; }
+}

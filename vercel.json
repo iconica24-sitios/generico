@@ -1,0 +1,14 @@
+{
+  "buildCommand": "node scripts/build.mjs",
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/api/github/:ruta(.*)", "destination": "/api/github?ruta=:ruta" }
+  ],
+  "headers": [
+    {
+      "source": "/(css|js|images|img|imagenes|assets|fonts)/(.*)",
+      "has": [{ "type": "query", "key": "v" }],
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}

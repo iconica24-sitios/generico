@@ -1,0 +1,11 @@
+/* Llamada a la acción: caja de color de acento */
+.llamada { max-width: 1200px; margin: 0 auto; padding: 0 32px 112px; width: 100%; }
+.llamada__caja {
+  border-radius: 24px; background: var(--acento); padding: clamp(48px, 7vw, 96px);
+  display: flex; justify-content: space-between; align-items: end; gap: 40px; flex-wrap: wrap;
+}
+.llamada__titulo { margin: 0; font-size: clamp(32px, 4.5vw, 56px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; color: var(--blanco); max-width: 640px; text-wrap: balance; }
+.llamada__boton { background: var(--blanco); color: var(--tinta); }
+.llamada__boton:hover { background: var(--tinta); color: var(--blanco); }
+/* Si la llamada es el primer bloque o sigue a una sección con fondo, gana aire arriba */
+main > .llamada:first-child, .imagen-texto--suave + .llamada, .contacto + .llamada { padding-top: 112px; }

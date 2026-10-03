@@ -1,0 +1,92 @@
+{
+  "label": "Contacto (formulario)",
+  "name": "contacto",
+  "widget": "object",
+  "summary": "Contacto — {{fields.titulo}}",
+  "fields": [
+    {
+      "label": "Título",
+      "name": "titulo",
+      "widget": "string",
+      "default": "Hablemos."
+    },
+    {
+      "label": "Texto",
+      "name": "texto",
+      "widget": "text",
+      "required": false,
+      "default": "Cuéntanos qué necesitas y te respondemos en menos de 24 horas."
+    },
+    {
+      "label": "Datos de contacto",
+      "name": "datos",
+      "widget": "list",
+      "summary": "{{fields.etiqueta}}: {{fields.valor}}",
+      "default": [
+        {
+          "etiqueta": "Correo",
+          "valor": "hola@tunegocio.com"
+        },
+        {
+          "etiqueta": "Oficina",
+          "valor": "Calle Ejemplo 123, Ciudad"
+        }
+      ],
+      "fields": [
+        {
+          "label": "Etiqueta",
+          "name": "etiqueta",
+          "widget": "string",
+          "hint": "Ej. Correo, Teléfono, Oficina"
+        },
+        {
+          "label": "Valor",
+          "name": "valor",
+          "widget": "string",
+          "hint": "Formato: [texto del enlace](mailto:hola@…) para que sea clicable"
+        }
+      ]
+    },
+    {
+      "label": "Correo que recibe los mensajes",
+      "name": "correo_destino",
+      "widget": "string",
+      "default": "",
+      "hint": "A dónde llegan los mensajes. Por ahora el formulario abre la aplicación de correo de quien escribe, con el mensaje listo.",
+      "pattern": [
+        "^([^@\\s]+@[^@\\s]+\\.[^@\\s]+)?$",
+        "Escribe un correo válido"
+      ]
+    },
+    {
+      "label": "Texto del botón",
+      "name": "boton",
+      "widget": "string",
+      "default": "Enviar mensaje"
+    },
+    {
+      "label": "Mensaje al enviar: título",
+      "name": "enviado_titulo",
+      "widget": "string",
+      "default": "Mensaje listo."
+    },
+    {
+      "label": "Mensaje al enviar: texto",
+      "name": "enviado_texto",
+      "widget": "string",
+      "default": "Se abrió tu aplicación de correo con el mensaje: sólo falta darle Enviar."
+    },
+    {
+      "label": "Ancla para el menú",
+      "name": "ancla",
+      "widget": "string",
+      "required": false,
+      "default": "contacto",
+      "hint": "Sin espacios (p. ej. precios): el menú la enlaza como #precios. Vacío = sin ancla.",
+      "pattern": [
+        "^[a-z0-9-]*$",
+        "Sólo minúsculas, números y guiones"
+      ]
+    }
+  ]
+}

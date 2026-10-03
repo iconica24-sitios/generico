@@ -1,0 +1,32 @@
+<section class="precios" id="" data-cms-id=".ancla" data-cms-item>
+  <div class="precios__interior">
+    <div class="precios__cabeza">
+      <div class="precios__intro">
+        <h2 class="titulo-seccion" data-cms=".titulo">Precios simples.</h2>
+        <p class="precios__texto" data-cms=".texto" data-cms-optional>Empieza gratis y cambia de plan cuando lo necesites.</p>
+      </div>
+      <div class="precios__periodos" role="group" aria-label="Periodo de pago" data-cms-if=".etiqueta_anual">
+        <button type="button" class="precios__periodo" aria-pressed="true" data-periodo="mensual" data-cms=".etiqueta_mensual">Mensual</button>
+        <button type="button" class="precios__periodo" aria-pressed="false" data-periodo="anual" data-cms=".etiqueta_anual">Anual −20%</button>
+      </div>
+    </div>
+    <div class="precios__planes" data-cms-list=".planes">
+      <div class="plan" data-cms-class="plan--destacado:.destacado" data-cms-item>
+        <div class="plan__cabeza">
+          <h3 class="plan__nombre" data-cms=".nombre">Básico</h3>
+          <span class="plan__insignia" data-cms=".insignia" data-cms-if=".destacado">Popular</span>
+        </div>
+        <div class="plan__precio">
+          <span class="plan__cifra plan__cifra--mensual" data-cms=".precio">0 €</span>
+          <span class="plan__cifra plan__cifra--anual" data-cms=".precio_anual" data-cms-if=".precio_anual">0 €</span>
+          <span class="plan__periodo" data-cms=".periodo"></span>
+        </div>
+        <p class="plan__descripcion" data-cms=".descripcion">Para probar el producto sin compromiso.</p>
+        <div class="plan__incluye" data-cms-list=".incluye">
+          <div class="plan__punto" data-cms-item><span class="plan__vineta" aria-hidden="true"></span><span data-cms=".">1 proyecto</span></div>
+        </div>
+        <a class="plan__boton" href="#contacto" data-cms-href=".boton.enlace" data-cms=".boton.texto">Empezar gratis</a>
+      </div>
+    </div>
+  </div>
+</section>

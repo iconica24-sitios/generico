@@ -1,0 +1,73 @@
+{
+  "label": "Funciones (tarjetas numeradas)",
+  "name": "funciones",
+  "widget": "object",
+  "summary": "Funciones — {{fields.titulo}}",
+  "fields": [
+    {
+      "label": "Rótulo",
+      "name": "rotulo",
+      "widget": "string",
+      "required": false,
+      "default": "Funciones"
+    },
+    {
+      "label": "Título",
+      "name": "titulo",
+      "widget": "string",
+      "default": "Todo lo que necesitas, nada que sobre."
+    },
+    {
+      "label": "Texto",
+      "name": "texto",
+      "widget": "text",
+      "required": false,
+      "default": "Resume en una o dos líneas el conjunto de funciones principales."
+    },
+    {
+      "label": "Tarjetas",
+      "name": "tarjetas",
+      "widget": "list",
+      "summary": "{{fields.titulo}}",
+      "hint": "Se numeran solas (01, 02…). Se ven mejor de 3 en 3.",
+      "default": [
+        {
+          "titulo": "Función principal",
+          "texto": "Describe el beneficio concreto, no la tecnología detrás."
+        },
+        {
+          "titulo": "Segunda función",
+          "texto": "Una o dos líneas bastan."
+        },
+        {
+          "titulo": "Tercera función",
+          "texto": "Cierra con lo que reduce el riesgo de empezar."
+        }
+      ],
+      "fields": [
+        {
+          "label": "Título",
+          "name": "titulo",
+          "widget": "string"
+        },
+        {
+          "label": "Texto",
+          "name": "texto",
+          "widget": "text"
+        }
+      ]
+    },
+    {
+      "label": "Ancla para el menú",
+      "name": "ancla",
+      "widget": "string",
+      "required": false,
+      "default": "funciones",
+      "hint": "Sin espacios (p. ej. precios): el menú la enlaza como #precios. Vacío = sin ancla.",
+      "pattern": [
+        "^[a-z0-9-]*$",
+        "Sólo minúsculas, números y guiones"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-cms="seo.titulo">Nombre</title>
+<meta name="description" content="" data-cms-content="seo.descripcion">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400&amp;display=swap">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/bloques.css">
+<script src="js/sitio.js" defer></script>
+</head>
+<body>
+<!-- =========================================================================
+     Plantilla de bloques de Icónica24
+     -------------------------------------------------------------------------
+     Esta página es el molde de todas las páginas del sitio: cabecera, pie y,
+     en medio, los bloques que el cliente elige y ordena desde el panel.
+     - Cabecera, menú y pie: contenido/sitio.json (uno para todo el sitio).
+     - Bloques de la página: contenido/inicio.json → "bloques".
+     - Cada bloque vive en bloques/<tipo>/: su HTML, sus campos del panel y
+       sus estilos. El build los junta (kit: scripts/build.mjs).
+     ========================================================================= -->
+<div id="top" class="sitio" style="" data-cms-style="--acento:{sitio.marca.acento}">
+
+<header class="cabecera">
+  <div class="cabecera__fila">
+    <a class="marca" href="/#top"><span class="marca__cuadro" aria-hidden="true"></span><span data-cms="sitio.nombre">Nombre</span></a>
+    <nav class="menu" aria-label="Menú principal" data-cms-list="sitio.menu">
+      <a href="#funciones" data-cms-href=".url" data-cms=".texto" data-cms-item>Funciones</a>
+    </nav>
+    <div class="cabecera__acciones" data-cms-if="sitio.boton.texto">
+      <a class="boton boton--tinta boton--chico" href="#precios" data-cms-href="sitio.boton.url" data-cms="sitio.boton.texto">Entrar</a>
+    </div>
+    <button class="hamburguesa" type="button" aria-label="Menú" aria-expanded="false" aria-controls="menu-movil">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="menu-movil" id="menu-movil">
+    <div class="menu-movil__recorte">
+      <div class="menu-movil__panel">
+        <nav class="menu-movil__lista" aria-label="Menú" data-cms-list="sitio.menu">
+          <a href="#funciones" data-cms-href=".url" data-cms=".texto" data-cms-item>Funciones</a>
+        </nav>
+        <a class="boton boton--tinta menu-movil__boton" href="#precios" data-cms-href="sitio.boton.url" data-cms="sitio.boton.texto" data-cms-if="sitio.boton.texto">Entrar</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main data-cms-bloques="bloques"></main>
+
+<footer class="pie">
+  <div class="pie__fila">
+    <div class="marca marca--pie"><span class="marca__cuadro" aria-hidden="true"></span><span data-cms="sitio.nombre">Nombre</span></div>
+    <nav class="pie__enlaces" aria-label="Enlaces del pie" data-cms-list="sitio.pie.enlaces">
+      <a href="#funciones" data-cms-href=".url" data-cms=".texto" data-cms-item>Funciones</a>
+    </nav>
+    <span data-cms="sitio.pie.legal">© 2026 Nombre</span>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

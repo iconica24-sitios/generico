@@ -1,0 +1,81 @@
+{
+  "label": "Incluye (lista con palomitas)",
+  "name": "incluye",
+  "widget": "object",
+  "summary": "Incluye — {{fields.titulo}}",
+  "fields": [
+    {
+      "label": "Rótulo",
+      "name": "rotulo",
+      "widget": "string",
+      "required": false,
+      "default": "Incluido"
+    },
+    {
+      "label": "Título",
+      "name": "titulo",
+      "widget": "string",
+      "default": "Todo viene listo desde el primer día."
+    },
+    {
+      "label": "Texto",
+      "name": "texto",
+      "widget": "text",
+      "required": false,
+      "default": "Una línea que resuma lo que obtiene el usuario sin costos ocultos."
+    },
+    {
+      "label": "Puntos",
+      "name": "puntos",
+      "widget": "list",
+      "field": {
+        "label": "Punto",
+        "name": "punto",
+        "widget": "string"
+      },
+      "hint": "En computadora se ven en dos columnas: un número par se ve parejo.",
+      "default": [
+        "Primera característica incluida",
+        "Segunda característica incluida",
+        "Tercera característica incluida",
+        "Cuarta característica incluida"
+      ]
+    },
+    {
+      "label": "Botón",
+      "name": "boton",
+      "widget": "object",
+      "collapsed": true,
+      "fields": [
+        {
+          "label": "Texto",
+          "name": "texto",
+          "widget": "string",
+          "required": false,
+          "default": "Ver planes",
+          "hint": "Vacío = sin botón."
+        },
+        {
+          "label": "Enlace",
+          "name": "enlace",
+          "widget": "string",
+          "required": false,
+          "default": "#precios",
+          "hint": "#ancla de una sección, /pagina o https://…"
+        }
+      ]
+    },
+    {
+      "label": "Ancla para el menú",
+      "name": "ancla",
+      "widget": "string",
+      "required": false,
+      "default": "",
+      "hint": "Sin espacios (p. ej. precios): el menú la enlaza como #precios. Vacío = sin ancla.",
+      "pattern": [
+        "^[a-z0-9-]*$",
+        "Sólo minúsculas, números y guiones"
+      ]
+    }
+  ]
+}

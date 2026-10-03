@@ -1,0 +1,11 @@
+/* Funciones: tarjetas numeradas en rejilla con filete */
+.funciones { border-top: 1px solid var(--linea); }
+.funciones__interior { max-width: 1200px; margin: 0 auto; padding: 112px 32px; }
+.funciones__rejilla {
+  margin-top: 72px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1px; background: var(--linea); border: 1px solid var(--linea); border-radius: 16px; overflow: hidden;
+}
+.funciones__tarjeta { background: var(--papel); padding: 40px 36px; display: flex; flex-direction: column; gap: 16px; }
+.funciones__numero { font-family: var(--mono); font-size: 13px; color: var(--acento); }
+.funciones__titulo { margin: 8px 0 0; font-size: 22px; letter-spacing: -0.02em; font-weight: 700; }
+.funciones__texto { margin: 0; font-size: 16px; line-height: 1.6; color: var(--gris); }
