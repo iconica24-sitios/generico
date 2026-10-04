@@ -9,7 +9,7 @@
 .testimonios__autor { display: flex; align-items: center; gap: 14px; }
 .testimonios__foto {
   width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; overflow: hidden;
-  background: repeating-linear-gradient(135deg, oklch(0.94 0.004 260) 0 5px, oklch(0.91 0.005 260) 5px 10px);
+  background: repeating-linear-gradient(135deg, #e9ebee 0 5px, #dfe1e5 5px 10px);
 }
 .testimonios__foto img { width: 100%; height: 100%; object-fit: cover; }
 .testimonios__datos { display: flex; flex-direction: column; gap: 2px; }

@@ -25,7 +25,9 @@
       if (cabecera.classList.contains('is-abierta') && !panel.contains(e.target) && !boton.contains(e.target)) abrir(false);
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') abrir(false); });
-    matchMedia('(min-width: 768px)').addEventListener('change', e => { if (e.matches) abrir(false); });
+    // (addListener: Safari anterior a 14 no tiene addEventListener aquí.)
+    const ancho = matchMedia('(min-width: 768px)'), alCambiar = e => { if (e.matches) abrir(false); };
+    if (ancho.addEventListener) ancho.addEventListener('change', alCambiar); else ancho.addListener(alCambiar);
   }
 
   /* ---------- Menú: la página en la que se está ---------- */

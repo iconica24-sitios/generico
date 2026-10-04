@@ -5,15 +5,15 @@
    ========================================================================= */
 
 :root {
-  --papel: oklch(0.985 0.003 260);
-  --blanco: oklch(0.99 0.003 260);
-  --tinta: oklch(0.2 0.012 260);
-  --gris: oklch(0.46 0.012 260);
-  --gris-claro: oklch(0.5 0.01 260);
-  --linea: oklch(0.92 0.005 260);
-  --linea-fuerte: oklch(0.88 0.006 260);
-  --suave: oklch(0.965 0.004 260);
-  --acento: oklch(0.52 0.16 262);
+  --papel: #f9fafc;
+  --blanco: #fbfcfe;
+  --tinta: #13161c;
+  --gris: #54585f;
+  --gris-claro: #606369;
+  --linea: #e3e5e8;
+  --linea-fuerte: #d5d8db;
+  --suave: #f2f3f6;
+  --acento: #3263c3;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
   --alto-cabecera: 75px;
 }
@@ -21,7 +21,11 @@
    versión oscura para :hover se calcula de él. */
 .sitio {
   --acento-fuerte: var(--acento);
-  --acento-fuerte: oklch(from var(--acento) calc(l - 0.08) c h);
+}
+/* (Safari anterior a 16.4 no calcula colores relativos: ahí el hover usa el
+   mismo acento. En una variable no hay respaldo automático, por eso @supports.) */
+@supports (color: oklch(from red l c h)) {
+  .sitio { --acento-fuerte: oklch(from var(--acento) calc(l - 0.08) c h); }
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -37,12 +41,12 @@ img { display: block; max-width: 100%; }
 a { color: var(--tinta); text-decoration: none; }
 a:hover { color: var(--acento); }
 input, textarea, button { font-family: inherit; }
-input::placeholder, textarea::placeholder { color: oklch(0.62 0.01 260); opacity: 1; }
+input::placeholder, textarea::placeholder { color: #83868c; opacity: 1; }
 
 .sitio { min-height: 100vh; display: flex; flex-direction: column; }
 
 /* Rayado que ocupa el lugar de una imagen mientras no hay foto */
-.rayado { background: repeating-linear-gradient(135deg, oklch(0.95 0.004 260) 0 12px, oklch(0.93 0.005 260) 12px 24px); }
+.rayado { background: repeating-linear-gradient(135deg, #edeef1 0 12px, #e6e8eb 12px 24px); }
 
 /* ---------- Encabezado de sección (rótulo, título, texto) ---------- */
 .encabezado { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -55,7 +59,7 @@ input::placeholder, textarea::placeholder { color: oklch(0.62 0.01 260); opacity
 .boton--chico { font-size: 15px; padding: 10px 18px; }
 .boton--acento { background: var(--acento); color: var(--blanco); }
 .boton--acento:hover { background: var(--acento-fuerte); color: var(--blanco); }
-.boton--borde { border: 1px solid oklch(0.86 0.006 260); }
+.boton--borde { border: 1px solid #cfd1d5; }
 .boton--borde:hover { border-color: var(--tinta); }
 .boton--tinta { background: var(--tinta); color: var(--papel); }
 .boton--tinta:hover { background: var(--acento); color: var(--papel); }
@@ -63,7 +67,7 @@ input::placeholder, textarea::placeholder { color: oklch(0.62 0.01 260); opacity
 /* ---------- Cabecera ---------- */
 .cabecera {
   position: sticky; top: 0; z-index: 10;
-  background: oklch(0.985 0.003 260 / 0.9);
+  background: rgb(249 250 252 / 0.9);
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--linea);
 }

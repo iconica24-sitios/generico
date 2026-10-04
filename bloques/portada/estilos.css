@@ -3,8 +3,8 @@
   position: relative; margin-top: calc(-1 * var(--alto-cabecera)); min-height: 640px;
   display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden;
 }
-@media (min-width: 1024px) { .portada { min-height: max(640px, 100svh); } }
-.portada__fondo { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, oklch(0.96 0.004 260) 0 12px, oklch(0.94 0.005 260) 12px 24px); }
+@media (min-width: 1024px) { .portada { min-height: max(640px, 100vh); min-height: max(640px, 100svh); } }
+.portada__fondo { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, #f0f2f4 0 12px, #e9ebef 12px 24px); }
 .portada__imagen { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .portada__interior { position: relative; max-width: 1200px; width: 100%; margin: 0 auto; padding: 180px 32px 96px; }
 .portada__cuerpo { max-width: 880px; }

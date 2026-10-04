@@ -3,7 +3,7 @@
 .incluye__interior { max-width: 1040px; margin: 0 auto; padding: 112px 32px; display: flex; flex-direction: column; align-items: center; }
 .incluye__rejilla { margin-top: 72px; width: 100%; display: grid; grid-template-columns: 1fr; gap: 16px; }
 @media (min-width: 768px) { .incluye__rejilla { grid-template-columns: 1fr 1fr; } }
-.incluye__punto { display: flex; align-items: center; gap: 20px; padding: 24px 28px; border-radius: 12px; background: oklch(0.955 0.004 260); }
+.incluye__punto { display: flex; align-items: center; gap: 20px; padding: 24px 28px; border-radius: 12px; background: #eef0f3; }
 .incluye__palomita {
   flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--acento);
   display: flex; align-items: center; justify-content: center;

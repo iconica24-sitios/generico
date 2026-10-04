@@ -45,6 +45,10 @@
    A prueba de fallos: si falta una clave en el JSON, el texto original del
    HTML se queda como está y sólo se avisa en el log del build.
 
+   Para la maqueta (consola → Descargar maqueta), { maqueta: true } rellena
+   el contenido pero conserva las marcas data-cms, y encierra cada bloque
+   entre <!-- ▼ bloque: tipo --> y <!-- ▲ bloque: tipo -->.
+
    Para la vista previa del panel, { marcar: true } deja en cada elemento
    editable un data-ruta con su ruta completa en el JSON (hero.titulo,
    faq.preguntas.3.respuesta…), para ligarlo con su campo del formulario.
@@ -138,11 +142,15 @@ function cierre(html, el) {
 }
 
 function limpiarApertura(etiqueta) {
+  // En la maqueta las marcas se conservan: se renombran mientras se arma
+  // la página (para no volver a procesarlas) y al final recuperan su nombre.
+  if (maqueta) return etiqueta.replace(/(\s)data-cms(?=[-="\s/>])/g, '$1data-cmz');
   return etiqueta.replace(/\s+data-cms(?:-[\w-]+)?(?:="[^"]*")?(?=[\s/>])/g, '');
 }
 
 const avisos = [];
 let marcar = false;
+let maqueta = false;
 let bloques = {};
 
 // Un valor "cuenta" si no está vacío: ni null, ni "", ni false, ni [].
@@ -199,7 +207,8 @@ function renderizar(html, ctx, indice, base = '') {
       nuevo = items.map((item, i) => {
         const tpl = bloques[item && item.tipo];
         if (!tpl) { avisos.push(`bloque "${item && item.tipo}" desconocido en ${ruta}.${i}`); return ''; }
-        return '\n' + renderizar(tpl.trim(), item, i, `${ruta}.${i}`);
+        const hecho = renderizar(tpl.trim(), item, i, `${ruta}.${i}`);
+        return maqueta ? `\n<!-- ▼ bloque: ${item.tipo} -->\n${hecho}\n<!-- ▲ bloque: ${item.tipo} -->` : '\n' + hecho;
       }).join('\n') + '\n';
     }
     const apertura = limpiarApertura(el.apertura);
@@ -296,9 +305,11 @@ function renderizar(html, ctx, indice, base = '') {
 export function aplicarContenido(html, datos, opciones = {}) {
   avisos.length = 0;
   marcar = !!opciones.marcar;
+  maqueta = !!opciones.maqueta;
   bloques = opciones.bloques || {};
   raiz = datos || {};
-  const salida = renderizar(html, datos);
+  let salida = renderizar(html, datos);
+  if (maqueta) salida = salida.replace(/(\s)data-cmz(?=[-="\s/>])/g, '$1data-cms');
   return { html: salida, avisos: [...avisos] };
 }
 
