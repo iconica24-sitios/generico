@@ -1,5 +1,5 @@
 /* =========================================================================
-   Build de un sitio Icónica24 (kit instalado por la consola)
+   Build de un sitio GraphicaWeb (kit instalado por la consola)
    -------------------------------------------------------------------------
    Corre SÓLO en Vercel (VERCEL=1). Arma public/, que es lo que se publica:
 

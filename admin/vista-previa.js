@@ -71,6 +71,7 @@ if (SITIO.estilosVista) CMS.registerPreviewStyle('/admin/vista-previa.css');
 // es un recuadro aparte, del tamaño total del elemento, encima de todo.
 // Sólo borde y halo: un fondo taparía el de botones y bloques oscuros.
 CMS.registerPreviewStyle(`
+  html, body { overflow-x: clip; }
   [data-ruta] { cursor: pointer; }
   .cms-vista-sitio [data-ruta]:not([data-ruta^="sitio."]), .cms-vista-pagina [data-ruta^="sitio."] { cursor: auto; }
   .cms-marco { position: absolute; z-index: 2147483647; pointer-events: none; box-sizing: border-box;
@@ -188,9 +189,14 @@ function enmarcar(tipo, el) {
   const r = el && el.isConnected ? el.getBoundingClientRect() : null;
   if (!r || !r.width || !r.height) { marco.hidden = true; return; }
   const win = docVista.defaultView;
+  // Sin salirse por los lados: un elemento a todo lo ancho (un título, un
+  // bloque) daría un recuadro más ancho que la página, y la vista previa
+  // se podría recorrer hacia los lados al arrastrar.
+  const ancho = docVista.documentElement.clientWidth;
+  const izq = Math.max(r.left - MARGEN, 2), der = Math.min(r.right + MARGEN, ancho - 2);
   marco.style.top = `${r.top + win.scrollY - MARGEN}px`;
-  marco.style.left = `${r.left + win.scrollX - MARGEN}px`;
-  marco.style.width = `${r.width + MARGEN * 2}px`;
+  marco.style.left = `${izq + win.scrollX}px`;
+  marco.style.width = `${Math.max(der - izq, 0)}px`;
   marco.style.height = `${r.height + MARGEN * 2}px`;
   marco.hidden = false;
 }
