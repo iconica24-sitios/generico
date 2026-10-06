@@ -36,7 +36,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, cpSync, rmSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
-import { aplicarContenido, enlazar } from './contenido.mjs';
+import { aplicarContenido, enlazar, anclasOcultas } from './contenido.mjs';
 
 const ROOT = process.cwd();
 const SALIDA = join(ROOT, 'public');
@@ -72,6 +72,13 @@ if (existsSync(dirBloques)) {
     if (existsSync(join(dirBloques, tipo, 'campos.json'))) {
       const campos = JSON.parse(readFileSync(join(dirBloques, tipo, 'campos.json'), 'utf8'));
       if (campos.name !== tipo) throw new Error(`bloques/${tipo}/campos.json: "name" debe ser "${tipo}"`);
+      // Todo bloque se puede apagar sin borrarlo: la casilla va primero y su
+      // estado se lee en la lista de bloques ("Precios — … (oculto)").
+      if (!(campos.fields || []).some(f => f.name === 'oculto')) {
+        campos.fields = [{ label: 'Oculto (no se publica)', name: 'oculto', widget: 'boolean', default: false, required: false,
+          hint: 'Apaga el bloque sin borrarlo: no se publica ni se ve en la vista previa, pero su contenido se guarda.' }, ...(campos.fields || [])];
+        campos.summary = `${campos.summary || campos.label}{{fields.oculto | ternary(' (oculto)', '')}}`;
+      }
       tipos.push(campos);
     }
   }
@@ -97,7 +104,9 @@ const nuevas = existsSync(dirPaginas)
 // Datos comunes a todas las páginas (menú, pie, marca): "sitio.*", con los
 // enlaces ya resueltos contra las páginas que existen.
 const datosSitio = existsSync(join(dirContenido, 'sitio.json')) ? JSON.parse(readFileSync(join(dirContenido, 'sitio.json'), 'utf8')) : null;
-const sitioEnlazado = enlazar(datosSitio, nuevas);
+// Un enlace a una sección de inicio que está apagada se quita mientras lo esté.
+const datosInicio = existsSync(join(dirContenido, 'inicio.json')) ? JSON.parse(readFileSync(join(dirContenido, 'inicio.json'), 'utf8')) : null;
+const sitioEnlazado = enlazar(datosSitio, nuevas, anclasOcultas(datosInicio));
 if (existsSync(dirContenido)) {
   for (const f of readdirSync(dirContenido).filter(f => f.endsWith('.json'))) {
     const nombre = f.slice(0, -5);

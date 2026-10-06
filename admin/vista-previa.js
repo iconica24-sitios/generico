@@ -19,6 +19,8 @@
    (admin/bloques.json) y los datos publicados (admin/datos/*.json). Una
    página se ve con el menú y pie guardados; "Sitio" (menú, marca, pie) se
    ve sobre la página de inicio guardada, y sus rutas llevan "sitio.".
+   Un bloque apagado ("Oculto") no se ve, igual que en el sitio; en el
+   formulario sigue completo.
    ========================================================================= */
 const { aplicarContenido, enlazar = x => x } = await import('/admin/contenido.js');
 
