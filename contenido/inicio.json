@@ -84,6 +84,7 @@
         "Segundo paso del proceso",
         "Resultado final"
       ],
+      "oculto": true,
       "ancla": "",
       "descripcion": "",
       "imagen": "",
