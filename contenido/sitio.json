@@ -6,7 +6,19 @@
   "menu": [
     {
       "texto": "Funciones",
-      "enlace": "#funciones"
+      "enlace": "#funciones",
+      "submenu": [
+        {
+          "texto": "Híbridas",
+          "enlace": "https://grfkweb.com/carpeta/",
+          "submenu": [
+            {
+              "texto": "Planas",
+              "enlace": "https://grfkweb.com/folder/archivo"
+            }
+          ]
+        }
+      ]
     },
     {
       "texto": "Producto",
