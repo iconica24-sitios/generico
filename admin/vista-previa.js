@@ -212,6 +212,7 @@ function reenmarcar() {
 function resaltar(desplazar) {
   if (!docVista) return;
   docVista.querySelectorAll('.cms-activo').forEach(el => el.classList.remove('cms-activo'));
+  docVista.querySelectorAll('.cms-camino').forEach(el => el.classList.remove('cms-camino'));
   if (!rutaActiva) return reenmarcar();
   // El elemento exacto; si no hay, el más cercano que lo contenga
   // (p. ej. al enfocar una pregunta completa de la lista).
@@ -221,7 +222,13 @@ function resaltar(desplazar) {
   }
   if (!objetivo) return reenmarcar();
   objetivo.classList.add('cms-activo');
+  // Los contenedores del elemento llevan .cms-camino: así una plantilla puede
+  // dejar abierto (en su admin/vista-previa.css) el submenú o desplegable que
+  // lo contiene mientras se edita, aunque el cursor ya no esté encima.
+  for (let p = objetivo.parentElement; p && p !== docVista.body; p = p.parentElement) p.classList.add('cms-camino');
   reenmarcar();
+  // Si algo se abrió con una transición, el recuadro se recoloca al terminar.
+  setTimeout(reenmarcar, 350);
   if (desplazar) objetivo.scrollIntoView({ block: 'center', behavior: 'smooth' });
 }
 
