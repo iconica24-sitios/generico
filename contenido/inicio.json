@@ -165,24 +165,6 @@
           ],
           "insignia": "Popular",
           "precio_anual": "19 €"
-        },
-        {
-          "boton": {
-            "texto": "Contactar ventas",
-            "enlace": "#contacto"
-          },
-          "precio": "A medida",
-          "destacado": false,
-          "nombre": "Empresa",
-          "descripcion": "Para organizaciones con necesidades a medida.",
-          "periodo": "",
-          "incluye": [
-            "Todo lo de Pro",
-            "SSO y permisos",
-            "Acuerdo de nivel de servicio"
-          ],
-          "insignia": "",
-          "precio_anual": ""
         }
       ],
       "ancla": "precios"
