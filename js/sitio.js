@@ -1,8 +1,9 @@
 /* =========================================================================
    Comportamiento de la plantilla de bloques (sin dependencias)
-   - Menú móvil: se abre con la hamburguesa y se cierra al elegir un enlace,
-     con la misma hamburguesa, al tocar fuera, con Escape o al pasar a pantalla
-     ancha. Sus submenús se despliegan con la flecha (que no lo cierra).
+   - Menú móvil: se abre con la hamburguesa y se cierra con la misma
+     hamburguesa, al tocar fuera del menú, con Escape o al pasar a pantalla
+     ancha (elegir un enlace no lo cierra). Sus submenús se despliegan con la
+     flecha.
    - Menú activo: resalta la página en la que se está y, en ella, la
      sección visible (enlaces #ancla).
    - Precios: selector Mensual / Anual.
@@ -20,9 +21,6 @@
       boton.setAttribute('aria-expanded', String(si));
     };
     boton.addEventListener('click', () => abrir(!cabecera.classList.contains('is-abierta')));
-    // Elegir un enlace lo cierra: el panel flota sobre la página y, si se
-    // quedara abierto, taparía la sección a la que se fue (#precios…).
-    panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => abrir(false)));
     cabecera.querySelector('.marca').addEventListener('click', () => abrir(false));
     document.addEventListener('pointerdown', e => {
       if (cabecera.classList.contains('is-abierta') && !panel.contains(e.target) && !boton.contains(e.target)) abrir(false);
