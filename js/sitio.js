@@ -1,7 +1,8 @@
 /* =========================================================================
    Comportamiento de la plantilla de bloques (sin dependencias)
-   - Menú móvil: se abre con la hamburguesa y se cierra al elegir, al tocar
-     fuera o al pasar a pantalla ancha.
+   - Menú móvil: se abre con la hamburguesa y se cierra al elegir un enlace,
+     con la misma hamburguesa, al tocar fuera, con Escape o al pasar a pantalla
+     ancha. Sus submenús se despliegan con la flecha (que no lo cierra).
    - Menú activo: resalta la página en la que se está y, en ella, la
      sección visible (enlaces #ancla).
    - Precios: selector Mensual / Anual.
@@ -19,6 +20,8 @@
       boton.setAttribute('aria-expanded', String(si));
     };
     boton.addEventListener('click', () => abrir(!cabecera.classList.contains('is-abierta')));
+    // Elegir un enlace lo cierra: el panel flota sobre la página y, si se
+    // quedara abierto, taparía la sección a la que se fue (#precios…).
     panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => abrir(false)));
     cabecera.querySelector('.marca').addEventListener('click', () => abrir(false));
     document.addEventListener('pointerdown', e => {
@@ -28,6 +31,20 @@
     // (addListener: Safari anterior a 14 no tiene addEventListener aquí.)
     const ancho = matchMedia('(min-width: 768px)'), alCambiar = e => { if (e.matches) abrir(false); };
     if (ancho.addEventListener) ancho.addEventListener('change', alCambiar); else ancho.addListener(alCambiar);
+
+    // Submenús del menú móvil: se pliegan y se abren con la flecha de cada elemento
+    cabecera.classList.add('con-js');
+    panel.querySelectorAll('.menu-movil__abrir').forEach(b => {
+      const item = b.closest('.menu-movil__item');
+      if (!item.querySelector(':scope > .menu-movil__sub')) { b.remove(); return; }
+      b.hidden = false;
+      b.addEventListener('click', () => {
+        const si = !item.classList.contains('is-abierto');
+        item.classList.toggle('is-abierto', si);
+        b.setAttribute('aria-expanded', String(si));
+        b.setAttribute('aria-label', si ? 'Ocultar submenú' : 'Mostrar submenú');
+      });
+    });
   }
 
   /* ---------- Menú: la página en la que se está ---------- */

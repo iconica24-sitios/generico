@@ -129,7 +129,12 @@ if (nuevas.length && existsSync(join(ROOT, 'index.html'))) {
   const molde = readFileSync(join(ROOT, 'index.html'), 'utf8');
   // El menú y el pie son de todo el sitio: sus #ancla son de la página de
   // inicio aunque esta página tenga un bloque con la misma ancla.
-  const aInicio = e => (e && /^#[\w-]+$/.test(e.url || '') ? { ...e, url: `/${e.url}` } : e);
+  const aInicio = e => {
+    if (!e) return e;
+    const c = /^#[\w-]+$/.test(e.url || '') ? { ...e, url: `/${e.url}` } : { ...e };
+    if (Array.isArray(e.submenu)) c.submenu = e.submenu.map(aInicio);
+    return c;
+  };
   const sitioInterior = sitioEnlazado && {
     ...sitioEnlazado,
     menu: Array.isArray(sitioEnlazado.menu) ? sitioEnlazado.menu.map(aInicio) : sitioEnlazado.menu,

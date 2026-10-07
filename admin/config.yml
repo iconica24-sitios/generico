@@ -1,5 +1,5 @@
 # =========================================================================
-# Panel de edición (Decap CMS) — plantilla de bloques de Icónica24
+# Panel de edición (Decap CMS) — plantilla de bloques de GraphicaWeb
 # -------------------------------------------------------------------------
 # - "Sitio": nombre, color de acento, menú, botón de la cabecera y pie.
 #   Es uno para todo el sitio (contenido/sitio.json).
@@ -108,11 +108,35 @@ collections:
             widget: list
             max: 6
             summary: "{{fields.texto}}"
-            hint: "Máximo 6 opciones para que quepan en la cabecera. Arrastra para ordenarlas."
+            hint: "Máximo 6 opciones para que quepan en la cabecera. Arrastra para ordenarlas. Cada opción puede tener un submenú."
             fields:
               - { label: "Texto", name: texto, widget: string, pattern: ['^.{1,24}$', "Máximo 24 caracteres"] }
               - { label: "Página", name: pagina, widget: relation, collection: paginas, value_field: "{{slug}}", search_fields: [titulo], display_fields: [titulo], required: false, hint: "Elige una página del sitio… (si se borra la página, la opción se quita sola)" }
               - { label: "…o una dirección", name: enlace, widget: string, required: false, hint: "Si no elegiste página: #ancla de un bloque de inicio (p. ej. #precios), /algo o https://…", pattern: ['^(|#[a-z0-9-]*|/.*|https?://.+|mailto:.+|tel:.+)$', "Empieza con #, / o https://"] }
+              - label: Submenú
+                name: submenu
+                label_singular: opción
+                widget: list
+                required: false
+                collapsed: true
+                summary: "{{fields.texto}}"
+                hint: "Opciones que se despliegan bajo esta. Vacío = sin submenú."
+                fields:
+                  - { label: "Texto", name: texto, widget: string, pattern: ['^.{1,24}$', "Máximo 24 caracteres"] }
+                  - { label: "Página", name: pagina, widget: relation, collection: paginas, value_field: "{{slug}}", search_fields: [titulo], display_fields: [titulo], required: false, hint: "Elige una página del sitio… (si se borra la página, la opción se quita sola)" }
+                  - { label: "…o una dirección", name: enlace, widget: string, required: false, hint: "Si no elegiste página: #ancla de un bloque de inicio (p. ej. #precios), /algo o https://…", pattern: ['^(|#[a-z0-9-]*|/.*|https?://.+|mailto:.+|tel:.+)$', "Empieza con #, / o https://"] }
+                  - label: Submenú
+                    name: submenu
+                    label_singular: opción
+                    widget: list
+                    required: false
+                    collapsed: true
+                    summary: "{{fields.texto}}"
+                    hint: "Tercer nivel: se abre a un lado del submenú. Úsalo poco: en celular cuesta más navegar."
+                    fields:
+                      - { label: "Texto", name: texto, widget: string, pattern: ['^.{1,24}$', "Máximo 24 caracteres"] }
+                      - { label: "Página", name: pagina, widget: relation, collection: paginas, value_field: "{{slug}}", search_fields: [titulo], display_fields: [titulo], required: false, hint: "Elige una página del sitio… (si se borra la página, la opción se quita sola)" }
+                      - { label: "…o una dirección", name: enlace, widget: string, required: false, hint: "Si no elegiste página: #ancla de un bloque de inicio (p. ej. #precios), /algo o https://…", pattern: ['^(|#[a-z0-9-]*|/.*|https?://.+|mailto:.+|tel:.+)$', "Empieza con #, / o https://"] }
           - label: Botón de la cabecera
             name: boton
             widget: object
@@ -126,13 +150,14 @@ collections:
             widget: object
             collapsed: true
             fields:
-              - label: Enlaces
-                name: enlaces
-                label_singular: enlace
+              - label: Redes sociales
+                name: redes
+                label_singular: red
                 widget: list
-                summary: "{{fields.texto}}"
+                required: false
+                summary: "{{fields.red}}"
+                hint: "Íconos que llevan a tus redes. Arrastra para ordenarlos."
                 fields:
-                  - { label: "Texto", name: texto, widget: string }
-                  - { label: "Página", name: pagina, widget: relation, collection: paginas, value_field: "{{slug}}", search_fields: [titulo], display_fields: [titulo], required: false, hint: "Elige una página del sitio… (si se borra la página, la opción se quita sola)" }
-                  - { label: "…o una dirección", name: enlace, widget: string, required: false, hint: "Si no elegiste página: #ancla de un bloque de inicio (p. ej. #precios), /algo o https://…", pattern: ['^(|#[a-z0-9-]*|/.*|https?://.+|mailto:.+|tel:.+)$', "Empieza con #, / o https://"] }
+                  - { label: "Red", name: red, widget: select, options: [{ label: "Facebook", value: facebook }, { label: "Instagram", value: instagram }, { label: "X / Twitter", value: x }, { label: "LinkedIn", value: linkedin }] }
+                  - { label: "Dirección", name: url, widget: string, hint: "La dirección completa de tu perfil (https://…). Vacía = no se muestra.", required: false, pattern: ['^(|https?://.+)$', "Empieza con https://"] }
               - { label: "Aviso legal", name: legal, widget: string }

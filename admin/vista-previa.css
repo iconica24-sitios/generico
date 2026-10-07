@@ -9,3 +9,10 @@
 /* La cabecera no se queda pegada arriba: taparía lo que se está editando. */
 .cabecera { position: relative; }
 .portada { margin-top: 0; }
+/* Submenús: en el panel se ven desplegados bajo su elemento para poder editarlos. */
+.menu__item { flex-direction: column; align-items: flex-start; }
+.menu__flecha, .submenu__flecha { display: none; }
+.submenu, .submenu--n3 { position: static; opacity: 1; visibility: visible; transform: none; padding: 0 0 0 12px; }
+.submenu__lista { min-width: 0; padding: 0; border: none; box-shadow: none; background: none; }
+.submenu__item { flex-direction: column; align-items: flex-start; }
+.submenu__item > a { padding: 4px 0; }

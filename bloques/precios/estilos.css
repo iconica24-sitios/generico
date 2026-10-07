@@ -8,10 +8,10 @@
 .precios__texto { margin: 20px 0 0; font-size: 18px; line-height: 1.6; color: var(--gris); }
 .precios__periodos { display: flex; padding: 4px; border-radius: 999px; background: #edeef1; gap: 4px; }
 .precios__periodo {
-  font-size: 14px; font-weight: 600; padding: 10px 18px; border-radius: 999px; border: none; cursor: pointer;
+  font-size: 14px; font-weight: 500; padding: 10px 18px; border-radius: 999px; border: none; cursor: pointer;
   background: transparent; color: var(--tinta); box-shadow: none;
 }
-.precios__periodo[aria-pressed="true"] { background: var(--blanco); box-shadow: 0 1px 3px rgb(19 22 28 / 0.12); }
+.precios__periodo[aria-pressed="true"] { background: var(--blanco); box-shadow: 0 1px 3px rgba(19, 22, 28, 0.12); }
 .precios__planes { margin-top: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px; align-items: stretch; }
 
 .plan { padding: 36px; border-radius: 16px; display: flex; flex-direction: column; background: transparent; color: var(--tinta); border: 1px solid #dcdee1; }
@@ -32,7 +32,7 @@
 .plan__punto { display: flex; gap: 12px; align-items: center; font-size: 15px; }
 .plan__vineta { width: 6px; height: 6px; border-radius: 50%; background: var(--acento); flex-shrink: 0; }
 .plan__boton {
-  text-align: center; font-size: 15px; font-weight: 600; padding: 14px 20px; border-radius: 999px;
+  text-align: center; font-size: 15px; font-weight: 500; padding: 14px 20px; border-radius: 999px;
   background: transparent; color: var(--tinta); border: 1px solid #cfd1d5;
 }
 .plan--destacado .plan__boton { background: var(--acento); color: var(--blanco); border-color: var(--acento); }

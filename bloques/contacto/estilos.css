@@ -7,7 +7,7 @@
 .contacto__datos { margin-top: 48px; display: flex; flex-direction: column; gap: 24px; font-size: 16px; }
 .contacto__dato { display: flex; flex-direction: column; gap: 4px; }
 .contacto__etiqueta { font-size: 13px; color: var(--gris); }
-.contacto__valor { font-weight: 600; }
+.contacto__valor { font-weight: 500; }
 .contacto__form { display: flex; flex-direction: column; gap: 20px; }
 .contacto__campos { display: flex; flex-direction: column; gap: 20px; }
 .contacto__fila { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 20px; }
@@ -18,7 +18,7 @@
 .contacto input:focus, .contacto textarea:focus { border-color: var(--acento); }
 .contacto textarea { resize: vertical; }
 .contacto__boton {
-  align-self: flex-start; justify-self: start; font-size: 16px; font-weight: 600; padding: 16px 28px;
+  align-self: flex-start; justify-self: start; font-size: 16px; font-weight: 500; padding: 16px 28px;
   border-radius: 999px; border: none; cursor: pointer; background: var(--tinta); color: var(--blanco);
 }
 .contacto__boton:hover { background: var(--acento); }
@@ -33,7 +33,9 @@
   .contacto__rejilla { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 72px; row-gap: 20px; }
   .contacto__info { grid-column: 1; grid-row: 1; justify-content: space-between; }
   .contacto__form { display: contents; }
-  .contacto__campos { grid-column: 2; grid-row: 1; }
+  /* El campo Mensaje se estira hasta la última línea base de la columna de información */
+  .contacto__campos { grid-column: 2; grid-row: 1; margin-bottom: 0.4em; }
+  .contacto__campos textarea { flex: 1 1 auto; min-height: 140px; resize: none; }
   .contacto__boton { grid-column: 2; grid-row: 2; }
   .contacto__enviado { grid-column: 2; grid-row: 1 / 3; }
 }

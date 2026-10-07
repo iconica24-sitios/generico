@@ -393,6 +393,8 @@ export function aplicarContenido(html, datos, opciones = {}) {
    página que ya no está se quita: borrar una página no deja enlaces rotos.
    Sin `paginas` (vista previa, donde puede haber páginas recién creadas),
    no se quita nada.
+   Las opciones pueden traer "submenu" (otra lista igual, en varios niveles):
+   se resuelven y se limpian de la misma forma.
    Con `ocultas` (anclas de bloques apagados de inicio, ver anclasOcultas),
    un enlace a #esa-ancla también se quita mientras el bloque esté apagado. */
 export function enlazar(sitio, paginas, ocultas = []) {
@@ -401,7 +403,8 @@ export function enlazar(sitio, paginas, ocultas = []) {
   const url = e => (e && e.pagina ? `/${e.pagina}` : (e && e.enlace) || '#');
   const apagado = e => !(e && e.pagina) && ocultas.includes(String(url(e)).replace(/^\/?#/, ''));
   const vale = e => (!(e && e.pagina) || existe(e.pagina)) && !apagado(e);
-  const lista = l => (Array.isArray(l) ? l.filter(vale).map(e => ({ ...e, url: url(e) })) : l);
+  // Los submenús (de cualquier nivel) se resuelven igual que el menú.
+  const lista = l => (Array.isArray(l) ? l.filter(vale).map(e => ({ ...e, url: url(e), ...(Array.isArray(e.submenu) ? { submenu: lista(e.submenu) } : {}) })) : l);
   const copia = { ...sitio, menu: lista(sitio.menu) };
   if (sitio.boton) copia.boton = !vale(sitio.boton) ? { ...sitio.boton, texto: '' } : { ...sitio.boton, url: url(sitio.boton) };
   if (sitio.pie) copia.pie = { ...sitio.pie, enlaces: lista(sitio.pie.enlaces) };

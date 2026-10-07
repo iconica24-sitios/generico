@@ -10,7 +10,7 @@
   .imagen-texto__imagen { width: 50%; }
   .imagen-texto__cuerpo { padding-inline: clamp(48px, 6vw, 112px); }
 }
-.imagen-texto__rotulo { margin: 0 0 20px; font-size: 14px; font-weight: 600; color: var(--acento); }
+.imagen-texto__rotulo { margin: 0 0 20px; font-size: 14px; font-weight: 500; color: var(--acento); }
 .imagen-texto__texto { margin: 28px 0 0; font-size: 18px; line-height: 1.65; color: var(--gris); text-wrap: pretty; }
 .imagen-texto__pasos { margin-top: 40px; display: flex; flex-direction: column; border-top: 1px solid var(--linea-fuerte); counter-reset: paso; }
 .imagen-texto__paso { padding: 18px 0; border-bottom: 1px solid var(--linea-fuerte); display: flex; gap: 20px; font-size: 16px; font-weight: 500; }

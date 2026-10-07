@@ -8,8 +8,10 @@
 .portada__imagen { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .portada__interior { position: relative; max-width: 1200px; width: 100%; margin: 0 auto; padding: 180px 32px 96px; }
 .portada__cuerpo { max-width: 880px; }
-.portada__etiqueta { margin: 0 0 28px; display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--acento); }
-.portada__punto { width: 6px; height: 6px; border-radius: 50%; background: var(--acento); }
+.portada__etiqueta { margin: 0 0 28px; display: inline-flex; align-items: center; gap: 10px; max-width: 100%; padding: 5px 16px 5px 5px; border: 1px solid var(--linea-fuerte); border-radius: 999px; background: var(--papel); font-size: 14px; line-height: 1.3; font-weight: 500; color: var(--tinta); }
+.portada__punto { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 22px; border-radius: 999px; background: var(--acento); }
+.portada__punto::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--blanco); }
 .portada__titulo { margin: 0; font-size: clamp(44px, 7vw, 88px); line-height: 1.02; letter-spacing: -0.04em; font-weight: 700; text-wrap: balance; }
 .portada__texto { margin: 32px 0 0; font-size: 20px; line-height: 1.55; color: var(--gris); max-width: 600px; text-wrap: pretty; }
 .portada__botones { margin-top: 44px; display: flex; gap: 14px; flex-wrap: wrap; }
+.portada__botones .boton--borde { background-color: #ffffff; }

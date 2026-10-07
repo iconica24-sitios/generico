@@ -7,14 +7,14 @@
 <meta name="description" content="" data-cms-content="seo.descripcion">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;family=Roboto+Mono:wght@400&amp;display=swap">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/bloques.css">
 <script src="js/sitio.js" defer></script>
 </head>
 <body>
 <!-- =========================================================================
-     Plantilla de bloques de Icónica24
+     Plantilla de bloques de GraphicaWeb
      -------------------------------------------------------------------------
      Esta página es el molde de todas las páginas del sitio: cabecera, pie y,
      en medio, los bloques que el cliente elige y ordena desde el panel.
@@ -28,8 +28,27 @@
 <header class="cabecera">
   <div class="cabecera__fila">
     <a class="marca" href="/#top"><span class="marca__cuadro" aria-hidden="true"></span><span data-cms="sitio.nombre">Nombre</span></a>
+    <!-- Menú en tres niveles: opción → submenú → submenú. En escritorio cada
+         submenú se abre al pasar el cursor o al llegar con el teclado (sólo
+         CSS, así también se ve en la vista previa del panel). -->
     <nav class="menu" aria-label="Menú principal" data-cms-list="sitio.menu">
-      <a href="#funciones" data-cms-href=".url" data-cms=".texto" data-cms-item>Funciones</a>
+      <div class="menu__item" data-cms-class="menu__item--padre:.submenu" data-cms-item>
+        <a href="#funciones" data-cms-href=".url" data-cms=".texto">Funciones</a><span class="menu__flecha" aria-hidden="true" data-cms-if=".submenu"></span>
+        <div class="submenu" data-cms-if=".submenu">
+          <div class="submenu__lista" data-cms-list=".submenu" data-cms-if=".submenu">
+            <div class="submenu__item" data-cms-class="submenu__item--padre:.submenu" data-cms-item>
+              <a href="#" data-cms-href=".url" data-cms=".texto">Elemento 1.1</a><span class="submenu__flecha" aria-hidden="true" data-cms-if=".submenu"></span>
+              <div class="submenu submenu--n3" data-cms-if=".submenu">
+                <div class="submenu__lista" data-cms-list=".submenu" data-cms-if=".submenu">
+                  <div class="submenu__item" data-cms-item>
+                    <a href="#" data-cms-href=".url" data-cms=".texto">Elemento 1.1.1</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </nav>
     <div class="cabecera__acciones" data-cms-if="sitio.boton.texto">
       <a class="boton boton--tinta boton--chico" href="#precios" data-cms-href="sitio.boton.url" data-cms="sitio.boton.texto">Entrar</a>
@@ -41,8 +60,25 @@
   <div class="menu-movil" id="menu-movil">
     <div class="menu-movil__recorte">
       <div class="menu-movil__panel">
+        <!-- En celular cada submenú se despliega con su flecha (js/sitio.js). -->
         <nav class="menu-movil__lista" aria-label="Menú" data-cms-list="sitio.menu">
-          <a href="#funciones" data-cms-href=".url" data-cms=".texto" data-cms-item>Funciones</a>
+          <div class="menu-movil__item menu-movil__item--n1" data-cms-item>
+            <div class="menu-movil__fila"><a href="#funciones" data-cms-href=".url" data-cms=".texto">Funciones</a><button class="menu-movil__abrir" type="button" aria-expanded="false" aria-label="Mostrar submenú" hidden data-cms-if=".submenu"><span aria-hidden="true"></span></button></div>
+            <div class="menu-movil__sub" data-cms-if=".submenu">
+              <div class="menu-movil__sub-recorte" data-cms-list=".submenu" data-cms-if=".submenu">
+                <div class="menu-movil__item menu-movil__item--n2" data-cms-item>
+                  <div class="menu-movil__fila"><a href="#" data-cms-href=".url" data-cms=".texto">Elemento 1.1</a><button class="menu-movil__abrir" type="button" aria-expanded="false" aria-label="Mostrar submenú" hidden data-cms-if=".submenu"><span aria-hidden="true"></span></button></div>
+                  <div class="menu-movil__sub" data-cms-if=".submenu">
+                    <div class="menu-movil__sub-recorte" data-cms-list=".submenu" data-cms-if=".submenu">
+                      <div class="menu-movil__item menu-movil__item--n3" data-cms-item>
+                        <div class="menu-movil__fila"><a href="#" data-cms-href=".url" data-cms=".texto">Elemento 1.1.1</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </nav>
         <a class="boton boton--tinta menu-movil__boton" href="#precios" data-cms-href="sitio.boton.url" data-cms="sitio.boton.texto" data-cms-if="sitio.boton.texto">Entrar</a>
       </div>
@@ -55,10 +91,16 @@
 <footer class="pie">
   <div class="pie__fila">
     <div class="marca marca--pie"><span class="marca__cuadro" aria-hidden="true"></span><span data-cms="sitio.nombre">Nombre</span></div>
-    <nav class="pie__enlaces" aria-label="Enlaces del pie" data-cms-list="sitio.pie.enlaces">
-      <a href="#funciones" data-cms-href=".url" data-cms=".texto" data-cms-item>Funciones</a>
+    <!-- Redes sociales: cada una elige su red en el panel, y eso decide el ícono. -->
+    <nav class="pie__redes" aria-label="Redes sociales" data-cms-list="sitio.pie.redes" data-cms-if="sitio.pie.redes">
+      <a class="pie__red" href="#" target="_blank" rel="noopener noreferrer" data-cms-href=".url" data-cms-if=".url" data-cms-item>
+        <svg data-cms-if=".red=facebook" role="img" aria-label="Facebook" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+        <svg data-cms-if=".red=x" role="img" aria-label="X / Twitter" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path></svg>
+        <svg data-cms-if=".red=instagram" role="img" aria-label="Instagram" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path></svg>
+        <svg data-cms-if=".red=linkedin" role="img" aria-label="LinkedIn" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
     </nav>
-    <span data-cms="sitio.pie.legal">© 2026 Nombre</span>
+    <span class="pie__legal" data-cms="sitio.pie.legal">© 2026 Nombre</span>
   </div>
 </footer>
 

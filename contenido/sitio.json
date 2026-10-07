@@ -44,6 +44,20 @@
         "enlace": "#"
       }
     ],
-    "legal": "© 2026 Nombre"
+    "legal": "© 2026 Nombre",
+    "redes": [
+      {
+        "red": "facebook",
+        "url": "https://www.facebook.com/"
+      },
+      {
+        "red": "instagram",
+        "url": "https://www.instagram.com/"
+      },
+      {
+        "red": "linkedin",
+        "url": "https://www.linkedin.com/"
+      }
+    ]
   }
 }

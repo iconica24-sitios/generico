@@ -14,7 +14,7 @@
   --linea-fuerte: #d5d8db;
   --suave: #f2f3f6;
   --acento: #3263c3;
-  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --mono: 'Roboto Mono', ui-monospace, monospace;
   --alto-cabecera: 75px;
 }
 /* El color de acento se puede cambiar desde el panel (Sitio → Marca); la
@@ -22,8 +22,7 @@
 .sitio {
   --acento-fuerte: var(--acento);
 }
-/* (Safari anterior a 16.4 no calcula colores relativos: ahí el hover usa el
-   mismo acento. En una variable no hay respaldo automático, por eso @supports.) */
+/* Tono oscuro del acento solo donde el navegador lo calcula; los demás usan el acento tal cual */
 @supports (color: oklch(from red l c h)) {
   .sitio { --acento-fuerte: oklch(from var(--acento) calc(l - 0.08) c h); }
 }
@@ -34,7 +33,7 @@ body {
   margin: 0;
   background: var(--papel);
   color: var(--tinta);
-  font-family: Manrope, system-ui, sans-serif;
+  font-family: Roboto, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 img { display: block; max-width: 100%; }
@@ -50,12 +49,12 @@ input::placeholder, textarea::placeholder { color: #83868c; opacity: 1; }
 
 /* ---------- Encabezado de sección (rótulo, título, texto) ---------- */
 .encabezado { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.rotulo { margin: 0 0 16px; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acento); }
+.rotulo { margin: 0 0 16px; font-size: 14px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acento); }
 .titulo-seccion { margin: 0; font-size: clamp(32px, 4vw, 48px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 700; text-wrap: balance; }
 .texto-seccion { margin: 24px 0 0; font-size: 18px; line-height: 1.6; color: var(--gris); text-wrap: pretty; }
 
 /* ---------- Botones ---------- */
-.boton { display: inline-block; font-size: 16px; font-weight: 600; padding: 16px 28px; border-radius: 999px; }
+.boton { display: inline-block; font-size: 16px; font-weight: 500; padding: 16px 28px; border-radius: 999px; }
 .boton--chico { font-size: 15px; padding: 10px 18px; }
 .boton--acento { background: var(--acento); color: var(--blanco); }
 .boton--acento:hover { background: var(--acento-fuerte); color: var(--blanco); }
@@ -67,7 +66,7 @@ input::placeholder, textarea::placeholder { color: #83868c; opacity: 1; }
 /* ---------- Cabecera ---------- */
 .cabecera {
   position: sticky; top: 0; z-index: 10;
-  background: rgb(249 250 252 / 0.9);
+  background: rgba(249, 250, 252, 0.9);
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--linea);
 }
@@ -75,10 +74,43 @@ input::placeholder, textarea::placeholder { color: #83868c; opacity: 1; }
   max-width: 1200px; margin: 0 auto; padding: 18px 32px; min-height: var(--alto-cabecera);
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
 }
-.marca { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: -0.02em; }
-.marca__cuadro { width: 22px; height: 22px; border-radius: 6px; background: var(--acento); }
+.marca { display: flex; align-items: center; gap: 12px; font-weight: 500; font-size: 20px; letter-spacing: -0.02em; color: var(--tinta); }
+.marca__cuadro { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--acento); }
 .menu { display: flex; gap: 32px; font-size: 15px; font-weight: 500; margin-left: auto; margin-right: 8px; }
 .menu a, .menu-movil__lista a { transition: color .2s; }
+/* Submenús (escritorio): se abren al pasar el cursor o con el teclado (solo CSS).
+   Nivel 2 baja del elemento; nivel 3 sale a la derecha. */
+.menu__item { position: relative; display: flex; align-items: center; gap: 6px; }
+.menu__item > a { padding: 8px 0; }
+.menu__flecha, .submenu__flecha {
+  width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  opacity: .5; transition: transform .25s ease, opacity .2s;
+}
+.menu__flecha { transform: translateY(-2px) rotate(45deg); }
+.menu__item:hover > .menu__flecha, .menu__item:focus-within > .menu__flecha { transform: translateY(1px) rotate(225deg); opacity: 1; }
+.submenu {
+  position: absolute; top: 100%; left: -14px; z-index: 5; padding-top: 10px;
+  opacity: 0; visibility: hidden; transform: translateY(6px);
+  transition: opacity .2s ease, transform .25s ease, visibility 0s linear .25s;
+}
+.submenu--n3 { top: -7px; left: 100%; padding: 0 0 0 8px; transform: translateX(-6px); }
+.menu__item:hover > .submenu, .menu__item:focus-within > .submenu,
+.submenu__item:hover > .submenu, .submenu__item:focus-within > .submenu {
+  opacity: 1; visibility: visible; transform: none; transition-delay: 0s;
+}
+.submenu__lista {
+  min-width: 220px; padding: 6px; display: flex; flex-direction: column;
+  background: var(--papel); border: 1px solid var(--linea); border-radius: 12px;
+  box-shadow: 0 12px 32px -12px rgba(20, 24, 33, 0.18);
+}
+.submenu__item { position: relative; display: flex; align-items: center; }
+.submenu__item > a { flex: 1; padding: 10px 36px 10px 12px; border-radius: 8px; font-size: 14px; color: var(--tinta); transition: background-color .2s, color .2s; }
+.submenu__item:hover > a, .submenu__item:focus-within > a { background: var(--suave); }
+.submenu__flecha { position: absolute; right: 14px; transform: rotate(-45deg); pointer-events: none; }
+.submenu__item:hover > .submenu__flecha { opacity: 1; }
+/* El último elemento abre hacia la izquierda para no salirse de la pantalla */
+.menu__item:last-child > .submenu { left: auto; right: -14px; }
+.menu__item:last-child .submenu--n3 { left: auto; right: 100%; padding: 0 8px 0 0; }
 .menu a[aria-current], .menu-movil__lista a[aria-current] { color: var(--acento); }
 .cabecera__acciones { display: flex; gap: 12px; align-items: center; }
 
@@ -104,8 +136,33 @@ input::placeholder, textarea::placeholder { color: #83868c; opacity: 1; }
   border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); padding: 12px 32px 28px;
   display: flex; flex-direction: column; background: var(--papel);
 }
-.menu-movil__lista { display: flex; flex-direction: column; font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
-.menu-movil__lista a { padding: 16px 0; border-bottom: 1px solid var(--linea); display: flex; align-items: center; gap: 12px; }
+.menu-movil__lista { display: flex; flex-direction: column; font-size: 20px; font-weight: 500; letter-spacing: -0.01em; }
+.menu-movil__panel { max-height: calc(100vh - var(--alto-cabecera)); max-height: calc(100svh - var(--alto-cabecera)); overflow-y: auto; }
+.menu-movil__fila { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--linea); }
+.menu-movil__fila a { flex: 1; padding: 16px 0; }
+.menu-movil__item--n2 .menu-movil__fila a { padding: 13px 0 13px 16px; font-size: 17px; }
+.menu-movil__item--n3 .menu-movil__fila a { padding: 11px 0 11px 32px; font-size: 16px; color: var(--gris); }
+.menu-movil__abrir {
+  flex: none; width: 44px; height: 44px; margin-right: -12px; border: none; background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; color: var(--tinta);
+}
+.menu-movil__abrir[hidden] { display: none; }
+.menu-movil__abrir span {
+  width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg); transition: transform .3s ease;
+}
+.menu-movil__item.is-abierto > .menu-movil__fila .menu-movil__abrir span { transform: translateY(2px) rotate(225deg); }
+/* Sin JavaScript los submenús se ven abiertos; con JavaScript se pliegan y despliegan */
+.menu-movil__sub { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .35s ease, opacity .3s ease; }
+.menu-movil__sub-recorte { min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
+.con-js .menu-movil__sub { grid-template-rows: 0fr; opacity: 0; }
+.con-js .menu-movil__item.is-abierto > .menu-movil__sub { grid-template-rows: 1fr; opacity: 1; }
+/* Con mouse (o trackpad), los submenús se abren al pasar el cursor y se pliegan al salir — solo CSS.
+   En pantallas táctiles no existe el hover: ahí se usa la flecha. */
+@media (hover: hover) and (pointer: fine) {
+  .menu-movil__item:hover > .menu-movil__sub { grid-template-rows: 1fr; opacity: 1; }
+  .menu-movil__item:hover > .menu-movil__fila .menu-movil__abrir span { transform: translateY(2px) rotate(225deg); }
+}
 .menu-movil__boton { margin-top: 24px; text-align: center; padding: 16px 20px; }
 
 @media (max-width: 767px) {
@@ -115,12 +172,22 @@ input::placeholder, textarea::placeholder { color: #83868c; opacity: 1; }
 }
 
 /* ---------- Pie ---------- */
+/* Celular: marca, aviso legal y redes centrados, uno sobre otro.
+   Desde 640px: marca | aviso legal a la izquierda y redes a la derecha.
+   El orden visual se da con "order", sin mover el HTML. */
 .pie { border-top: 1px solid var(--linea); }
 .pie__fila {
-  max-width: 1200px; margin: 0 auto; padding: 48px 32px;
-  display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
-  font-size: 14px; color: var(--gris);
+  max-width: 1200px; margin: 0 auto; padding: 40px 32px;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  font-size: 14px; color: var(--gris); text-align: center;
 }
-.marca--pie { font-size: 16px; color: var(--tinta); }
-.marca--pie .marca__cuadro { width: 18px; height: 18px; border-radius: 5px; }
-.pie__enlaces { display: flex; gap: 28px; flex-wrap: wrap; }
+.marca--pie { order: 1; }
+.pie__legal { order: 2; }
+.pie__redes { order: 3; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.pie__red { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; color: var(--gris); }
+.pie__red:hover { color: var(--tinta); background: var(--suave); }
+@media (min-width: 640px) {
+  .pie__fila { flex-direction: row; flex-wrap: wrap; gap: 16px; text-align: left; }
+  .pie__legal { padding: 8px 0 8px 16px; border-left: 2px solid var(--linea); }
+  .pie__redes { margin-left: auto; margin-right: -10px; justify-content: flex-end; }
+}
