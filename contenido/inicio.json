@@ -39,7 +39,8 @@
           "texto": "Cierra con la función que reduce la fricción o el riesgo de empezar."
         }
       ],
-      "ancla": "funciones"
+      "ancla": "funciones",
+      "fondo_suave": false
     },
     {
       "tipo": "incluye",
@@ -58,7 +59,8 @@
         "texto": "Ver planes",
         "enlace": "#precios"
       },
-      "ancla": ""
+      "ancla": "",
+      "fondo_suave": true
     },
     {
       "rotulo": "Cómo funciona",
@@ -191,7 +193,8 @@
           "precio_anual": "19 €"
         }
       ],
-      "ancla": "precios"
+      "ancla": "precios",
+      "fondo_suave": true
     },
     {
       "tipo": "llamada",
