@@ -74,6 +74,30 @@
       "tipo": "imagen_texto",
       "titulo": "Explica el flujo principal en una frase.",
       "imagen_derecha": false,
+      "fondo_suave": false
+    },
+    {
+      "rotulo": "Cómo funciona",
+      "texto": "Describe con más detalle cómo el usuario pasa del problema al resultado. Un párrafo concreto funciona mejor que una lista larga de beneficios.",
+      "boton": {
+        "texto": "Empezar ahora",
+        "enlace": "#contacto"
+      },
+      "pasos": [
+        "Primer paso del proceso",
+        "Segundo paso del proceso",
+        "Resultado final"
+      ],
+      "oculto": false,
+      "ancla": "",
+      "boton2": {
+        "texto": "Ver precios",
+        "enlace": "#precios"
+      },
+      "descripcion": "",
+      "tipo": "imagen_texto",
+      "titulo": "Explica el flujo principal en una frase.",
+      "imagen_derecha": true,
       "fondo_suave": true
     },
     {
