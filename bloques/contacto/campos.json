@@ -77,6 +77,14 @@
       "default": "Se abrió tu aplicación de correo con el mensaje: sólo falta darle Enviar."
     },
     {
+      "label": "Fondo gris suave",
+      "name": "fondo_suave",
+      "widget": "boolean",
+      "default": true,
+      "required": false,
+      "hint": "Sin marcar, el bloque va con el fondo de la página."
+    },
+    {
       "label": "Ancla para el menú",
       "name": "ancla",
       "widget": "string",

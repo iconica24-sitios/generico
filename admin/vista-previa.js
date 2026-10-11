@@ -145,6 +145,37 @@ const editableDe = el => {
   const e = el && el.closest('[data-ruta]');
   return e && editableAqui(e.getAttribute('data-ruta')) ? e : null;
 };
+const cuadro = () => new Promise(r => requestAnimationFrame(r));
+// Espera (cuadro a cuadro, hasta ~`max` cuadros) a que `fn` devuelva algo:
+// Decap pinta los campos de un elemento que se despliega un poco después.
+async function esperarA(fn, max = 30) {
+  for (let i = 0; i < max; i++) {
+    const v = fn();
+    if (v) return v;
+    await cuadro();
+  }
+  return null;
+}
+
+// Contenedor que se desplaza (el formulario de Decap).
+function cajaDe(el) {
+  for (let c = el.parentElement; c; c = c.parentElement) {
+    if (c.scrollHeight > c.clientHeight + 1 && /auto|scroll/.test(getComputedStyle(c).overflowY)) return c;
+  }
+  return null;
+}
+
+function aLaVista(el) {
+  const caja = cajaDe(el);
+  const r = el.getBoundingClientRect();
+  const c = caja ? caja.getBoundingClientRect() : { top: 0, bottom: innerHeight };
+  return r.top >= c.top && r.bottom <= c.bottom;
+}
+
+// Cada clic en la vista previa es un viaje; uno nuevo deja sin efecto al
+// anterior (si se hace clic rápido en varios elementos, gana el último).
+let viaje = 0;
+
 async function irACampo(ruta) {
   const raiz = formulario();
   if (!raiz) return;
@@ -153,22 +184,48 @@ async function irACampo(ruta) {
     if (!ruta.startsWith(prefijo)) return;
     ruta = ruta.slice(prefijo.length);
   } else if (ruta.startsWith('sitio.') && SITIO.sitio) return;
+  const este = ++viaje;
+  const vigente = () => este === viaje;
   let nodo = raiz;
   for (const parte of ruta.split('.')) {
     abrir(nodo, raiz);
-    await new Promise(r => requestAnimationFrame(r));
-    const candidatos = hijos(nodo, raiz);
-    const siguiente = /^\d+$/.test(parte)
-      ? candidatos.filter(esItem)[Number(parte)]
-      : candidatos.find(el => (el.id.match(ID_CAMPO) || [])[1] === parte);
+    const actual = nodo;
+    const siguiente = await esperarA(() => {
+      const candidatos = hijos(actual, raiz);
+      return /^\d+$/.test(parte)
+        ? candidatos.filter(esItem)[Number(parte)]
+        : candidatos.find(el => (el.id.match(ID_CAMPO) || [])[1] === parte);
+    }, 20);
+    if (!vigente()) return;
     if (!siguiente) break;
     nodo = siguiente;
   }
   abrir(nodo, raiz);
-  await new Promise(r => requestAnimationFrame(r));
-  const control = nodo.matches('input, textarea') ? nodo : nodo.querySelector('input, textarea, [contenteditable="true"]');
-  (control || nodo).scrollIntoView({ block: 'center', behavior: 'smooth' });
+  const destino = nodo;
+  const control = (destino.matches('input, textarea') ? destino : await esperarA(
+    () => destino.querySelector('input, textarea, [contenteditable="true"]'), 10)) || null;
+  if (!vigente()) return;
+  const el = control || destino;
+  // Al desplegarse, los campos (sobre todo los de texto con formato) cambian
+  // de alto unos cuadros más: se espera a que el campo deje de moverse antes
+  // de desplazar el formulario, o el desplazamiento apunta a donde estaba.
+  let antes = null, quieto = 0;
+  for (let i = 0; i < 30 && quieto < 3; i++) {
+    const caja = cajaDe(el);
+    const y = el.getBoundingClientRect().top + (caja ? caja.scrollTop : scrollY);
+    quieto = y === antes ? quieto + 1 : 0;
+    antes = y;
+    await cuadro();
+    if (!vigente()) return;
+  }
   if (control) control.focus({ preventScroll: true });
+  el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  // Si algo se movió durante el desplazamiento (o lo interrumpió), se corrige.
+  for (const comportamiento of ['smooth', 'auto']) {
+    await new Promise(r => setTimeout(r, 700));
+    if (!vigente() || !el.isConnected) return;
+    if (!aLaVista(el)) el.scrollIntoView({ block: 'center', behavior: comportamiento });
+  }
 }
 
 /* ---------- Vista previa: resaltar el campo activo ---------- */

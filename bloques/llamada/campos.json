@@ -3,6 +3,7 @@
   "name": "llamada",
   "widget": "object",
   "summary": "Llamada — {{fields.titulo}}",
+  "fondo": false,
   "fields": [
     {
       "label": "Título",

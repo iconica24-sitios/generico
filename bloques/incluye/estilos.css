@@ -11,3 +11,5 @@
 .incluye__palomita span { width: 6px; height: 11px; margin-top: -3px; border-right: 2px solid var(--acento); border-bottom: 2px solid var(--acento); transform: rotate(45deg); }
 .incluye__texto { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; }
 .incluye__boton { margin-top: 72px; }
+/* Sobre fondo gris suave, las tarjetas pasan al color de la página para no perderse. */
+.bloque--suave .incluye__punto { background: var(--papel); }

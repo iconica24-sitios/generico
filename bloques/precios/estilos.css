@@ -36,3 +36,5 @@
   background: transparent; color: var(--tinta); border: 1px solid #cfd1d5;
 }
 .plan--destacado .plan__boton { background: var(--acento); color: var(--blanco); border-color: var(--acento); }
+/* Sobre fondo gris suave, el selector Mensual/Anual se oscurece un poco para seguir viéndose. */
+.bloque--suave .precios__periodos { background: #e4e6ea; }

@@ -48,6 +48,12 @@ input::placeholder, textarea::placeholder { color: #83868c; opacity: 1; }
 /* Rayado que ocupa el lugar de una imagen mientras no hay foto */
 .rayado { background: repeating-linear-gradient(135deg, #edeef1 0 12px, #e6e8eb 12px 24px); }
 
+/* ---------- Fondo de los bloques (casilla "Fondo gris suave" del panel) ----------
+   El sistema pone bloque--suave o bloque--papel en la sección; sin elegir, cada
+   bloque queda con su fondo de siempre. "section." para ganarle a la regla del bloque. */
+section.bloque--suave { background: var(--suave); border-top: 0; }
+section.bloque--papel { background: var(--papel); }
+
 /* ---------- Encabezado de sección (rótulo, título, texto) ---------- */
 .encabezado { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .rotulo { margin: 0 0 16px; font-size: 14px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acento); }

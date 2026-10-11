@@ -43,7 +43,10 @@
                                     claves relativas: ".titulo"). Un bloque
                                     con "oculto": true no se publica ni se
                                     ve en la vista previa (en el formulario
-                                    del panel sigue completo)
+                                    del panel sigue completo). Con
+                                    "fondo_suave": true la sección lleva
+                                    la clase bloque--suave; con false,
+                                    bloque--papel
      "@sitio.negocio.telefono"      en cualquier clave: se lee desde la raíz de
                                     los datos (p. ej. un bloque que muestra el
                                     teléfono que se escribe en Sitio)
@@ -240,6 +243,14 @@ function conRuta(apertura, ruta) {
   return apertura.replace(/\s*\/?>$/, m => ` data-ruta="${escapar(ruta)}"${m}`);
 }
 
+// Agrega una clase a la primera etiqueta de un fragmento de HTML.
+function ponerClase(html, clase) {
+  return html.replace(/^(\s*<[a-zA-Z][\w-]*)([^>]*?)(\s*\/?>)/, (todo, inicio, attrs, fin) =>
+    /\sclass="/.test(attrs)
+      ? inicio + attrs.replace(/(\sclass=")([^"]*)(")/, (_, a, v, b) => `${a}${v ? v + ' ' : ''}${clase}${b}`) + fin
+      : `${inicio}${attrs} class="${clase}"${fin}`);
+}
+
 // Pone un atributo con su valor: lo reemplaza si ya está, si no lo agrega.
 function ponerAtributo(apertura, nombre, valor) {
   const re = new RegExp(`(\\s${nombre}=")[^"]*(")`);
@@ -266,7 +277,10 @@ function renderizar(html, ctx, indice, base = '', total) {
         // contenido sigue guardado (y en el formulario del panel).
         const oculto = item.oculto === true;
         if (oculto && !maqueta) return '';
-        const hecho = renderizar(tpl.trim(), item, i, `${ruta}.${i}`, items.length);
+        let hecho = renderizar(tpl.trim(), item, i, `${ruta}.${i}`, items.length);
+        // Fondo del bloque (casilla "Fondo gris suave"): la plantilla decide
+        // cómo se ve cada clase; sin valor, el bloque queda con su fondo de siempre.
+        if (item.fondo_suave === true || item.fondo_suave === false) hecho = ponerClase(hecho, item.fondo_suave ? 'bloque--suave' : 'bloque--papel');
         const nota = oculto ? ' (oculto)' : '';
         return maqueta ? `\n<!-- ▼ bloque: ${item.tipo}${nota} -->\n${hecho}\n<!-- ▲ bloque: ${item.tipo} -->` : '\n' + hecho;
       }).filter(Boolean).join('\n') + '\n';

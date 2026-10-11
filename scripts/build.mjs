@@ -79,6 +79,18 @@ if (existsSync(dirBloques)) {
           hint: 'Apaga el bloque sin borrarlo: no se publica ni se ve en la vista previa, pero su contenido se guarda.' }, ...(campos.fields || [])];
         campos.summary = `${campos.summary || campos.label}{{fields.oculto | ternary(' (oculto)', '')}}`;
       }
+      // Y todo bloque puede ir con el fondo de siempre o con un gris suave,
+      // salvo los que lo desactivan en su campos.json ("fondo": false), como
+      // una franja oscura. Un bloque que ya trae su campo fondo_suave (p. ej.
+      // con otro valor por defecto) lo conserva.
+      const conFondo = campos.fondo !== false;
+      delete campos.fondo;
+      if (conFondo && !(campos.fields || []).some(f => f.name === 'fondo_suave')) {
+        const casilla = { label: 'Fondo gris suave', name: 'fondo_suave', widget: 'boolean', default: false, required: false,
+          hint: 'Sin marcar, el bloque va con el fondo de la página.' };
+        const i = campos.fields.findIndex(f => f.name === 'ancla');
+        campos.fields.splice(i >= 0 ? i : campos.fields.length, 0, casilla);
+      }
       tipos.push(campos);
     }
   }

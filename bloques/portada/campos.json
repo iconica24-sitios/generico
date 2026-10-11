@@ -3,6 +3,7 @@
   "name": "portada",
   "widget": "object",
   "summary": "Portada — {{fields.titulo}}",
+  "fondo": false,
   "fields": [
     {
       "label": "Etiqueta",
