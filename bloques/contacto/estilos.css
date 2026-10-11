@@ -19,7 +19,7 @@
 .contacto textarea { resize: vertical; }
 .contacto__boton {
   align-self: flex-start; justify-self: start; font-size: 16px; font-weight: 500; padding: 16px 28px;
-  border-radius: 999px; border: none; cursor: pointer; background: var(--tinta); color: var(--blanco);
+  border-radius: var(--radio-boton); border: none; cursor: pointer; background: var(--tinta); color: var(--blanco);
 }
 .contacto__boton:hover { background: var(--acento); }
 .contacto__enviado {

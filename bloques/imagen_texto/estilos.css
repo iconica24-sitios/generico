@@ -15,3 +15,26 @@
 .imagen-texto__pasos { margin-top: 40px; display: flex; flex-direction: column; border-top: 1px solid var(--linea-fuerte); counter-reset: paso; }
 .imagen-texto__paso { padding: 18px 0; border-bottom: 1px solid var(--linea-fuerte); display: flex; gap: 20px; font-size: 16px; font-weight: 500; }
 .imagen-texto__paso::before { counter-increment: paso; content: counter(paso); font-family: var(--mono); font-size: 13px; color: var(--gris-claro); padding-top: 3px; }
+/* Botones opcionales al final del texto: en línea a la izquierda y del mismo ancho (el del texto más largo);
+   en celular, uno sobre otro a todo el ancho */
+.imagen-texto__botones { margin-top: 40px; display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 12px; max-width: 100%; }
+.imagen-texto__botones .boton { text-align: center; }
+.imagen-texto__boton2 { background: var(--blanco); }
+@media (max-width: 639px) {
+  .imagen-texto__botones { display: grid; grid-auto-flow: row; }
+}
+/* Si la columna de texto queda angosta (imagen al lado), los botones también van uno sobre otro.
+   Navegadores con consultas de contenedor: se decide por el ancho real de la columna.
+   Navegadores viejos: respaldo por ancho de pantalla (768–1023px). */
+.imagen-texto__cuerpo { container-type: inline-size; }
+@media (min-width: 768px) and (max-width: 1023px) {
+  .imagen-texto__botones { display: grid; grid-auto-flow: row; }
+}
+@supports (container-type: inline-size) {
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .imagen-texto__botones { display: inline-grid; grid-auto-flow: column; }
+  }
+  @container (max-width: 440px) {
+    .imagen-texto__botones { display: grid; grid-auto-flow: row; }
+  }
+}

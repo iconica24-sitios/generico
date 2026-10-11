@@ -1,0 +1,141 @@
+{
+  "label": "Funciones con enlaces",
+  "name": "funciones_2",
+  "widget": "object",
+  "summary": "Funciones con enlaces — {{fields.titulo}}",
+  "fields": [
+    {
+      "label": "Rótulo",
+      "name": "rotulo",
+      "widget": "string",
+      "required": false,
+      "default": "Funciones"
+    },
+    {
+      "label": "Título",
+      "name": "titulo",
+      "widget": "string",
+      "default": "Cada función, con su siguiente paso."
+    },
+    {
+      "label": "Texto",
+      "name": "texto",
+      "widget": "text",
+      "required": false,
+      "default": "Resume en una o dos líneas el conjunto de funciones y a dónde lleva cada una."
+    },
+    {
+      "label": "Tarjetas",
+      "name": "tarjetas",
+      "widget": "list",
+      "summary": "{{fields.titulo}}",
+      "hint": "Cada tarjeta puede llevar su enlace. Se ven mejor de 2 en 2 o de 4 en 4.",
+      "default": [
+        {
+          "titulo": "Función principal",
+          "texto": "Describe el beneficio concreto, no la tecnología detrás.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "titulo": "Segunda función",
+          "texto": "Una o dos líneas bastan para explicarla.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "titulo": "Tercera función",
+          "texto": "Lo que ahorra tiempo o esfuerzo al cliente.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "titulo": "Cuarta función",
+          "texto": "Cierra con lo que reduce el riesgo de empezar.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        }
+      ],
+      "fields": [
+        {
+          "label": "Título",
+          "name": "titulo",
+          "widget": "string"
+        },
+        {
+          "label": "Texto",
+          "name": "texto",
+          "widget": "text"
+        },
+        {
+          "label": "Enlace",
+          "name": "enlace",
+          "widget": "object",
+          "collapsed": true,
+          "fields": [
+            {
+              "label": "Texto",
+              "name": "texto",
+              "widget": "string",
+              "required": false,
+              "default": "Saber más",
+              "hint": "Vacío = sin enlace."
+            },
+            {
+              "label": "Dirección",
+              "name": "url",
+              "widget": "string",
+              "required": false,
+              "default": "#",
+              "hint": "#ancla de una sección, /pagina o https://…"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Botón al pie",
+      "name": "boton",
+      "widget": "object",
+      "collapsed": true,
+      "fields": [
+        {
+          "label": "Texto",
+          "name": "texto",
+          "widget": "string",
+          "required": false,
+          "default": "Empezar ahora",
+          "hint": "Vacío = sin botón."
+        },
+        {
+          "label": "Enlace",
+          "name": "enlace",
+          "widget": "string",
+          "required": false,
+          "default": "#contacto",
+          "hint": "#ancla de una sección, /pagina o https://…"
+        }
+      ]
+    },
+    {
+      "label": "Ancla para el menú",
+      "name": "ancla",
+      "widget": "string",
+      "required": false,
+      "default": "",
+      "hint": "Sin espacios (p. ej. precios): el menú la enlaza como #precios. Vacío = sin ancla.",
+      "pattern": [
+        "^[a-z0-9-]*$",
+        "Sólo minúsculas, números y guiones"
+      ]
+    }
+  ]
+}

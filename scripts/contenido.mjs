@@ -16,8 +16,8 @@
      "lista.-1.precio"              un índice negativo cuenta desde el final
                                     (-1 es el último elemento)
      data-cms-index                 número del elemento en la lista (01, 02…)
-     data-cms-optional              si el valor está vacío, el elemento
-                                    desaparece
+     data-cms-optional              si el valor está vacío (o la clave aún no
+                                    existe), el elemento desaparece
      data-cms-href="tel:+52{negocio.telefono|digitos}"
                                     atributo armado con uno o más valores
                                     entre llaves; |digitos deja sólo los
@@ -354,7 +354,11 @@ function renderizar(html, ctx, indice, base = '', total) {
     if (conIndice) contenido = String((indice ?? 0) + 1).padStart(2, '0');
     else if (clave !== null) {
       const v = clave.includes('{') ? valorDeAtributo(ctx, clave) : leer(ctx, clave);
-      if (v == null) avisos.push(`falta "${clave}"`);
+      // Un elemento opcional cuya clave aún no existe (un campo que el diseño
+      // agregó después) se quita como si estuviera vacío: no debe publicarse
+      // el texto de ejemplo del HTML.
+      if (v == null && opcional) contenido = '';
+      else if (v == null) avisos.push(`falta "${clave}"`);
       else contenido = marcado(v);
     }
 

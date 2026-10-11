@@ -1,0 +1,28 @@
+/* Funciones 3: tarjetas sueltas con imagen opcional arriba, categoría, texto y enlace */
+.funciones-3 { border-top: 1px solid var(--linea); }
+.funciones-3__interior { max-width: 1200px; margin: 0 auto; padding: 112px 32px; }
+.funciones-3__rejilla { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.funciones-3__interior > .encabezado + .funciones-3__rejilla { margin-top: 72px; }
+@media (min-width: 640px) { .funciones-3__rejilla { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .funciones-3__rejilla { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.funciones-3__tarjeta {
+  display: flex; flex-direction: column; background: var(--papel);
+  border: 1px solid var(--linea); border-radius: 16px; overflow: hidden;
+  transition: border-color .2s ease, box-shadow .25s ease;
+}
+.funciones-3__tarjeta:hover { border-color: var(--linea-fuerte); box-shadow: 0 12px 32px -16px rgba(20, 24, 33, 0.18); }
+/* La imagen guarda proporción 16:9; mientras no hay foto se ve el rayado */
+.funciones-3__imagen { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--linea); }
+.funciones-3__imagen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.funciones-3__imagen img:not([src]), .funciones-3__imagen img[src=""] { display: none; }
+.funciones-3__cuerpo { flex: 1; padding: 28px 28px 32px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.funciones-3__categoria { margin: 0; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gris); }
+.funciones-3__titulo { margin: 0; font-size: 20px; line-height: 1.3; letter-spacing: -0.02em; font-weight: 500; color: var(--tinta); text-wrap: balance; }
+.funciones-3__texto { margin: 0; font-size: 16px; line-height: 1.6; color: var(--gris); text-wrap: pretty; }
+.funciones-3__enlace {
+  margin-top: auto; padding-top: 10px; display: inline-flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 500; color: var(--acento);
+}
+.funciones-3__enlace::after { content: "→"; transition: transform .2s ease; }
+.funciones-3__enlace:hover { color: var(--acento-fuerte); }
+.funciones-3__enlace:hover::after { transform: translateX(4px); }

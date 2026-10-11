@@ -13,5 +13,8 @@
 .portada__punto::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--blanco); }
 .portada__titulo { margin: 0; font-size: clamp(44px, 7vw, 88px); line-height: 1.02; letter-spacing: -0.04em; font-weight: 700; text-wrap: balance; }
 .portada__texto { margin: 32px 0 0; font-size: 20px; line-height: 1.55; color: var(--gris); max-width: 600px; text-wrap: pretty; }
-.portada__botones { margin-top: 44px; display: flex; gap: 14px; flex-wrap: wrap; }
+/* Botones del mismo ancho (el del texto más largo); en celular, uno sobre otro a todo el ancho */
+.portada__botones { margin-top: 44px; display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 14px; max-width: 100%; }
+.portada__botones .boton { text-align: center; }
+@media (max-width: 639px) { .portada__botones { display: grid; grid-auto-flow: row; } }
 .portada__botones .boton--borde { background-color: #ffffff; }

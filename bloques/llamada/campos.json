@@ -11,7 +11,15 @@
       "default": "Una invitación final, directa y breve."
     },
     {
-      "label": "Botón",
+      "label": "Texto",
+      "name": "texto",
+      "widget": "text",
+      "required": false,
+      "default": "Una o dos líneas que resuman por qué dar el paso ahora y qué obtiene el cliente al hacerlo.",
+      "hint": "Formato: `**negritas**` · `==resaltado==` · `[texto del enlace](https://…)`"
+    },
+    {
+      "label": "Botón principal",
       "name": "boton",
       "widget": "object",
       "fields": [
@@ -31,7 +39,40 @@
           "default": "#contacto",
           "hint": "#ancla, /pagina o https://…"
         }
+      ],
+      "collapsed": true
+    },
+    {
+      "label": "Botón secundario",
+      "name": "boton2",
+      "widget": "object",
+      "collapsed": true,
+      "fields": [
+        {
+          "label": "Texto",
+          "name": "texto",
+          "widget": "string",
+          "required": false,
+          "default": "Hablar con nosotros",
+          "hint": "Vacío = sin botón."
+        },
+        {
+          "label": "Enlace",
+          "name": "enlace",
+          "widget": "string",
+          "required": false,
+          "default": "#contacto",
+          "hint": "#ancla de una sección, /pagina o https://…"
+        }
       ]
+    },
+    {
+      "label": "Nota",
+      "name": "nota",
+      "widget": "string",
+      "required": false,
+      "default": "Una nota breve para resolver la última duda: condiciones, plazos o garantía.",
+      "hint": "Vacío = sin nota. Formato: `**negritas**` · `==resaltado==` · `[texto del enlace](https://…)`"
     },
     {
       "label": "Ancla para el menú",

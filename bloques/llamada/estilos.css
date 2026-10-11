@@ -1,11 +1,20 @@
-/* Llamada a la acción: caja de color de acento */
-.llamada { max-width: 1200px; margin: 0 auto; padding: 0 32px 112px; width: 100%; }
-.llamada__caja {
-  border-radius: 24px; background: var(--acento); padding: clamp(48px, 7vw, 96px);
-  display: flex; justify-content: space-between; align-items: end; gap: 40px; flex-wrap: wrap;
+/* Llamada a la acción: franja oscura a todo el ancho; título, texto, dos botones y nota, centrados.
+   En celular el texto se alinea a la izquierda y los botones van uno sobre otro, a todo el ancho. */
+.llamada { background: var(--tinta); color: var(--blanco); padding: 128px 32px; }
+.llamada__caja { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.llamada__titulo { margin: 0; font-size: clamp(36px, 5vw, 60px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; color: var(--blanco); text-wrap: balance; }
+.llamada__texto { margin: 24px 0 0; font-size: 19px; line-height: 1.6; color: rgba(251, 252, 254, 0.68); text-wrap: pretty; }
+.llamada__texto strong, .llamada__nota strong { color: var(--blanco); font-weight: 500; }
+.llamada__botones { margin-top: 44px; display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 12px; max-width: 100%; }
+.llamada__botones .boton { text-align: center; }
+.llamada__boton { background: var(--blanco); color: var(--tinta); border: 1px solid var(--blanco); transition: background-color .2s, color .2s, border-color .2s; }
+.llamada__boton:hover { background: var(--acento); border-color: var(--acento); color: var(--blanco); }
+.llamada__boton2 { background: transparent; color: var(--blanco); border: 1px solid rgba(251, 252, 254, 0.22); transition: border-color .2s, background-color .2s; }
+.llamada__boton2:hover { border-color: rgba(251, 252, 254, 0.6); background: rgba(251, 252, 254, 0.06); }
+.llamada__nota { margin: 28px 0 0; font-size: 14px; line-height: 1.5; color: rgba(251, 252, 254, 0.55); text-wrap: pretty; }
+@media (max-width: 639px) {
+  .llamada { padding: 88px 24px; }
+  .llamada__caja { align-items: stretch; text-align: left; }
+  .llamada__botones { margin-top: 36px; display: grid; grid-auto-flow: row; }
+  .llamada__nota { text-align: center; }
 }
-.llamada__titulo { margin: 0; font-size: clamp(32px, 4.5vw, 56px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; color: var(--blanco); max-width: 640px; text-wrap: balance; }
-.llamada__boton { background: var(--blanco); color: var(--tinta); }
-.llamada__boton:hover { background: var(--tinta); color: var(--blanco); }
-/* Si la llamada es el primer bloque o sigue a una sección con fondo, gana aire arriba */
-main > .llamada:first-child, .imagen-texto--suave + .llamada, .contacto + .llamada { padding-top: 112px; }

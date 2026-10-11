@@ -70,6 +70,54 @@
       ]
     },
     {
+      "label": "Botón principal",
+      "name": "boton",
+      "widget": "object",
+      "collapsed": true,
+      "fields": [
+        {
+          "label": "Texto",
+          "name": "texto",
+          "widget": "string",
+          "required": false,
+          "default": "Empezar ahora",
+          "hint": "Vacío = sin botón."
+        },
+        {
+          "label": "Enlace",
+          "name": "enlace",
+          "widget": "string",
+          "required": false,
+          "default": "#contacto",
+          "hint": "#ancla de una sección, /pagina o https://…"
+        }
+      ]
+    },
+    {
+      "label": "Botón secundario",
+      "name": "boton2",
+      "widget": "object",
+      "collapsed": true,
+      "fields": [
+        {
+          "label": "Texto",
+          "name": "texto",
+          "widget": "string",
+          "required": false,
+          "default": "Ver precios",
+          "hint": "Vacío = sin botón."
+        },
+        {
+          "label": "Enlace",
+          "name": "enlace",
+          "widget": "string",
+          "required": false,
+          "default": "#precios",
+          "hint": "#ancla de una sección, /pagina o https://…"
+        }
+      ]
+    },
+    {
       "label": "Ancla para el menú",
       "name": "ancla",
       "widget": "string",

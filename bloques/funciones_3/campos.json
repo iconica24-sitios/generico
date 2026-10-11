@@ -1,0 +1,130 @@
+{
+  "label": "Funciones con imagen",
+  "name": "funciones_3",
+  "widget": "object",
+  "summary": "Funciones con imagen — {{fields.titulo}}",
+  "fields": [
+    {
+      "label": "Rótulo",
+      "name": "rotulo",
+      "widget": "string",
+      "required": false,
+      "default": "Funciones"
+    },
+    {
+      "label": "Título",
+      "name": "titulo",
+      "widget": "string",
+      "required": false,
+      "default": "Cada función, con su imagen.",
+      "hint": "Vacío = sin encabezado (sólo las tarjetas)."
+    },
+    {
+      "label": "Texto",
+      "name": "texto",
+      "widget": "text",
+      "required": false,
+      "default": "Resume en una o dos líneas lo que muestran las tarjetas."
+    },
+    {
+      "label": "Tarjetas",
+      "name": "tarjetas",
+      "widget": "list",
+      "summary": "{{fields.titulo}}",
+      "hint": "Se ven mejor de 3 en 3.",
+      "default": [
+        {
+          "imagen": "",
+          "categoria": "Categoría",
+          "titulo": "Función principal",
+          "texto": "Describe el beneficio concreto, no la tecnología detrás.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "imagen": "",
+          "categoria": "Categoría",
+          "titulo": "Segunda función",
+          "texto": "Una o dos líneas bastan para explicarla.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "imagen": "",
+          "categoria": "Categoría",
+          "titulo": "Tercera función",
+          "texto": "Cierra con lo que reduce el riesgo de empezar.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        }
+      ],
+      "fields": [
+        {
+          "label": "Imagen",
+          "name": "imagen",
+          "widget": "image",
+          "required": false,
+          "hint": "Mientras no subas una, se ve un recuadro rayado en su lugar. Su texto alternativo es el título de la tarjeta."
+        },
+        {
+          "label": "Categoría",
+          "name": "categoria",
+          "widget": "string",
+          "required": false
+        },
+        {
+          "label": "Título",
+          "name": "titulo",
+          "widget": "string"
+        },
+        {
+          "label": "Texto",
+          "name": "texto",
+          "widget": "text"
+        },
+        {
+          "label": "Enlace",
+          "name": "enlace",
+          "widget": "object",
+          "collapsed": true,
+          "fields": [
+            {
+              "label": "Texto",
+              "name": "texto",
+              "widget": "string",
+              "required": false,
+              "default": "Saber más",
+              "hint": "Vacío = sin enlace."
+            },
+            {
+              "label": "Dirección",
+              "name": "url",
+              "widget": "string",
+              "required": false,
+              "default": "#",
+              "hint": "#ancla de una sección, /pagina o https://…"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Ancla para el menú",
+      "name": "ancla",
+      "widget": "string",
+      "required": false,
+      "default": "",
+      "hint": "Sin espacios (p. ej. precios): el menú la enlaza como #precios. Vacío = sin ancla.",
+      "pattern": [
+        "^[a-z0-9-]*$",
+        "Sólo minúsculas, números y guiones"
+      ]
+    }
+  ]
+}
