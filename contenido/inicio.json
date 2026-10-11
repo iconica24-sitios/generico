@@ -120,6 +120,29 @@
       "fondo_suave": false
     },
     {
+      "tipo": "funciones",
+      "oculto": false,
+      "rotulo": "Funciones",
+      "titulo": "Todo lo que necesitas, nada que sobre.",
+      "texto": "Resume en una o dos líneas el conjunto de funciones principales.",
+      "tarjetas": [
+        {
+          "titulo": "Función principal",
+          "texto": "Describe el beneficio concreto, no la tecnología detrás."
+        },
+        {
+          "titulo": "Segunda función",
+          "texto": "Una o dos líneas bastan."
+        },
+        {
+          "titulo": "Tercera función",
+          "texto": "Cierra con lo que reduce el riesgo de empezar."
+        }
+      ],
+      "fondo_suave": false,
+      "ancla": "funciones"
+    },
+    {
       "tipo": "testimonios",
       "rotulo": "Testimonios",
       "titulo": "Lo que dicen quienes ya lo usan.",
