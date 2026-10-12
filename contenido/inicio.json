@@ -226,7 +226,11 @@
         "texto": "Empezar gratis",
         "enlace": "#precios"
       },
-      "ancla": ""
+      "ancla": "",
+      "texto": "Claro que aquí todavía podemos agregar aún más texto.",
+      "boton2": {
+        "texto": "Agendar cita"
+      }
     },
     {
       "texto": "Cuéntanos qué necesitas y te respondemos en menos de 24 horas.",
