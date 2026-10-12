@@ -214,6 +214,19 @@
           ],
           "insignia": "Popular",
           "precio_anual": "19 €"
+        },
+        {
+          "destacado": false,
+          "insignia": "Popular",
+          "boton": {
+            "texto": "Elegir",
+            "enlace": "#contacto"
+          },
+          "nombre": "Plus Ultra",
+          "precio_anual": "",
+          "periodo": "Miembros distinguidos",
+          "descripcion": "Todo lo incluído en los planes anteriores, más masaje urbano. ",
+          "precio": "$56"
         }
       ],
       "ancla": "precios",
