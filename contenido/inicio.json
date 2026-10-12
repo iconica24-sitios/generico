@@ -167,7 +167,8 @@
           "foto": ""
         }
       ],
-      "ancla": ""
+      "ancla": "",
+      "fondo_suave": true
     },
     {
       "tipo": "precios",
@@ -230,7 +231,7 @@
         }
       ],
       "ancla": "precios",
-      "fondo_suave": true
+      "fondo_suave": false
     },
     {
       "tipo": "llamada",
