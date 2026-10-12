@@ -168,7 +168,8 @@
         }
       ],
       "ancla": "",
-      "fondo_suave": true
+      "fondo_suave": true,
+      "oculto": true
     },
     {
       "tipo": "precios",
