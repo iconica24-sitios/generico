@@ -2,7 +2,7 @@
    En celular el texto se alinea a la izquierda y los botones van uno sobre otro, a todo el ancho. */
 .llamada { background: var(--tinta); color: var(--blanco); padding: 128px 32px; }
 .llamada__caja { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.llamada__titulo { margin: 0; font-size: clamp(36px, 5vw, 60px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; color: var(--blanco); text-wrap: balance; }
+.llamada__titulo { margin: 0; font-size: clamp(36px, 5vw, 60px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 900; color: var(--blanco); text-wrap: balance; }
 .llamada__texto { margin: 24px 0 0; font-size: 19px; line-height: 1.6; color: rgba(251, 252, 254, 0.68); text-wrap: pretty; }
 .llamada__texto strong, .llamada__nota strong { color: var(--blanco); font-weight: 500; }
 .llamada__botones { margin-top: 44px; display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 12px; max-width: 100%; }
