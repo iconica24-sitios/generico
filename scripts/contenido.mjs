@@ -302,7 +302,12 @@ function renderizar(html, ctx, indice, base = '', total) {
     const interior = html.slice(el.finApertura, c.inicio);
     const tpl = buscar(interior, 0, t => atributo(t, 'data-cms-item') !== null);
     let nuevo = interior;
-    if (!Array.isArray(items)) avisos.push(`falta la lista "${clave}"`);
+    // Una sublista de un elemento (clave relativa: ".incluye") que aún no
+    // existe es una lista vacía: p. ej. un plan nuevo al que no se le han
+    // puesto puntos. (Dejar la plantilla haría que su "." leyera el plan
+    // completo y se publicara "[object Object]".)
+    const lista = Array.isArray(items) ? items : items == null && clave.startsWith('.') ? [] : null;
+    if (!lista) avisos.push(`falta la lista "${clave}"`);
     else if (!tpl) avisos.push(`la lista "${clave}" no tiene data-cms-item`);
     else {
       const plantilla = interior.slice(tpl.inicio, cierre(interior, tpl).fin);
@@ -311,7 +316,7 @@ function renderizar(html, ctx, indice, base = '', total) {
       const k = interior.lastIndexOf('\n');
       const cola = k >= 0 ? interior.slice(k) : '';
       const ruta = rutaDe(clave, base);
-      nuevo = items.map((item, i) => sangria + renderizar(plantilla, item, i, `${ruta}.${i}`, items.length)).join('') + cola;
+      nuevo = lista.map((item, i) => sangria + renderizar(plantilla, item, i, `${ruta}.${i}`, lista.length)).join('') + cola;
     }
     const apertura = soltarLista(el.apertura);
     html = html.slice(0, el.inicio) + apertura + nuevo + html.slice(c.inicio);
@@ -367,7 +372,10 @@ function renderizar(html, ctx, indice, base = '', total) {
     let contenido = null;
     if (conIndice) contenido = String((indice ?? 0) + 1).padStart(2, '0');
     else if (clave !== null) {
-      const v = clave.includes('{') ? valorDeAtributo(ctx, clave) : leer(ctx, clave);
+      let v = clave.includes('{') ? valorDeAtributo(ctx, clave) : leer(ctx, clave);
+      // Un objeto o una lista no es un texto: se trata como dato faltante
+      // (nunca se publica "[object Object]").
+      if (v !== null && typeof v === 'object') v = undefined;
       // Un elemento opcional cuya clave aún no existe (un campo que el diseño
       // agregó después) se quita como si estuviera vacío: no debe publicarse
       // el texto de ejemplo del HTML.

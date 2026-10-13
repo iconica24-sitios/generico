@@ -39,6 +39,12 @@ function plantilla(nombre) {
     return cuerpo.replace(/<script\b[\s\S]*?<\/script>/gi, '');
   });
 }
+// Idioma del sitio (<html lang="…"> de la plantilla). La vista previa es otro
+// documento, sin idioma: sin él, hyphens: auto no parte ninguna palabra y el
+// texto se ve con otros cortes y otro número de líneas que en el sitio.
+function idioma(nombre) {
+  return html(nombre).then(texto => (texto.match(/<html\b[^>]*\slang=["']?([\w-]+)/i) || [])[1] || 'es', () => 'es');
+}
 
 // La vista previa vive dentro de /admin/: las rutas relativas del sitio
 // (imagenes/foto.jpg) se vuelven absolutas (/imagenes/foto.jpg).
@@ -330,6 +336,7 @@ const vista = (nombre, pagina = nombre) => window.createClass({
     if (!this.raiz) return;
     const doc = this.raiz.ownerDocument;
     doc.__prefijo = this.prefijo;
+    if (!doc.documentElement.lang) idioma(pagina).then(l => { doc.documentElement.lang = l; });
     if (SITIO.sitio) {
       doc.body.classList.toggle('cms-vista-sitio', !!this.prefijo);
       doc.body.classList.toggle('cms-vista-pagina', !this.prefijo);
