@@ -63,6 +63,47 @@
       "fondo_suave": true
     },
     {
+      "tipo": "funciones_3",
+      "oculto": false,
+      "rotulo": "Funciones",
+      "titulo": "Cada función, con su imagen.",
+      "texto": "Resume en una o dos líneas lo que muestran las tarjetas.",
+      "tarjetas": [
+        {
+          "imagen": "",
+          "categoria": "Categoría",
+          "titulo": "Función principal",
+          "texto": "Describe el beneficio concreto, no la tecnología detrás.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "imagen": "",
+          "categoria": "Categoría",
+          "titulo": "Segunda función",
+          "texto": "Una o dos líneas bastan para explicarla.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "imagen": "",
+          "categoria": "Categoría",
+          "titulo": "Tercera función",
+          "texto": "Cierra con lo que reduce el riesgo de empezar.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        }
+      ],
+      "fondo_suave": false,
+      "ancla": ""
+    },
+    {
       "rotulo": "Cómo funciona",
       "texto": "Describe con más detalle cómo el usuario pasa del problema al resultado. Un párrafo concreto funciona mejor que una lista larga de beneficios.",
       "pasos": [
@@ -120,27 +161,51 @@
       "fondo_suave": false
     },
     {
-      "tipo": "funciones",
-      "oculto": false,
       "rotulo": "Funciones",
-      "titulo": "Todo lo que necesitas, nada que sobre.",
-      "texto": "Resume en una o dos líneas el conjunto de funciones principales.",
+      "texto": "Resume en una o dos líneas el conjunto de funciones y a dónde lleva cada una.",
       "tarjetas": [
         {
           "titulo": "Función principal",
-          "texto": "Describe el beneficio concreto, no la tecnología detrás."
+          "texto": "Describe el beneficio concreto, no la tecnología detrás.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
         },
         {
           "titulo": "Segunda función",
-          "texto": "Una o dos líneas bastan."
+          "texto": "Una o dos líneas bastan para explicarla.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
         },
         {
           "titulo": "Tercera función",
-          "texto": "Cierra con lo que reduce el riesgo de empezar."
+          "texto": "Lo que ahorra tiempo o esfuerzo al cliente.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "titulo": "Cuarta función",
+          "texto": "Cierra con lo que reduce el riesgo de empezar.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
         }
       ],
-      "fondo_suave": false,
-      "ancla": "funciones"
+      "boton": {
+        "texto": "Empezar ahora",
+        "enlace": "#contacto"
+      },
+      "oculto": false,
+      "ancla": "",
+      "tipo": "funciones_2",
+      "titulo": "Cada función, con su siguiente paso.",
+      "fondo_suave": false
     },
     {
       "tipo": "testimonios",
