@@ -317,11 +317,11 @@
             "texto": "Empezar gratis",
             "enlace": "#contacto"
           },
-          "precio": "0 €",
+          "precio": "$0",
           "destacado": false,
           "nombre": "Básico",
           "descripcion": "Para probar el producto sin compromiso.",
-          "periodo": "",
+          "periodo": "/mes",
           "incluye": [
             "1 proyecto",
             "Funciones esenciales",
@@ -335,11 +335,11 @@
             "texto": "Elegir Pro",
             "enlace": "#contacto"
           },
-          "precio": "24 €",
+          "precio": "$24",
           "destacado": true,
           "nombre": "Pro",
           "descripcion": "Para equipos pequeños que ya están creciendo.",
-          "periodo": "/ usuario · mes",
+          "periodo": "/mes",
           "incluye": [
             "Proyectos ilimitados",
             "Todas las funciones",
@@ -360,7 +360,7 @@
           },
           "nombre": "Plus Ultra",
           "precio_anual": "",
-          "periodo": "Miembros distinguidos",
+          "periodo": "/mes",
           "descripcion": "Todo lo incluído en los planes anteriores, más masaje urbano. ",
           "precio": "$56"
         }
