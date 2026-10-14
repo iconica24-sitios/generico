@@ -1,0 +1,43 @@
+/* Contacto 2: todo centrado en una columna. Formulario con etiquetas arriba (nombre y correo
+   lado a lado, también en celular), filete y debajo correo, dirección y redes. */
+.contacto-2 { border-top: 1px solid var(--linea); }
+.contacto-2__interior { max-width: 1200px; margin: 0 auto; padding: 112px 24px; }
+@media (min-width: 640px) { .contacto-2__interior { padding: 112px 32px; } }
+.contacto-2__cuerpo { max-width: 640px; margin: 56px auto 0; }
+.contacto-2__form { display: flex; flex-direction: column; gap: 20px; }
+.contacto-2__fila { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (min-width: 640px) { .contacto-2__fila { gap: 20px; } }
+.contacto-2__campo { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.contacto-2__etiqueta { font-size: 14px; color: var(--gris); }
+.contacto-2 input, .contacto-2 textarea {
+  width: 100%; font-size: 16px; padding: 12px 14px; border-radius: var(--radio-boton);
+  border: 1px solid var(--linea-fuerte); background: rgba(20, 24, 33, 0.03); color: var(--tinta); outline: none;
+  transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+.contacto-2 input:focus, .contacto-2 textarea:focus { border-color: var(--acento); background: var(--papel); box-shadow: 0 0 0 3px rgba(20, 24, 33, 0.06); }
+.contacto-2 textarea { min-height: 140px; resize: vertical; }
+.contacto-2__boton { border: none; cursor: pointer; }
+/* Botones: apilados a todo el ancho en celular; desde 640px lado a lado, centrados y del mismo ancho */
+.contacto-2__botones { margin-top: 20px; /* + gap 20px = 40px, igual que debajo hasta el filete */ display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.contacto-2__botones > .boton { width: 100%; }
+@media (min-width: 640px) {
+  .contacto-2__botones { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: minmax(0, 1fr); width: max-content; max-width: 100%; margin-left: auto; margin-right: auto; }
+}
+.contacto-2__enviado {
+  padding: 48px 32px; border-radius: 16px; background: var(--papel); border: 1px solid var(--linea-fuerte);
+  display: flex; flex-direction: column; gap: 12px; text-align: center;
+}
+.contacto-2__enviado[hidden] { display: none; }
+.contacto-2__enviado h3 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+.contacto-2__enviado p { margin: 0; font-size: 16px; color: var(--gris); }
+.contacto-2__datos {
+  margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--linea);
+  display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center;
+}
+.contacto-2__correo { font-size: 16px; font-weight: 500; color: var(--acento); overflow-wrap: anywhere; }
+.contacto-2__correo:hover { color: var(--acento-fuerte); }
+.contacto-2__direccion { margin: 0; font-size: 16px; line-height: 1.6; color: var(--gris); white-space: pre-line; }
+.contacto-2__redes { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px; }
+.contacto-2__red { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; color: var(--gris); }
+.contacto-2__red:hover { color: var(--tinta); background: var(--suave); }
+.bloque--suave .contacto-2__red:hover { background: var(--papel); }

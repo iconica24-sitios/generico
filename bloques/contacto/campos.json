@@ -24,15 +24,25 @@
       "summary": "{{fields.etiqueta}}: {{fields.valor}}",
       "default": [
         {
+          "icono": "mail",
           "etiqueta": "Correo",
           "valor": "hola@tunegocio.com"
         },
         {
+          "icono": "location_on",
           "etiqueta": "Oficina",
           "valor": "Calle Ejemplo 123, Ciudad"
         }
       ],
       "fields": [
+        {
+          "label": "Icono",
+          "name": "icono",
+          "widget": "string",
+          "required": false,
+          "default": "",
+          "hint": "Nombre del icono de Material Symbols (fonts.google.com/icons), en inglés y con guion bajo: p. ej. speed, lock, support_agent. Vacío = sin icono."
+        },
         {
           "label": "Etiqueta",
           "name": "etiqueta",
@@ -75,6 +85,25 @@
       "name": "enviado_texto",
       "widget": "string",
       "default": "Se abrió tu aplicación de correo con el mensaje: sólo falta darle Enviar."
+    },
+    {
+      "label": "WhatsApp: número",
+      "name": "whatsapp",
+      "widget": "string",
+      "required": false,
+      "default": "",
+      "hint": "Con código de país, sin «+» ni espacios (p. ej. 5215512345678). Vacío = sin botón de WhatsApp.",
+      "pattern": [
+        "^[0-9]*$",
+        "Sólo números, con el código de país"
+      ]
+    },
+    {
+      "label": "WhatsApp: texto del botón",
+      "name": "whatsapp_texto",
+      "widget": "string",
+      "required": false,
+      "default": "Escríbenos por WhatsApp"
     },
     {
       "label": "Fondo gris suave",

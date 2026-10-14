@@ -1,0 +1,32 @@
+/* Iconos: icono en círculo, título, texto y enlace; filetes discretos sólo entre columnas y filas.
+   1 columna → 2 (640px) → 3 (1024px). Los filetes son el borde izq./sup. de cada elemento;
+   el marco recorta los de la primera columna y la primera fila. */
+.iconos { border-top: 1px solid var(--linea); }
+.iconos__interior { max-width: 1200px; margin: 0 auto; padding: 112px 32px; }
+.iconos__interior > .encabezado + .iconos__marco { margin-top: 72px; }
+.iconos__marco { overflow: hidden; }
+.iconos__rejilla { display: grid; grid-template-columns: minmax(0, 1fr); margin: -1px 0 0 -1px; }
+@media (min-width: 640px) { .iconos__rejilla { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .iconos__rejilla { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.iconos__item {
+  border-left: 1px solid var(--linea); border-top: 1px solid var(--linea);
+  padding: 40px 8px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;
+}
+@media (min-width: 640px) { .iconos__item { padding: 48px 36px; } }
+.iconos__icono {
+  flex: none; width: 64px; height: 64px; margin-bottom: 8px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--acento-tenue); color: var(--acento);
+}
+.iconos__icono .icono { font-size: 30px; }
+.bloque--suave .iconos__icono { background: var(--papel); }
+.iconos__titulo { margin: 0; font-size: 20px; line-height: 1.3; letter-spacing: -0.02em; font-weight: 500; color: var(--tinta); text-wrap: balance; }
+.iconos__texto { margin: 0; max-width: 34ch; font-size: 16px; line-height: 1.6; color: var(--gris); text-wrap: pretty; }
+.iconos__enlace {
+  margin-top: auto; padding-top: 8px; display: inline-flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 500; color: var(--acento);
+}
+.iconos__enlace::after { content: "→"; transition: transform .2s ease; }
+.iconos__enlace:hover { color: var(--acento-fuerte); }
+.iconos__enlace:hover::after { transform: translateX(4px); }
+.iconos__pie { margin-top: 72px; display: flex; justify-content: center; }

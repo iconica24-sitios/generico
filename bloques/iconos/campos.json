@@ -1,0 +1,170 @@
+{
+  "label": "Ventajas con iconos",
+  "name": "iconos",
+  "widget": "object",
+  "summary": "Ventajas con iconos — {{fields.titulo}}",
+  "fields": [
+    {
+      "label": "Rótulo",
+      "name": "rotulo",
+      "widget": "string",
+      "required": false,
+      "default": "Ventajas"
+    },
+    {
+      "label": "Título",
+      "name": "titulo",
+      "widget": "string",
+      "default": "Todo lo que necesitas, en un solo lugar"
+    },
+    {
+      "label": "Texto",
+      "name": "texto",
+      "widget": "text",
+      "required": false,
+      "default": "Resume en una o dos líneas lo que tienen en común estas ventajas."
+    },
+    {
+      "label": "Elementos",
+      "name": "elementos",
+      "widget": "list",
+      "label_singular": "elemento",
+      "summary": "{{fields.icono}} · {{fields.titulo}}",
+      "hint": "Se ven mejor de 3 en 3.",
+      "default": [
+        {
+          "icono": "speed",
+          "titulo": "Rápido desde el primer día",
+          "texto": "Configúralo en minutos y empieza a ver resultados sin curva de aprendizaje.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "icono": "lock",
+          "titulo": "Seguro por diseño",
+          "texto": "Tus datos viajan cifrados y sólo los ve quien tú decides.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "icono": "sync",
+          "titulo": "Siempre sincronizado",
+          "texto": "Los cambios aparecen al instante en todos tus dispositivos.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "icono": "insights",
+          "titulo": "Decisiones con datos",
+          "texto": "Reportes claros para saber qué funciona y qué ajustar.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "icono": "support_agent",
+          "titulo": "Soporte humano",
+          "texto": "Personas reales que responden en tu idioma y en horario hábil.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "icono": "tune",
+          "titulo": "A tu medida",
+          "texto": "Ajusta cada detalle para que se adapte a tu forma de trabajar.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        }
+      ],
+      "fields": [
+        {
+          "label": "Icono",
+          "name": "icono",
+          "widget": "string",
+          "default": "star",
+          "hint": "Nombre del icono de Material Symbols (fonts.google.com/icons), en inglés y con guion bajo: p. ej. speed, lock, support_agent."
+        },
+        {
+          "label": "Título",
+          "name": "titulo",
+          "widget": "string"
+        },
+        {
+          "label": "Texto",
+          "name": "texto",
+          "widget": "text"
+        },
+        {
+          "label": "Enlace",
+          "name": "enlace",
+          "widget": "object",
+          "required": false,
+          "collapsed": true,
+          "fields": [
+            {
+              "label": "Texto del enlace",
+              "name": "texto",
+              "widget": "string",
+              "required": false,
+              "hint": "Vacío = sin enlace."
+            },
+            {
+              "label": "Dirección",
+              "name": "url",
+              "widget": "string",
+              "required": false,
+              "default": "#"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Botón final",
+      "name": "boton",
+      "widget": "object",
+      "required": false,
+      "collapsed": true,
+      "fields": [
+        {
+          "label": "Texto",
+          "name": "texto",
+          "widget": "string",
+          "required": false,
+          "default": "Empezar ahora",
+          "hint": "Vacío = sin botón."
+        },
+        {
+          "label": "Enlace",
+          "name": "enlace",
+          "widget": "string",
+          "required": false,
+          "default": "#contacto"
+        }
+      ]
+    },
+    {
+      "label": "Ancla para el menú",
+      "name": "ancla",
+      "widget": "string",
+      "required": false,
+      "default": "",
+      "hint": "Sin espacios (p. ej. precios): el menú la enlaza como #precios. Vacío = sin ancla.",
+      "pattern": [
+        "^[a-z0-9-]*$",
+        "Sólo minúsculas, números y guiones"
+      ]
+    }
+  ]
+}

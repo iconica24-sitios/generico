@@ -7,7 +7,7 @@
    - Menú activo: resalta la página en la que se está y, en ella, la
      sección visible (enlaces #ancla).
    - Precios: selector Mensual / Anual.
-   - Contacto: abre la aplicación de correo con el mensaje listo.
+   - Contacto y contacto 2: abren la aplicación de correo con el mensaje listo.
    ========================================================================= */
 (() => {
   const cabecera = document.querySelector('.cabecera');
@@ -93,9 +93,9 @@
   });
 
   /* ---------- Contacto ---------- */
-  document.querySelectorAll('.contacto').forEach(seccion => {
-    const form = seccion.querySelector('.contacto__form');
-    const destino = (seccion.querySelector('.contacto__destino')?.getAttribute('href') || '').replace(/^mailto:/, '');
+  document.querySelectorAll('.contacto, .contacto-2').forEach(seccion => {
+    const form = seccion.querySelector('.contacto__form, .contacto-2__form');
+    const destino = (seccion.querySelector('.contacto__destino, .contacto-2__destino')?.getAttribute('href') || '').replace(/^mailto:/, '');
     if (!form) return;
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -106,7 +106,7 @@
       location.href = `mailto:${destino}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
       form.hidden = true;
       form.style.display = 'none';
-      seccion.querySelector('.contacto__enviado').hidden = false;
+      seccion.querySelector('.contacto__enviado, .contacto-2__enviado').hidden = false;
     });
   });
 })();

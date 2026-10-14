@@ -1,0 +1,97 @@
+{
+  "label": "Contacto (formulario y datos)",
+  "name": "contacto_2",
+  "widget": "object",
+  "summary": "Contacto 2 — {{fields.titulo}}",
+  "fields": [
+    {
+      "label": "Título",
+      "name": "titulo",
+      "widget": "string",
+      "default": "Escríbenos"
+    },
+    {
+      "label": "Texto",
+      "name": "texto",
+      "widget": "text",
+      "required": false,
+      "default": "Cuéntanos qué necesitas y te respondemos en menos de 24 horas."
+    },
+    {
+      "label": "Correo que recibe los mensajes",
+      "name": "correo_destino",
+      "widget": "string",
+      "default": "",
+      "hint": "A dónde llegan los mensajes. Por ahora el formulario abre la aplicación de correo de quien escribe, con el mensaje listo.",
+      "pattern": [
+        "^([^@\\s]+@[^@\\s]+\\.[^@\\s]+)?$",
+        "Escribe un correo válido"
+      ]
+    },
+    {
+      "label": "Texto del botón",
+      "name": "boton",
+      "widget": "string",
+      "default": "Enviar mensaje"
+    },
+    {
+      "label": "Mensaje al enviar: título",
+      "name": "enviado_titulo",
+      "widget": "string",
+      "default": "Mensaje listo."
+    },
+    {
+      "label": "Mensaje al enviar: texto",
+      "name": "enviado_texto",
+      "widget": "string",
+      "default": "Se abrió tu aplicación de correo con el mensaje: sólo falta darle Enviar."
+    },
+    {
+      "label": "WhatsApp: número",
+      "name": "whatsapp",
+      "widget": "string",
+      "required": false,
+      "default": "",
+      "hint": "Con código de país, sin «+» ni espacios (p. ej. 5215512345678). Vacío = sin botón de WhatsApp.",
+      "pattern": [
+        "^[0-9]*$",
+        "Sólo números, con el código de país"
+      ]
+    },
+    {
+      "label": "WhatsApp: texto del botón",
+      "name": "whatsapp_texto",
+      "widget": "string",
+      "required": false,
+      "default": "Escríbenos por WhatsApp"
+    },
+    {
+      "label": "Correo visible",
+      "name": "correo",
+      "widget": "string",
+      "required": false,
+      "default": "hola@tunegocio.com",
+      "hint": "Se muestra abajo y abre el correo al hacer clic. Vacío = no se muestra."
+    },
+    {
+      "label": "Dirección",
+      "name": "direccion",
+      "widget": "text",
+      "required": false,
+      "default": "Calle Ejemplo 123\nColonia Centro, Ciudad",
+      "hint": "Puede ir en varias líneas. Vacía = no se muestra."
+    },
+    {
+      "label": "Ancla para el menú",
+      "name": "ancla",
+      "widget": "string",
+      "required": false,
+      "default": "",
+      "hint": "Sin espacios (p. ej. precios): el menú la enlaza como #precios. Vacío = sin ancla.",
+      "pattern": [
+        "^[a-z0-9-]*$",
+        "Sólo minúsculas, números y guiones"
+      ]
+    }
+  ]
+}

@@ -22,10 +22,11 @@
    versión oscura para :hover se calcula de él. */
 .sitio {
   --acento-fuerte: var(--acento);
+  --acento-tenue: var(--suave); /* fondo claro teñido del acento (círculos de iconos) */
 }
 /* Tono oscuro del acento solo donde el navegador lo calcula; los demás usan el acento tal cual */
 @supports (color: oklch(from red l c h)) {
-  .sitio { --acento-fuerte: oklch(from var(--acento) calc(l - 0.08) c h); }
+  .sitio { --acento-fuerte: oklch(from var(--acento) calc(l - 0.08) c h); --acento-tenue: oklch(from var(--acento) 0.95 calc(c * 0.25) h); }
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -60,6 +61,16 @@ section.bloque--papel { background: var(--papel); }
 .titulo-seccion { margin: 0; font-size: clamp(36px, 4.7vw, 56px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 900; text-wrap: balance; }
 .texto-seccion { margin: 24px 0 0; font-size: 18px; line-height: 1.6; color: var(--gris); text-wrap: pretty; }
 
+/* ---------- Iconos (Material Symbols Outlined, Google Fonts) ----------
+   El nombre del icono es el texto del elemento (p. ej. "speed"); la fuente lo dibuja
+   sin JavaScript. Ancho fijo y overflow para que el nombre no asome mientras carga. */
+.icono {
+  font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal;
+  font-size: 24px; line-height: 1; letter-spacing: normal; text-transform: none;
+  display: inline-block; width: 1em; height: 1em; overflow: hidden; white-space: nowrap; direction: ltr;
+  -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased;
+}
+
 /* ---------- Botones ---------- */
 .boton { display: inline-block; font-size: 16px; font-weight: 500; padding: 16px 28px; border-radius: var(--radio-boton); }
 .boton--chico { font-size: 15px; padding: 10px 18px; }
@@ -69,6 +80,13 @@ section.bloque--papel { background: var(--papel); }
 .boton--borde:hover { border-color: var(--tinta); }
 .boton--tinta { background: var(--tinta); color: var(--papel); }
 .boton--tinta:hover { background: var(--acento); color: var(--papel); }
+/* WhatsApp: verde de marca, con su icono; mismo alto que los demás botones */
+.boton-whatsapp {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: #1fa855; color: #ffffff; line-height: 1.2; text-align: center;
+}
+.boton-whatsapp:hover { background: #178f47; color: #ffffff; }
+.boton-whatsapp__icono { flex: none; }
 
 /* ---------- Cabecera ---------- */
 .cabecera {
