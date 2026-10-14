@@ -21,6 +21,75 @@
       "ancla": ""
     },
     {
+      "elementos": [
+        {
+          "icono": "speed",
+          "titulo": "Rápido desde el primer día",
+          "texto": "Configúralo en minutos y empieza a ver resultados sin curva de aprendizaje.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "icono": "lock",
+          "titulo": "Seguro por diseño",
+          "texto": "Tus datos viajan cifrados y sólo los ve quien tú decides.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "icono": "sync",
+          "titulo": "Siempre sincronizado",
+          "texto": "Los cambios aparecen al instante en todos tus dispositivos.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "icono": "insights",
+          "titulo": "Decisiones con datos",
+          "texto": "Reportes claros para saber qué funciona y qué ajustar.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "icono": "support_agent",
+          "titulo": "Soporte humano",
+          "texto": "Personas reales que responden en tu idioma y en horario hábil.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        },
+        {
+          "icono": "tune",
+          "titulo": "A tu medida",
+          "texto": "Ajusta cada detalle para que se adapte a tu forma de trabajar.",
+          "enlace": {
+            "texto": "Saber más",
+            "url": "#"
+          }
+        }
+      ],
+      "rotulo": "Ventajas",
+      "texto": "Resume en una o dos líneas lo que tienen en común estas ventajas.",
+      "boton": {
+        "texto": "Empezar ahora",
+        "enlace": "#contacto"
+      },
+      "oculto": false,
+      "ancla": "",
+      "tipo": "iconos",
+      "titulo": "Todo lo que necesitas, en un solo lugar",
+      "fondo_suave": true
+    },
+    {
       "tipo": "funciones",
       "rotulo": "Funciones",
       "titulo": "Todo lo que necesitas, nada que sobre.",
