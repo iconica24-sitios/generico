@@ -393,11 +393,13 @@
       "datos": [
         {
           "etiqueta": "Correo",
-          "valor": "hola@nombre.com"
+          "valor": "hola@nombre.com",
+          "icono": "mail"
         },
         {
           "etiqueta": "Oficina",
-          "valor": "Calle Ejemplo 123, Ciudad"
+          "valor": "Calle Ejemplo 123, Ciudad",
+          "icono": "location_on"
         }
       ],
       "correo_destino": "hola@nombre.com"
