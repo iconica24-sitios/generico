@@ -87,7 +87,7 @@
       "ancla": "",
       "tipo": "iconos",
       "titulo": "Todo lo que necesitas, en un solo lugar",
-      "fondo_suave": true
+      "fondo_suave": false
     },
     {
       "tipo": "funciones",
