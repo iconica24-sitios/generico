@@ -2,7 +2,7 @@
   "label": "Precios",
   "name": "precios",
   "widget": "object",
-  "summary": "Precios — {{fields.titulo}}",
+  "summary": "{{fields.titulo}}",
   "fields": [
     {
       "label": "Título",

@@ -1,8 +1,8 @@
 {
-  "label": "Contacto (formulario y datos)",
+  "label": "Contacto Estilo 2",
   "name": "contacto_2",
   "widget": "object",
-  "summary": "Contacto 2 — {{fields.titulo}}",
+  "summary": "{{fields.titulo}}",
   "fields": [
     {
       "label": "Título",

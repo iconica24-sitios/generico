@@ -1,8 +1,8 @@
 {
-  "label": "Incluye (lista con palomitas)",
+  "label": "Servicios - Listado",
   "name": "incluye",
   "widget": "object",
-  "summary": "Incluye — {{fields.titulo}}",
+  "summary": "{{fields.titulo}}",
   "fields": [
     {
       "label": "Rótulo",

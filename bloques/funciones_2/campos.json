@@ -1,8 +1,8 @@
 {
-  "label": "Funciones con enlaces",
+  "label": "Servicios - Enlace",
   "name": "funciones_2",
   "widget": "object",
-  "summary": "Funciones con enlaces — {{fields.titulo}}",
+  "summary": "{{fields.titulo}}",
   "fields": [
     {
       "label": "Rótulo",

@@ -1,8 +1,8 @@
 {
-  "label": "Portada",
+  "label": "Portada B",
   "name": "portada",
   "widget": "object",
-  "summary": "Portada — {{fields.titulo}}",
+  "summary": "{{fields.titulo}}",
   "fondo": false,
   "fields": [
     {

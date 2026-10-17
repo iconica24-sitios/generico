@@ -1,8 +1,8 @@
 {
-  "label": "Funciones con imagen",
+  "label": "Servicios - Imagen",
   "name": "funciones_3",
   "widget": "object",
-  "summary": "Funciones con imagen — {{fields.titulo}}",
+  "summary": "{{fields.titulo}}",
   "fields": [
     {
       "label": "Rótulo",

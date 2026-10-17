@@ -1,8 +1,8 @@
 {
-  "label": "Llamada a la acción",
+  "label": "Promoción - Oferta",
   "name": "llamada",
   "widget": "object",
-  "summary": "Llamada — {{fields.titulo}}",
+  "summary": "{{fields.titulo}}",
   "fondo": false,
   "fields": [
     {

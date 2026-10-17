@@ -2,7 +2,7 @@
   "label": "Testimonios",
   "name": "testimonios",
   "widget": "object",
-  "summary": "Testimonios — {{fields.titulo}}",
+  "summary": "{{fields.titulo}}",
   "fields": [
     {
       "label": "Rótulo",

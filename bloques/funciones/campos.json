@@ -1,8 +1,8 @@
 {
-  "label": "Funciones (tarjetas numeradas)",
+  "label": "Servicios - Numerado",
   "name": "funciones",
   "widget": "object",
-  "summary": "Funciones — {{fields.titulo}}",
+  "summary": "{{fields.titulo}}",
   "fields": [
     {
       "label": "Rótulo",

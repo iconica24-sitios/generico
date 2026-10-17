@@ -1,8 +1,8 @@
 {
-  "label": "Imagen y texto",
+  "label": "Portada Secundaria",
   "name": "imagen_texto",
   "widget": "object",
-  "summary": "Imagen y texto — {{fields.titulo}}",
+  "summary": "{{fields.titulo}}",
   "fields": [
     {
       "label": "Imagen",

@@ -1,8 +1,8 @@
 {
-  "label": "Ventajas con iconos",
+  "label": "Servicios - Icono",
   "name": "iconos",
   "widget": "object",
-  "summary": "Ventajas con iconos — {{fields.titulo}}",
+  "summary": "{{fields.titulo}}",
   "fields": [
     {
       "label": "Rótulo",
