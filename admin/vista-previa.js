@@ -243,6 +243,27 @@ let bajoMouse = null;
 // hamburguesa lo abre y lo cierra desde aquí. Se recuerda abierto aunque
 // la vista se vuelva a dibujar al editar.
 let menuMovilAbierto = false;
+// Menú compacto: misma medición que js/sitio.js de las plantillas (si las
+// opciones no caben en el renglón de la cabecera, hamburguesa también en
+// pantalla ancha). Las reglas viven en css/base.css de cada plantilla.
+const medirMenu = doc => {
+  const cabecera = doc.querySelector('.cabecera');
+  const fila = cabecera && cabecera.querySelector('.cabecera__fila');
+  if (!fila) return;
+  const ver = doc.defaultView;
+  cabecera.classList.remove('menu-compacto');
+  if (ver.matchMedia('(max-width: 767px)').matches) return;
+  cabecera.classList.add('menu-midiendo');
+  const css = ver.getComputedStyle(fila);
+  const hijos = [...fila.children].filter(h => ver.getComputedStyle(h).display !== 'none');
+  const usado = hijos.reduce((t, h) => {
+    const m = ver.getComputedStyle(h);
+    return t + h.getBoundingClientRect().width + parseFloat(m.marginLeft) + parseFloat(m.marginRight);
+  }, 0) + (parseFloat(css.columnGap) || 0) * (hijos.length - 1);
+  const disponible = fila.clientWidth - parseFloat(css.paddingLeft) - parseFloat(css.paddingRight);
+  cabecera.classList.remove('menu-midiendo');
+  cabecera.classList.toggle('menu-compacto', usado + 24 > disponible);
+};
 const aplicarMenuMovil = doc => {
   const cabecera = doc.querySelector('.cabecera');
   if (!cabecera) return;
@@ -380,9 +401,12 @@ const vista = (nombre, pagina = nombre) => window.createClass({
       // Si cambia el tamaño (ventana, fuentes, imágenes que terminan de
       // cargar, un acordeón que se abre), los recuadros se recolocan.
       doc.defaultView.addEventListener('resize', reenmarcar);
+      doc.defaultView.addEventListener('resize', () => medirMenu(doc));
+      if (doc.fonts) doc.fonts.ready.then(() => medirMenu(doc));
       doc.addEventListener('toggle', () => setTimeout(reenmarcar, 400), true);
       new doc.defaultView.ResizeObserver(reenmarcar).observe(doc.body);
     }
+    medirMenu(doc);
     aplicarMenuMovil(doc);
     bajoMouse = null;
     resaltar(false);

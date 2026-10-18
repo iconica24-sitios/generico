@@ -4,6 +4,8 @@
      hamburguesa, al tocar fuera del menú, con Escape o al pasar a pantalla
      ancha (elegir un enlace no lo cierra). Sus submenús se despliegan con la
      flecha.
+   - Menú compacto: si las opciones no caben en pantalla ancha, se usa la
+     hamburguesa.
    - Menú activo: resalta la página en la que se está y, en ella, la
      sección visible (enlaces #ancla).
    - Precios: selector Mensual / Anual.
@@ -43,6 +45,32 @@
         b.setAttribute('aria-label', si ? 'Ocultar submenú' : 'Mostrar submenú');
       });
     });
+
+    // Menú compacto: si las opciones no caben junto a la marca y el botón,
+    // también en pantalla ancha se usa la hamburguesa (css/base.css). Se
+    // mide al cargar, al cambiar el ancho y cuando llegan las fuentes.
+    const fila = cabecera.querySelector('.cabecera__fila');
+    const medirMenu = () => {
+      cabecera.classList.remove('menu-compacto');
+      if (!fila || matchMedia('(max-width: 767px)').matches) return;
+      cabecera.classList.add('menu-midiendo');
+      const css = getComputedStyle(fila);
+      const hijos = [...fila.children].filter(h => getComputedStyle(h).display !== 'none');
+      const usado = hijos.reduce((t, h) => {
+        const m = getComputedStyle(h);
+        return t + h.getBoundingClientRect().width + parseFloat(m.marginLeft) + parseFloat(m.marginRight);
+      }, 0) + (parseFloat(css.columnGap) || 0) * (hijos.length - 1);
+      const disponible = fila.clientWidth - parseFloat(css.paddingLeft) - parseFloat(css.paddingRight);
+      cabecera.classList.remove('menu-midiendo');
+      const compacto = usado + 24 > disponible;
+      cabecera.classList.toggle('menu-compacto', compacto);
+      if (!compacto && !matchMedia('(max-width: 767px)').matches) abrir(false);
+    };
+    medirMenu();
+    let medida = 0;
+    addEventListener('resize', () => { cancelAnimationFrame(medida); medida = requestAnimationFrame(medirMenu); });
+    if (document.fonts) document.fonts.ready.then(medirMenu);
+    addEventListener('load', medirMenu);
   }
 
   /* ---------- Menú: la página en la que se está ---------- */

@@ -200,6 +200,16 @@ section.bloque--papel { background: var(--papel); }
   .menu-movil { display: grid; }
 }
 
+/* Menú compacto: si las opciones del menú no caben en el renglón de la
+   cabecera (js/sitio.js lo mide; en el panel, la vista previa), se usa la
+   hamburguesa también en pantalla ancha. Mientras se mide, nada se encoge. */
+.cabecera.menu-compacto .menu, .cabecera.menu-compacto .cabecera__acciones { display: none; }
+.cabecera.menu-compacto .hamburguesa { display: flex; }
+.cabecera.menu-compacto .menu-movil { display: grid; }
+.cabecera.menu-midiendo .cabecera__fila > * { flex-shrink: 0; }
+.cabecera.menu-midiendo .menu { margin-left: 0; }
+.cabecera.menu-midiendo .menu a { white-space: nowrap; }
+
 /* ---------- Pie ---------- */
 /* Celular: marca, aviso legal y redes centrados, uno sobre otro.
    Desde 640px: marca | aviso legal a la izquierda y redes a la derecha.
