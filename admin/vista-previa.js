@@ -239,6 +239,16 @@ async function irACampo(ruta) {
 let rutaActiva = null;
 let docVista = null;
 let bajoMouse = null;
+// Menú móvil: la vista previa no corre el JS del sitio, así que la
+// hamburguesa lo abre y lo cierra desde aquí. Se recuerda abierto aunque
+// la vista se vuelva a dibujar al editar.
+let menuMovilAbierto = false;
+const aplicarMenuMovil = doc => {
+  const cabecera = doc.querySelector('.cabecera');
+  if (!cabecera) return;
+  cabecera.classList.toggle('is-abierta', menuMovilAbierto);
+  cabecera.querySelector('.hamburguesa')?.setAttribute('aria-expanded', String(menuMovilAbierto));
+};
 const MARGEN = 6;
 
 // Coloca (o esconde) un recuadro sobre el área completa de `el`.
@@ -344,6 +354,11 @@ const vista = (nombre, pagina = nombre) => window.createClass({
     if (doc !== docVista) {
       docVista = doc;
       doc.addEventListener('click', e => {
+        if (e.target.closest('.hamburguesa')) {
+          menuMovilAbierto = !menuMovilAbierto;
+          aplicarMenuMovil(doc);
+          return;
+        }
         // En la vista previa los enlaces no navegan: un clic edita.
         if (e.target.closest('a')) e.preventDefault();
         const el = editableDe(e.target);
@@ -368,6 +383,7 @@ const vista = (nombre, pagina = nombre) => window.createClass({
       doc.addEventListener('toggle', () => setTimeout(reenmarcar, 400), true);
       new doc.defaultView.ResizeObserver(reenmarcar).observe(doc.body);
     }
+    aplicarMenuMovil(doc);
     bajoMouse = null;
     resaltar(false);
   },
