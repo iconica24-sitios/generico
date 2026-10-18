@@ -8,7 +8,6 @@
      sección visible (enlaces #ancla).
    - Precios: selector Mensual / Anual.
    - Contacto y contacto 2: abren la aplicación de correo con el mensaje listo.
-   - Iconos: centrado óptico de los que no están en la tabla de css/base.css.
    ========================================================================= */
 (() => {
   const cabecera = document.querySelector('.cabecera');
@@ -110,29 +109,4 @@
       seccion.querySelector('.contacto__enviado, .contacto-2__enviado').hidden = false;
     });
   });
-
-  /* ---------- Iconos: centrado óptico ----------
-     Mide dónde cae el dibujo de cada icono dentro de su caja y lo desplaza
-     para centrarlo. Solo para los que la tabla de css/base.css no corrige
-     (los que ya traen translate), y solo cuando la fuente cargó. */
-  const iconos = [...document.querySelectorAll('.icono')];
-  if (iconos.length && document.fonts) {
-    document.fonts.ready.then(() => {
-      const lienzo = document.createElement('canvas').getContext('2d');
-      iconos.forEach(el => {
-        const css = getComputedStyle(el);
-        const nombre = el.textContent.trim();
-        if (!nombre || css.translate !== 'none') return;
-        const fuente = `${css.fontWeight} 100px ${css.fontFamily}`;
-        if (!document.fonts.check(fuente, nombre)) return;
-        lienzo.font = fuente;
-        const m = lienzo.measureText(nombre);
-        if (!m.width || Math.abs(m.width - 100) > 2) return; // sin ligadura: no es un icono
-        const dx = ((m.actualBoundingBoxRight - m.actualBoundingBoxLeft) / 2 - m.width / 2) / 100;
-        const dy = ((m.fontBoundingBoxAscent - m.fontBoundingBoxDescent) - (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent)) / 200;
-        if (Math.abs(dx) < 0.01 && Math.abs(dy) < 0.01) return;
-        el.style.translate = `${(-dx).toFixed(3)}em ${(-dy).toFixed(3)}em`;
-      });
-    });
-  }
 })();
