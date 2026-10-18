@@ -70,6 +70,10 @@ section.bloque--papel { background: var(--papel); }
   display: inline-block; width: 1em; height: 1em; overflow: hidden; white-space: nowrap; direction: ltr;
   -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased;
 }
+/* Posición del icono (campo del editor): algunos dibujos se ven altos o bajos
+   en su círculo; se mueven 1/10 de su tamaño. */
+.icono--subir { translate: 0 -0.1em; }
+.icono--bajar { translate: 0 0.1em; }
 
 /* ---------- Botones ---------- */
 .boton { display: inline-block; font-size: 16px; font-weight: 500; padding: 16px 28px; border-radius: var(--radio-boton); }

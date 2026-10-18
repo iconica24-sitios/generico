@@ -44,6 +44,28 @@
           "hint": "Nombre del icono de Material Symbols (fonts.google.com/icons), en inglés y con guion bajo: p. ej. speed, lock, support_agent. Vacío = sin icono."
         },
         {
+          "label": "Posición del icono",
+          "name": "posicion",
+          "widget": "select",
+          "required": false,
+          "default": "centrado",
+          "options": [
+            {
+              "label": "Centrado",
+              "value": "centrado"
+            },
+            {
+              "label": "Subir",
+              "value": "subir"
+            },
+            {
+              "label": "Bajar",
+              "value": "bajar"
+            }
+          ],
+          "hint": "Si el icono se ve alto o bajo dentro de su círculo, súbelo o bájalo un poco."
+        },
+        {
           "label": "Etiqueta",
           "name": "etiqueta",
           "widget": "string",
