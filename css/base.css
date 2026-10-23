@@ -167,6 +167,9 @@ section.bloque--papel { background: var(--papel); }
 }
 .menu-movil__lista { display: flex; flex-direction: column; font-size: 20px; font-weight: 500; letter-spacing: -0.01em; }
 .menu-movil__panel { max-height: calc(100vh - var(--alto-cabecera)); max-height: calc(100svh - var(--alto-cabecera)); overflow-y: auto; }
+/* En pantalla ancha (menú compacto) las opciones arrancan donde arranca la marca:
+   mismo ancho máximo que .cabecera__fila (1200px con 32px de margen). */
+.menu-movil__panel { padding-inline: max(32px, calc(50% - 568px)); }
 .menu-movil__fila { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--linea); }
 .menu-movil__fila a { flex: 1; padding: 16px 0; }
 .menu-movil__item--n2 .menu-movil__fila a { padding: 13px 0 13px 16px; font-size: 17px; }
