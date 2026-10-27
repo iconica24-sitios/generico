@@ -148,22 +148,26 @@ const editableAqui = ruta => {
 };
 // Elemento editable (en este formulario) más cercano.
 const editableDe = el => {
+  // Un campo de formulario sin ruta propia (sin texto de ayuda editable) va a
+  // la de su etiqueta, no a la del bloque.
+  const campo = el && el.closest && el.closest('input, textarea, select');
+  if (campo && !campo.hasAttribute('data-ruta')) {
+    const etiqueta = campo.closest('label');
+    const deEtiqueta = etiqueta && etiqueta.querySelector('[data-ruta]');
+    if (deEtiqueta) el = deEtiqueta;
+  }
   const e = el && el.closest('[data-ruta]');
   return e && editableAqui(e.getAttribute('data-ruta')) ? e : null;
 };
 const cuadro = () => new Promise(r => requestAnimationFrame(r));
-// Espera (cuadro a cuadro, hasta `ms` milisegundos) a que `fn` devuelva algo:
-// Decap pinta los campos de un elemento que se despliega un poco después, y
-// con un bloque grande o la computadora ocupada puede tardar bastante más que
-// unos cuadros. Se mide en tiempo, no en cuadros, y se deja de esperar en
-// cuanto `seguir` dice que no (otro clic empezó un viaje nuevo).
-async function esperarA(fn, ms = 500, seguir = () => true) {
-  const fin = performance.now() + ms;
-  do {
+// Espera (cuadro a cuadro, hasta ~`max` cuadros) a que `fn` devuelva algo:
+// Decap pinta los campos de un elemento que se despliega un poco después.
+async function esperarA(fn, max = 30) {
+  for (let i = 0; i < max; i++) {
     const v = fn();
     if (v) return v;
     await cuadro();
-  } while (performance.now() < fin && seguir());
+  }
   return null;
 }
 
@@ -205,7 +209,7 @@ async function irACampo(ruta) {
       return /^\d+$/.test(parte)
         ? candidatos.filter(esItem)[Number(parte)]
         : candidatos.find(el => (el.id.match(ID_CAMPO) || [])[1] === parte);
-    }, 2000, vigente);
+    }, 20);
     if (!vigente()) return;
     if (!siguiente) break;
     nodo = siguiente;
@@ -213,7 +217,7 @@ async function irACampo(ruta) {
   abrir(nodo, raiz);
   const destino = nodo;
   const control = (destino.matches('input, textarea') ? destino : await esperarA(
-    () => destino.querySelector('input, textarea, [contenteditable="true"]'), 400, vigente)) || null;
+    () => destino.querySelector('input, textarea, [contenteditable="true"]'), 10)) || null;
   if (!vigente()) return;
   const el = control || destino;
   // Al desplegarse, los campos (sobre todo los de texto con formato) cambian

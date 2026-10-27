@@ -364,8 +364,9 @@ function renderizar(html, ctx, indice, base = '', total) {
 
     const clave = atributo(apertura, 'data-cms');
     const esItem = atributo(apertura, 'data-cms-item') !== null;
-    // Sin texto editable, la ruta es la del atributo (enlace, imagen…).
-    const deAtributo = ['href', 'src', 'alt', 'content'].map(a => atributo(apertura, `data-cms-${a}`)).find(x => x !== null);
+    // Sin texto editable, la ruta es la del atributo (enlace, imagen, texto de
+    // ayuda de un campo…).
+    const deAtributo = ['href', 'src', 'alt', 'content', 'placeholder'].map(a => atributo(apertura, `data-cms-${a}`)).find(x => x !== null);
     const ruta = clave !== null ? rutaDe(claveDeAtributo(clave), base, ctx) : esItem ? base : deAtributo != null ? rutaDe(claveDeAtributo(deAtributo), base, ctx) : null;
     const conIndice = atributo(apertura, 'data-cms-index') !== null;
     const opcional = atributo(apertura, 'data-cms-optional') !== null;
