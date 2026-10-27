@@ -29,6 +29,33 @@
       ]
     },
     {
+      "label": "Textos del formulario",
+      "name": "formulario",
+      "widget": "object",
+      "collapsed": true,
+      "hint": "Etiquetas y textos de ayuda (los que se ven en gris dentro de los campos vacíos).",
+      "fields": [
+        {
+          "label": "Etiqueta: nombre",
+          "name": "nombre",
+          "widget": "string",
+          "default": "Nombre"
+        },
+        {
+          "label": "Etiqueta: correo",
+          "name": "correo",
+          "widget": "string",
+          "default": "Correo"
+        },
+        {
+          "label": "Etiqueta: mensaje",
+          "name": "mensaje",
+          "widget": "string",
+          "default": "Mensaje"
+        }
+      ]
+    },
+    {
       "label": "Texto del botón",
       "name": "boton",
       "widget": "string",

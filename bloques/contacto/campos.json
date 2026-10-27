@@ -91,6 +91,60 @@
       ]
     },
     {
+      "label": "Textos del formulario",
+      "name": "formulario",
+      "widget": "object",
+      "collapsed": true,
+      "hint": "Etiquetas y textos de ayuda (los que se ven en gris dentro de los campos vacíos).",
+      "fields": [
+        {
+          "label": "Etiqueta: nombre",
+          "name": "nombre",
+          "widget": "string",
+          "default": "Nombre"
+        },
+        {
+          "label": "Ayuda: nombre",
+          "name": "nombre_ayuda",
+          "widget": "string",
+          "required": false,
+          "default": "Tu nombre"
+        },
+        {
+          "label": "Etiqueta: correo",
+          "name": "correo",
+          "widget": "string",
+          "default": "Correo"
+        },
+        {
+          "label": "Ayuda: correo",
+          "name": "correo_ayuda",
+          "widget": "string",
+          "required": false,
+          "default": "tucorreo@ejemplo.com"
+        },
+        {
+          "label": "Etiqueta: mensaje",
+          "name": "mensaje",
+          "widget": "string",
+          "default": "Mensaje"
+        },
+        {
+          "label": "Ayuda: mensaje",
+          "name": "mensaje_ayuda",
+          "widget": "string",
+          "required": false,
+          "default": "Cuéntanos en qué te podemos ayudar"
+        },
+        {
+          "label": "Nota de campos obligatorios",
+          "name": "nota",
+          "widget": "string",
+          "default": "Campos obligatorios"
+        }
+      ]
+    },
+    {
       "label": "Texto del botón",
       "name": "boton",
       "widget": "string",

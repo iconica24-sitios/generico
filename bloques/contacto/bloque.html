@@ -6,10 +6,10 @@
     </div>
     <form class="contacto__form">
       <a class="contacto__destino" hidden href="mailto:" data-cms-href="mailto:{.correo_destino}"></a>
-      <label class="contacto__campo"><span class="contacto__etiqueta-campo">Nombre <span class="contacto__obligatorio" aria-hidden="true">*</span></span><input name="nombre" required placeholder="Tu nombre" autocomplete="name"></label>
-      <label class="contacto__campo"><span class="contacto__etiqueta-campo">Correo <span class="contacto__obligatorio" aria-hidden="true">*</span></span><input name="correo" type="email" required placeholder="tucorreo@ejemplo.com" autocomplete="email"></label>
-      <label class="contacto__campo"><span class="contacto__etiqueta-campo">Mensaje</span><textarea name="mensaje" rows="4" placeholder="Cuéntanos en qué te podemos ayudar"></textarea></label>
-      <p class="contacto__nota"><span class="contacto__obligatorio" aria-hidden="true">*</span> Campos obligatorios</p>
+      <label class="contacto__campo"><span class="contacto__etiqueta-campo"><span data-cms=".formulario.nombre">Nombre</span> <span class="contacto__obligatorio" aria-hidden="true">*</span></span><input name="nombre" required placeholder="Tu nombre" data-cms-placeholder=".formulario.nombre_ayuda" autocomplete="name"></label>
+      <label class="contacto__campo"><span class="contacto__etiqueta-campo"><span data-cms=".formulario.correo">Correo</span> <span class="contacto__obligatorio" aria-hidden="true">*</span></span><input name="correo" type="email" required placeholder="tucorreo@ejemplo.com" data-cms-placeholder=".formulario.correo_ayuda" autocomplete="email"></label>
+      <label class="contacto__campo"><span class="contacto__etiqueta-campo" data-cms=".formulario.mensaje">Mensaje</span><textarea name="mensaje" rows="4" placeholder="Cuéntanos en qué te podemos ayudar" data-cms-placeholder=".formulario.mensaje_ayuda"></textarea></label>
+      <p class="contacto__nota"><span class="contacto__obligatorio" aria-hidden="true">*</span> <span data-cms=".formulario.nota">Campos obligatorios</span></p>
       <button type="submit" class="contacto__boton" data-cms=".boton">Enviar mensaje</button>
     </form>
     <div class="contacto__info">
