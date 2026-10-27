@@ -22,8 +22,8 @@
                                     atributo armado con uno o más valores
                                     entre llaves; |digitos deja sólo los
                                     números ("55 1234 5678" → 5512345678)
-                                    (también -id, -style, -value y -label;
-                                    un id vacío se quita)
+                                    (también -id, -style, -value, -label y
+                                    -placeholder; un id vacío se quita)
      data-cms-data-precio=".precio" pone el atributo data-precio (cualquier
                                     data-*; lo crea si no está)
      data-cms-selected="#ultimo"    atributo sin valor (selected, checked,
@@ -70,7 +70,7 @@
    faq.preguntas.3.respuesta…), para ligarlo con su campo del formulario.
    ========================================================================= */
 
-const ATRIBUTOS = ['href', 'src', 'alt', 'content', 'id', 'style', 'value', 'label'];
+const ATRIBUTOS = ['href', 'src', 'alt', 'content', 'id', 'style', 'value', 'label', 'placeholder'];
 const BOOLEANOS = ['selected', 'checked', 'open', 'hidden'];
 
 // Etiquetas y comentarios. Los comentarios se saltan: el HTML guarda

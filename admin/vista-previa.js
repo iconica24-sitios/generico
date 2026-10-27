@@ -152,14 +152,18 @@ const editableDe = el => {
   return e && editableAqui(e.getAttribute('data-ruta')) ? e : null;
 };
 const cuadro = () => new Promise(r => requestAnimationFrame(r));
-// Espera (cuadro a cuadro, hasta ~`max` cuadros) a que `fn` devuelva algo:
-// Decap pinta los campos de un elemento que se despliega un poco después.
-async function esperarA(fn, max = 30) {
-  for (let i = 0; i < max; i++) {
+// Espera (cuadro a cuadro, hasta `ms` milisegundos) a que `fn` devuelva algo:
+// Decap pinta los campos de un elemento que se despliega un poco después, y
+// con un bloque grande o la computadora ocupada puede tardar bastante más que
+// unos cuadros. Se mide en tiempo, no en cuadros, y se deja de esperar en
+// cuanto `seguir` dice que no (otro clic empezó un viaje nuevo).
+async function esperarA(fn, ms = 500, seguir = () => true) {
+  const fin = performance.now() + ms;
+  do {
     const v = fn();
     if (v) return v;
     await cuadro();
-  }
+  } while (performance.now() < fin && seguir());
   return null;
 }
 
@@ -201,7 +205,7 @@ async function irACampo(ruta) {
       return /^\d+$/.test(parte)
         ? candidatos.filter(esItem)[Number(parte)]
         : candidatos.find(el => (el.id.match(ID_CAMPO) || [])[1] === parte);
-    }, 20);
+    }, 2000, vigente);
     if (!vigente()) return;
     if (!siguiente) break;
     nodo = siguiente;
@@ -209,7 +213,7 @@ async function irACampo(ruta) {
   abrir(nodo, raiz);
   const destino = nodo;
   const control = (destino.matches('input, textarea') ? destino : await esperarA(
-    () => destino.querySelector('input, textarea, [contenteditable="true"]'), 10)) || null;
+    () => destino.querySelector('input, textarea, [contenteditable="true"]'), 400, vigente)) || null;
   if (!vigente()) return;
   const el = control || destino;
   // Al desplegarse, los campos (sobre todo los de texto con formato) cambian
@@ -380,8 +384,10 @@ const vista = (nombre, pagina = nombre) => window.createClass({
           aplicarMenuMovil(doc);
           return;
         }
-        // En la vista previa los enlaces no navegan: un clic edita.
-        if (e.target.closest('a')) e.preventDefault();
+        // En la vista previa los enlaces no navegan: un clic edita. Tampoco las
+        // etiquetas de un formulario activan su campo: el navegador dispararía
+        // un segundo clic sobre el campo, que ganaría y llevaría a otro lado.
+        if (e.target.closest('a, label')) e.preventDefault();
         const el = editableDe(e.target);
         if (el) {
           // Se resalta de inmediato (los campos de imagen no reciben foco).
