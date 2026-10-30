@@ -2,9 +2,8 @@
    vista previa como en un navegador: angosta, con hamburguesa (el panel la
    abre y la cierra, aunque aquí no corre el JavaScript del sitio); ancha,
    con el menú de escritorio. */
-/* La cabecera no se queda pegada arriba: taparía lo que se está editando. */
-.cabecera { position: relative; }
-.portada { margin-top: 0; }
+/* La cabecera se queda pegada arriba como en el sitio (el menú de la vista
+   previa navega), y la portada sube por debajo de ella igual que allá. */
 /* Submenús: se comportan como en el sitio (se abren al pasar el cursor).
    Mientras se edita una opción de un submenú, el panel marca sus
    contenedores con .cms-camino y el submenú se queda abierto. */
