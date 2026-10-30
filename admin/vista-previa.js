@@ -423,12 +423,16 @@ function espiar(doc) {
   marcarSeccion(doc, activo);
 }
 
-// Abre otra entrada del editor. Si se está editando una, primero se sale con
-// la flecha de regreso de la barra de Decap (vuelve a la lista de la
-// colección) y después se abre la otra: cambiando sólo la dirección de una
-// entrada a otra, Decap muestra el formulario nuevo pero se queda con la
-// vista previa anterior. La flecha es un enlace del propio Decap, así que si
-// hay cambios sin guardar pregunta, y si el cliente decide quedarse no se sigue.
+// Abre otra entrada del editor siguiendo el camino de una persona:
+//  1. Si se está editando una, se sale con la flecha de regreso de la barra
+//     de Decap. Es un enlace del propio Decap: si hay cambios sin guardar
+//     pregunta, y si el cliente decide quedarse no se sigue.
+//  2. Se va a la lista de la colección destino, se espera a que aparezca el
+//     enlace de la entrada y se hace clic en él.
+// Atajos que fallan: cambiar sólo la dirección de una entrada a otra (Decap
+// muestra el formulario nuevo con la vista previa anterior), o abrir la
+// entrada antes de que Decap cargue su colección («No se ha podido cargar la
+// vista previa…», al calcular el enlace «Ver publicación»).
 async function irA(destino) {
   if (location.hash === destino) return;
   const regreso = document.querySelector('[class*="ToolbarSectionBackLink"]');
@@ -436,6 +440,12 @@ async function irA(destino) {
     regreso.click();
     const cerrado = await esperarA(() => !document.querySelector('[class*="ToolbarSectionMain"]'), 90);
     if (!cerrado) return;
+  }
+  const lista = destino.replace(/\/(entries\/[^/]+|new)$/, '');
+  if (lista !== destino) {
+    if (location.hash !== lista) location.hash = lista;
+    const enlace = await esperarA(() => [...document.querySelectorAll('a[href^="#/collections/"]')].find(a => a.getAttribute('href') === destino), 300);
+    if (enlace) { enlace.click(); return; }
   }
   location.hash = destino;
 }
