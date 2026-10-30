@@ -82,6 +82,8 @@ CMS.registerPreviewStyle(`
   html, body { overflow-x: clip; }
   [data-ruta] { cursor: pointer; }
   .cms-vista-sitio [data-ruta]:not([data-ruta^="sitio."]), .cms-vista-pagina [data-ruta^="sitio."] { cursor: auto; }
+  /* En una página, los enlaces del menú y del pie no se editan pero navegan: manita. */
+  .cms-vista-pagina a[href][data-ruta^="sitio."] { cursor: pointer; }
   .cms-marco { position: absolute; z-index: 2147483647; pointer-events: none; box-sizing: border-box;
                border-radius: 6px; transition: top .12s, left .12s, width .12s, height .12s; }
   .cms-marco--activo { border: 2px solid #2f6fed; box-shadow: 0 0 0 4px rgba(47, 111, 237, .2); }
@@ -323,6 +325,12 @@ function resaltar(desplazar) {
     objetivo = docVista.querySelector(`[data-ruta="${CSS.escape(r)}"]`);
   }
   if (!objetivo) return reenmarcar();
+  // Si el menú móvil está abierto y lo que se edita no está en él, se cierra
+  // (como en el sitio al tocar fuera): si no, el resaltado quedaría encima.
+  if (menuMovilAbierto && !docVista.querySelector(`.menu-movil [data-ruta="${CSS.escape(objetivo.getAttribute('data-ruta'))}"]`)) {
+    menuMovilAbierto = false;
+    aplicarMenuMovil(docVista);
+  }
   objetivo.classList.add('cms-activo');
   // Los contenedores del elemento llevan .cms-camino: así una plantilla puede
   // dejar abierto (en su admin/vista-previa.css) el submenú o desplegable que
@@ -360,6 +368,183 @@ function quitarResaltado() {
   resaltar(false);
 }
 
+/* ---------- Vista previa: el menú navega ----------
+   En la vista previa de una página, el menú, el botón de la cabecera y el pie
+   no se editan (se editan en «Sitio»): ahí sus enlaces funcionan como en el
+   sitio. Un #ancla de la misma página desplaza la vista previa hasta esa
+   sección; un enlace a otra página (/nombre o la de inicio) abre esa página en
+   el editor y, si lleva #ancla, baja hasta ella al cargarse. Los enlaces
+   externos no navegan (no sacan al cliente del editor). */
+
+let anclaPendiente = null;
+
+// Entrada del editor de una dirección del sitio ("/" o "/nombre/").
+function entradaDe(ruta) {
+  const limpia = ruta.replace(/\/index\.html$/, '/').replace(/\/+$/, '') || '/';
+  if (limpia === '/') return (SITIO.paginas || []).includes('inicio') ? '#/collections/inicio/entries/inicio' : null;
+  const nombre = limpia.slice(1);
+  return /^[a-z0-9-]+$/.test(nombre) ? `#/collections/paginas/entries/${nombre}` : null;
+}
+
+function irAAncla(doc, ancla) {
+  if (!ancla || ancla === 'top') { doc.defaultView.scrollTo({ top: 0, behavior: 'smooth' }); return true; }
+  const destino = doc.getElementById(ancla);
+  if (!destino) return false;
+  destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  return true;
+}
+
+// Opción activa del menú, como js/sitio.js en el sitio (que aquí no corre):
+// la de la página en la que se está y la de la sección visible (#ancla).
+const enlacesDelMenu = doc => [...doc.querySelectorAll('.menu a, .menu-movil__lista a')];
+function marcarPagina(doc) {
+  const ruta = p => p.replace(/\/index\.html$/, '/').replace(/\/+$/, '') || '/';
+  for (const a of enlacesDelMenu(doc)) {
+    const href = a.getAttribute('href') || '';
+    if (href.startsWith('/') && !href.includes('#') && ruta(href) === ruta(doc.__pagina || '/')) a.setAttribute('aria-current', 'page');
+  }
+}
+function marcarSeccion(doc, activo) {
+  for (const a of enlacesDelMenu(doc)) {
+    const href = a.getAttribute('href') || '';
+    if (a.getAttribute('aria-current') === 'page' || !/^#[\w-]+$/.test(href)) continue;
+    if (href === '#' + activo) a.setAttribute('aria-current', 'true');
+    else a.removeAttribute('aria-current');
+  }
+}
+function espiar(doc) {
+  if (Date.now() < (doc.__bloqueoEspia || 0)) return;
+  const ver = doc.defaultView;
+  const ids = [...new Set(enlacesDelMenu(doc).map(a => a.getAttribute('href') || '').filter(h => /^#[\w-]+$/.test(h)).map(h => h.slice(1)))].filter(id => doc.getElementById(id));
+  let activo = null;
+  for (const id of ids) if (doc.getElementById(id).getBoundingClientRect().top <= 140) activo = id;
+  const alto = doc.documentElement.scrollHeight;
+  if (ids.length && ver.scrollY > 0 && alto > ver.innerHeight + 200 && ver.innerHeight + ver.scrollY >= alto - 4) activo = ids[ids.length - 1];
+  marcarSeccion(doc, activo);
+}
+
+// Abre otra entrada del editor. Si se está editando una, primero se sale con
+// la flecha de regreso de la barra de Decap (vuelve a la lista de la
+// colección) y después se abre la otra: cambiando sólo la dirección de una
+// entrada a otra, Decap muestra el formulario nuevo pero se queda con la
+// vista previa anterior. La flecha es un enlace del propio Decap, así que si
+// hay cambios sin guardar pregunta, y si el cliente decide quedarse no se sigue.
+async function irA(destino) {
+  if (location.hash === destino) return;
+  const regreso = document.querySelector('[class*="ToolbarSectionBackLink"]');
+  if (regreso && /\/(entries\/[^/]+|new)$/.test(location.hash)) {
+    regreso.click();
+    const cerrado = await esperarA(() => !document.querySelector('[class*="ToolbarSectionMain"]'), 90);
+    if (!cerrado) return;
+  }
+  location.hash = destino;
+}
+
+// true si el clic en el enlace `a` se resolvió navegando.
+function navegar(a, doc) {
+  const href = a.getAttribute('href') || '';
+  if (!href || /^(mailto|tel|javascript):/i.test(href)) return false;
+  let u;
+  try { u = new URL(href, location.origin + (doc.__pagina || '/')); } catch (e) { return false; }
+  if (u.origin !== location.origin) return false;
+  const ancla = decodeURIComponent(u.hash.slice(1));
+  const misma = (u.pathname.replace(/\/index\.html$/, '/').replace(/\/+$/, '') || '/') === ((doc.__pagina || '/').replace(/\/+$/, '') || '/');
+  if (misma) {
+    // Se marca de inmediato, sin esperar el desplazamiento (como en el sitio).
+    if (ancla) { doc.__bloqueoEspia = Date.now() + 900; marcarSeccion(doc, ancla); setTimeout(() => espiar(doc), 950); }
+    return irAAncla(doc, ancla) || true;
+  }
+  const entrada = entradaDe(u.pathname);
+  if (!entrada) return false;
+  anclaPendiente = ancla || null;
+  irA(entrada);
+  return true;
+}
+
+/* ---------- Pestañas en la barra del editor ----------
+   Junto al botón de publicar: «Contenido» (la página de inicio y, si las hay,
+   las páginas nuevas), «Menú y sitio» y «+ Nueva página». Si hay cambios sin
+   guardar, Decap pregunta antes de salir, como con su flecha de regreso. */
+
+function pestanas() {
+  const conInicio = (SITIO.paginas || []).includes('inicio');
+  const lista = [];
+  if (conInicio) lista.push({ texto: 'Contenido', destino: '#/collections/inicio/entries/inicio', activa: h => h.startsWith('#/collections/inicio') || /^#\/collections\/paginas\/entries\//.test(h) });
+  if (SITIO.sitio) lista.push({ texto: 'Menú y sitio', destino: '#/collections/sitio/entries/sitio', activa: h => h.startsWith('#/collections/sitio') });
+  if (SITIO.bloques && conInicio) lista.push({ texto: '+ Nueva página', destino: '#/collections/paginas/new', activa: h => h.startsWith('#/collections/paginas/new') });
+  return lista;
+}
+
+let paginasNuevas = [];
+if (SITIO.bloques) fetch('/admin/datos/paginas.json').then(r => r.json()).then(l => { paginasNuevas = Array.isArray(l) ? l : []; }).catch(() => {});
+const tituloDe = nombre => nombre.replace(/-/g, ' ').replace(/^./, c => c.toUpperCase());
+
+document.head.insertAdjacentHTML('beforeend', `<style>
+  .cms-pestanas { display: flex; align-items: center; gap: 4px; margin: 0 12px; flex-wrap: nowrap; white-space: nowrap; }
+  .cms-pestanas a, .cms-pestanas summary { display: inline-block; padding: 7px 12px; border-radius: 5px; font-size: 14px; font-weight: 600; color: #313d3e; text-decoration: none; cursor: pointer; list-style: none; }
+  .cms-pestanas summary::-webkit-details-marker { display: none; }
+  .cms-pestanas a:hover, .cms-pestanas summary:hover { background: #eff0f4; }
+  .cms-pestanas .cms-activa, .cms-pestanas .cms-activa > summary { background: #e8f5fe; color: #3a69c7; }
+  .cms-pestanas details { position: relative; }
+  .cms-pestanas details > div { position: absolute; top: calc(100% + 4px); left: 0; z-index: 400; min-width: 200px; padding: 6px; background: #fff; border-radius: 5px; box-shadow: 0 4px 12px rgba(68, 74, 87, .15), 0 1px 3px rgba(68, 74, 87, .25); }
+  .cms-pestanas details > div a { display: block; color: #313d3e; background: none; }
+  .cms-pestanas details > div a:hover { background: #eff0f4; }
+  @media (max-width: 1100px) { .cms-pestanas a, .cms-pestanas summary { padding: 6px 8px; font-size: 13px; } }
+</style>`);
+
+function pintarPestanas() {
+  const main = document.querySelector('[class*="ToolbarSectionMain"]');
+  const lista = pestanas();
+  if (!main || !lista.length) return;
+  let nav = main.querySelector('.cms-pestanas');
+  const h = location.hash;
+  const firma = h + '|' + paginasNuevas.join(',');
+  if (nav && nav.dataset.firma === firma) return;
+  if (!nav) {
+    nav = document.createElement('nav');
+    nav.className = 'cms-pestanas';
+    nav.setAttribute('aria-label', 'Secciones del editor');
+    const primera = main.querySelector('[class*="ToolbarSubSectionFirst"]');
+    primera ? primera.after(nav) : main.prepend(nav);
+  }
+  nav.dataset.firma = firma;
+  nav.innerHTML = '';
+  for (const p of lista) {
+    if (p.texto === 'Contenido' && paginasNuevas.length) {
+      // Con páginas nuevas, «Contenido» despliega la lista de páginas.
+      const d = document.createElement('details');
+      if (p.activa(h)) d.className = 'cms-activa';
+      d.innerHTML = '<summary>Contenido ▾</summary><div></div>';
+      const caja = d.querySelector('div');
+      const opciones = [['Inicio', p.destino], ...paginasNuevas.map(n => [tituloDe(n), `#/collections/paginas/entries/${n}`]), ['Todas las páginas', '#/collections/paginas']];
+      for (const [texto, destino] of opciones) {
+        const a = document.createElement('a');
+        a.href = destino; a.textContent = texto;
+        a.addEventListener('click', () => { d.open = false; });
+        caja.append(a);
+      }
+      nav.append(d);
+      continue;
+    }
+    const a = document.createElement('a');
+    a.href = p.destino; a.textContent = p.texto;
+    if (p.activa(h)) a.className = 'cms-activa';
+    nav.append(a);
+  }
+}
+new MutationObserver(pintarPestanas).observe(document.body, { childList: true, subtree: true });
+document.addEventListener('click', e => {
+  const a = e.target.closest('.cms-pestanas a[href^="#/"]');
+  if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+  e.preventDefault();
+  irA(a.getAttribute('href'));
+});
+addEventListener('hashchange', pintarPestanas);
+document.addEventListener('click', e => {
+  const abierto = document.querySelector('.cms-pestanas details[open]');
+  if (abierto && !abierto.contains(e.target)) abierto.open = false;
+});
+
 /* ---------- Plantilla de vista previa ---------- */
 
 // `pagina`: la plantilla que se muestra. Para "Sitio" es la de inicio, con
@@ -375,6 +560,13 @@ const vista = (nombre, pagina = nombre) => window.createClass({
     if (!this.raiz) return;
     const doc = this.raiz.ownerDocument;
     doc.__prefijo = this.prefijo;
+    // Dirección de la página en el sitio, para resolver los enlaces del menú.
+    doc.__pagina = nombre === 'paginas' ? `/${this.props.entry.get('slug') || ''}/` : '/';
+    if (anclaPendiente) {
+      const ancla = anclaPendiente;
+      anclaPendiente = null;
+      setTimeout(() => irAAncla(doc, ancla), 300);
+    }
     if (!doc.documentElement.lang) idioma(pagina).then(l => { doc.documentElement.lang = l; });
     if (SITIO.sitio) {
       doc.body.classList.toggle('cms-vista-sitio', !!this.prefijo);
@@ -388,11 +580,21 @@ const vista = (nombre, pagina = nombre) => window.createClass({
           aplicarMenuMovil(doc);
           return;
         }
+        // Un clic fuera del menú móvil abierto lo cierra, como en el sitio (y
+        // el clic sigue: abre el campo de lo que se tocó).
+        if (menuMovilAbierto && !e.target.closest('.menu-movil')) {
+          menuMovilAbierto = false;
+          aplicarMenuMovil(doc);
+        }
         // En la vista previa los enlaces no navegan: un clic edita. Tampoco las
         // etiquetas de un formulario activan su campo: el navegador dispararía
         // un segundo clic sobre el campo, que ganaría y llevaría a otro lado.
         if (e.target.closest('a, label')) e.preventDefault();
         const el = editableDe(e.target);
+        // Excepción: un enlace que aquí no se edita (el menú en una página)
+        // navega como en el sitio.
+        const enlace = e.target.closest('a[href]');
+        if (enlace && !el && navegar(enlace, doc)) { quitarResaltado(); return; }
         if (el) {
           // Se resalta de inmediato (los campos de imagen no reciben foco).
           rutaActiva = el.getAttribute('data-ruta');
@@ -412,12 +614,21 @@ const vista = (nombre, pagina = nombre) => window.createClass({
       // cargar, un acordeón que se abre), los recuadros se recolocan.
       doc.defaultView.addEventListener('resize', reenmarcar);
       doc.defaultView.addEventListener('resize', () => medirMenu(doc));
+      let espiaPendiente = false;
+      doc.defaultView.addEventListener('scroll', () => {
+        if (espiaPendiente) return;
+        espiaPendiente = true;
+        doc.defaultView.requestAnimationFrame(() => { espiaPendiente = false; espiar(doc); });
+      }, { passive: true });
       if (doc.fonts) doc.fonts.ready.then(() => medirMenu(doc));
       doc.addEventListener('toggle', () => setTimeout(reenmarcar, 400), true);
       new doc.defaultView.ResizeObserver(reenmarcar).observe(doc.body);
     }
     medirMenu(doc);
     aplicarMenuMovil(doc);
+    // Al redibujarse (cada edición) se pierden las marcas: se vuelven a poner.
+    marcarPagina(doc);
+    espiar(doc);
     bajoMouse = null;
     resaltar(false);
   },
